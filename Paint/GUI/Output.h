@@ -20,7 +20,7 @@ public:
 	
 	// -- Figures Drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a rectangle
-	void DrawSquare(Point p1,GfxInfo SquareGfxInfo, bool selected = true)const;
+	void DrawSquare(Point p1,GfxInfo SquareGfxInfo, bool selected = false)const;
 	void DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false)const;
 	///TODO:Make similar functions for drawing all other figure types.
 	

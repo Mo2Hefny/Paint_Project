@@ -84,12 +84,22 @@ int main()
 
 	/// 2.2- Square Test ///
 	/// ============== 
-	pOut->PrintMessage("Drawing a Square, normal and Highlighted, Click to continue");
+	pOut->PrintMessage("Drawing a Square, filled/unfilled and Highlighted filled/unfilled, Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-	pOut->PrintMessage("Drawing a Square, normal and highlighted, Click the center of the square");
+	pOut->PrintMessage("Drawing a Square==>unfilled, Click the center of the square");
 	pIn->GetPointClicked(P1.x, P1.y);
 	gfxInfo.isFilled = false;
-	pOut->DrawSquare(P1,gfxInfo,true);
+	pOut->DrawSquare(P1,gfxInfo,false);
+	pOut->PrintMessage("Drawing a Square==> Highlighted unfilled, Click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawSquare(P1, gfxInfo, true);
+	pOut->PrintMessage("Drawing a Square==>filled,click the center of the square");
+	pIn->GetPointClicked(P1.x, P1.y);
+	gfxInfo.isFilled = true;
+	pOut->DrawSquare(P1, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Square==>filled highlighted,click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawSquare(P1, gfxInfo, true);
 	///TODO: Add code to draw Square, Normal and Highlighted
 
 	pOut->PrintMessage("Drawing a Square Test ==> OK,  Click anywhere to continue");

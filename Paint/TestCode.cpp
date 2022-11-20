@@ -86,7 +86,10 @@ int main()
 	/// ============== 
 	pOut->PrintMessage("Drawing a Square, normal and Highlighted, Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-
+	pOut->PrintMessage("Drawing a Square, normal and highlighted, Click the center of the square");
+	pIn->GetPointClicked(P1.x, P1.y);
+	gfxInfo.isFilled = false;
+	pOut->DrawSquare(P1,gfxInfo,true);
 	///TODO: Add code to draw Square, Normal and Highlighted
 
 	pOut->PrintMessage("Drawing a Square Test ==> OK,  Click anywhere to continue");

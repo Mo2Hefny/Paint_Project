@@ -81,6 +81,10 @@ void Output::CreateDrawToolBar() const
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
+	MenuItemImages[ITM_SQR] = "images\\MenuItems\\Menu_Square.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Triangle.jpg";
+	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Circ.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hexa.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -162,6 +166,30 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	
 }
 
+void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	int l = 50;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = HexGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (HexGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(HexGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	int X[6], Y[6];
+	X[0] = C.x - l; X[1] = X[5] = C.x - (l / 2); X[2] = X[4] = C.x + (l / 2); X[3] = C.x + l;
+	Y[0] = Y[3] = C.y; Y[1] = Y[2] = C.y + (0.866 * l / 2); Y[4] = Y[5] = C.y - (0.866 * l / 2);
+	pWind->DrawPolygon(X, Y, 6, style);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()

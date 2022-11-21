@@ -107,12 +107,45 @@ int main()
 	/// 2.4- Hexagon Test ///
 	/// =================== 
 	pOut->PrintMessage("Drawing a Hexagon, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
-	pIn->GetPointClicked(x,y);	//Wait for any click
+	pIn->GetPointClicked(P1.x,P1.y);	//Wait for any click
 
 	///TODO: Add code to draw Hexagon in all possible states
+	/* 2.4.1 - Drawing non - filled Hexagon */ 
+	pOut->PrintMessage("Drawing a Hexagon Test ==> non-filled,  Click anywhere to continue");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.DrawClr = BLACK;	//any color for border
+	gfxInfo.isFilled = false;	//Figure is NOT filled
+	pOut->DrawHex(P1, gfxInfo, false);
+
+	/* 2.4.2 - Drawing highlighted non - filled hexagon */
+	pOut->PrintMessage("Drawing a Hexagon ==> Highlighted non-filled, Click to Highlight");
+	pIn->GetPointClicked(x, y);	//Wait for any click
+	pOut->DrawHex(P1, gfxInfo, true);
+
+
+	/* 2.4.3 - Drawing a filled hexagon */
+	pOut->PrintMessage("Drawing a Hexagon ==> filled,  Click two points");
+	pIn->GetPointClicked(P1.x, P1.y);
+
+	gfxInfo.BorderWdth = 6;
+	gfxInfo.DrawClr = BLUE;	//any color for border
+	gfxInfo.FillClr = GREEN;//any color for filling
+	gfxInfo.isFilled = true;//Figure is filled
+	pOut->DrawHex(P1, gfxInfo, false);
+
+
+	/* 2.4.4 - Drawing a highlighted filled hexagon */
+	pOut->PrintMessage("Drawing a Hexagon ==> Highlighted filled, Click to Highlight");
+	pIn->GetPointClicked(x, y);	//Wait for any click
+	pOut->DrawHex(P1, gfxInfo, true);
+
+
 
 	pOut->PrintMessage("Drawing a Hexagon Test ==> OK,  Click anywhere to continue");
-	pIn->GetPointClicked(x,y);	//Wait for any click
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawArea();
 	
 	/// 2.5- Circle Test ///

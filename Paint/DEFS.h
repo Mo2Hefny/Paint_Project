@@ -7,6 +7,10 @@
 enum ActionType //The actions supported (you can add more if needed)
 {
 	DRAW_RECT,		//Draw Rectangle
+	DRAW_SQR,
+	DRAW_TRI,
+	DRAW_CRCL,
+	DRAW_HEX,
 	EXIT,			//Exit
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,		//Switch interface to Play mode

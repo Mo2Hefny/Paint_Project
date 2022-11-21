@@ -171,7 +171,25 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const
 	P3.y = P1.y + 40;
 	DrawRect(P2, P3, SquareGfxInfo, selected);
 }
+void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected)const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = TriangleGfxInfo.DrawClr;
 
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (TriangleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(TriangleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()

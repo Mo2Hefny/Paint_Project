@@ -110,7 +110,25 @@ int main()
 	/// =================== 
 	pOut->PrintMessage("Drawing a Triangle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-
+	Point P3;
+	pOut->PrintMessage("Drawing a Triangle==>non filled, click the 3 vertices");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P3.x, P3.y);
+	gfxInfo.isFilled = false;
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Triangle==>non filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
+	pOut->PrintMessage("Drawing a Triangle==>filled,click the 3 vertices");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P3.x, P3.y);
+	gfxInfo.isFilled = true;
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Triangle==> filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
 	///TODO: Add code to draw Triangle in all possible states
 
 	pOut->PrintMessage("Drawing a Triangle Test ==> OK,  Click anywhere to continue");

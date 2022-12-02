@@ -11,6 +11,11 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_TRI,
 	DRAW_CRCL,
 	DRAW_HEX,
+	DRAW_UNDO,
+	DRAW_REDO,
+	DRAW_DEL,
+	DRAW_HIGHLIGHT,
+	DRAW_FILL,
 	EXIT,			//Exit
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,		//Switch interface to Play mode

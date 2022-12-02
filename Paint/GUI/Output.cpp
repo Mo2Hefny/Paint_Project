@@ -80,11 +80,16 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
-	MenuItemImages[ITM_SQR] = "images\\MenuItems\\Menu_Square.jpg";
-	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Triangle.jpg";
-	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Circ.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hexa.jpg";
+	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SQR] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Undo] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Redo] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Del] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Highlight] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Fill] = "images\\MenuItems\\Menu_Exit.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -165,7 +170,35 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 	
 }
+void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
+{
+	Point P2;
+	P2.x = P1.x - 40;
+	P2.y = P1.y - 40;
+	Point P3;
+	P3.x = P1.x + 40;
+	P3.y = P1.y + 40;
+	DrawRect(P2, P3, SquareGfxInfo, selected);
+}
+void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = TriangleGfxInfo.DrawClr;
 
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (TriangleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(TriangleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+}
 void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;

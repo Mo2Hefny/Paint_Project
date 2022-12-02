@@ -164,11 +164,12 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const
 {
 	Point P2;
-	P2.x = P1.x - 40;
-	P2.y = P1.y - 40;
+	float length = 40.0;
+	P2.x = P1.x - length;
+	P2.y = P1.y - length;
 	Point P3;
-	P3.x = P1.x + 40;
-	P3.y = P1.y + 40;
+	P3.x = P1.x + length;
+	P3.y = P1.y + length;	
 	DrawRect(P2, P3, SquareGfxInfo, selected);
 }
 void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected)const
@@ -189,6 +190,26 @@ void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bo
 	else
 		style = FRAME;
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+}
+void Output:: DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = CircleGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (CircleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(CircleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	float radius = sqrt(pow((P1.x - P2.x), 2) + pow((P1.y - P2.y), 2));
+	pWind->DrawCircle(P1.x, P1.y, radius, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

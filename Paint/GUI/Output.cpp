@@ -80,7 +80,16 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
+	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SQR] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Undo] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Redo] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Del] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Highlight] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_Fill] = "images\\MenuItems\\Menu_Exit.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -161,7 +170,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 	
 }
-void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const
+void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
 {
 	Point P2;
 	P2.x = P1.x - 40;
@@ -171,7 +180,7 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const
 	P3.y = P1.y + 40;
 	DrawRect(P2, P3, SquareGfxInfo, selected);
 }
-void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected)const
+void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -189,6 +198,30 @@ void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bo
 	else
 		style = FRAME;
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+}
+void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	int l = 50;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = HexGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (HexGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(HexGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	int X[6], Y[6];
+	X[0] = C.x - l; X[1] = X[5] = C.x - (l / 2); X[2] = X[4] = C.x + (l / 2); X[3] = C.x + l;
+	Y[0] = Y[3] = C.y; Y[1] = Y[2] = C.y + (0.866 * l / 2); Y[4] = Y[5] = C.y - (0.866 * l / 2);
+	pWind->DrawPolygon(X, Y, 6, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

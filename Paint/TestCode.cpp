@@ -84,9 +84,22 @@ int main()
 
 	/// 2.2- Square Test ///
 	/// ============== 
-	pOut->PrintMessage("Drawing a Square, normal and Highlighted, Click to continue");
+	pOut->PrintMessage("Drawing a Square, filled/unfilled and Highlighted filled/unfilled, Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-
+	pOut->PrintMessage("Drawing a Square==>unfilled, Click the center of the square");
+	pIn->GetPointClicked(P1.x, P1.y);
+	gfxInfo.isFilled = false;
+	pOut->DrawSquare(P1,gfxInfo,false);
+	pOut->PrintMessage("Drawing a Square==> Highlighted unfilled, Click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawSquare(P1, gfxInfo, true);
+	pOut->PrintMessage("Drawing a Square==>filled,click the center of the square");
+	pIn->GetPointClicked(P1.x, P1.y);
+	gfxInfo.isFilled = true;
+	pOut->DrawSquare(P1, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Square==>filled highlighted,click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawSquare(P1, gfxInfo, true);
 	///TODO: Add code to draw Square, Normal and Highlighted
 
 	pOut->PrintMessage("Drawing a Square Test ==> OK,  Click anywhere to continue");
@@ -97,7 +110,25 @@ int main()
 	/// =================== 
 	pOut->PrintMessage("Drawing a Triangle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-
+	Point P3;
+	pOut->PrintMessage("Drawing a Triangle==>non filled, click the 3 vertices");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P3.x, P3.y);
+	gfxInfo.isFilled = false;
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Triangle==>non filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
+	pOut->PrintMessage("Drawing a Triangle==>filled,click the 3 vertices");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P3.x, P3.y);
+	gfxInfo.isFilled = true;
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Triangle==> filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
 	///TODO: Add code to draw Triangle in all possible states
 
 	pOut->PrintMessage("Drawing a Triangle Test ==> OK,  Click anywhere to continue");

@@ -5,17 +5,17 @@ Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
-	
+
 	UI.width = 1250;
 	UI.height = 650;
 	UI.wx = 5;
-	UI.wy =5;
+	UI.wy = 5;
 
-	
+
 	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
-	
+	UI.ToolBarHeight = 40;
+	UI.MenuItemWidth = 46;
+
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = RED;		//Messages color
@@ -24,12 +24,12 @@ Output::Output()
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
-	
+
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
-	
+
 	CreateDrawToolBar();
 	CreateStatusBar();
 }
@@ -46,11 +46,11 @@ Input* Output::CreateInput() const
 //======================================================================================//
 
 window* Output::CreateWind(int w, int h, int x, int y) const
-{ 
+{
 	window* pW = new window(w, h, x, y);
 	pW->SetBrush(UI.BkGrndColor);
 	pW->SetPen(UI.BkGrndColor, 1);
-	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
+	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ void Output::CreateDrawToolBar() const
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
-	
+
 	//First prepare List of images for each menu item
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
@@ -85,24 +85,39 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Exit.jpg";
 	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Exit.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_Undo] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_Redo] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_Del] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_Highlight] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_Fill] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_FillCol] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_DrawCol] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_BLACK] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_YELLOW] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_ORANGE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_RED] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_BLUE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[CLR_GREEN] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_CLEAR] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_StartRec] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_StopRec] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_PlayRec] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SwitchPlay] = "images\\MenuItems\\Menu_Exit.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time
-	for(int i=0; i<DRAW_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	for (int i = 0; i < DRAW_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -111,6 +126,20 @@ void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
+	string MenuItemImages[PLAY_ITM_COUNT];
+	MenuItemImages[PLAY_ITM_TYPE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[PLAY_ITM_FILL] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[PLAY_ITM_TypeFill] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[PLAY_ITM_SwitchDraw] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[PLAY_ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -119,30 +148,36 @@ void Output::ClearDrawArea() const
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
-	
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
-	
+
 	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntDrawColor() const	//get current drawing color
-{	return UI.DrawColor;	}
+{
+	return UI.DrawColor;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntFillColor() const	//get current filling color
-{	return UI.FillColor;	}
+{
+	return UI.FillColor;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
-	
+
 int Output::getCrntPenWidth() const		//get current pen width
-{	return UI.PenWidth;	}
+{
+	return UI.PenWidth;
+}
 
 //======================================================================================//
 //								Figures Drawing Functions								//
@@ -151,24 +186,24 @@ int Output::getCrntPenWidth() const		//get current pen width
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
-	if(selected)	
+	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-	else			
+	else
 		DrawingClr = RectGfxInfo.DrawClr;
-	
-	pWind->SetPen(DrawingClr,1);
+
+	pWind->SetPen(DrawingClr, 1);
 	drawstyle style;
-	if (RectGfxInfo.isFilled)	
+	if (RectGfxInfo.isFilled)
 	{
-		style = FILLED;		
+		style = FILLED;
 		pWind->SetBrush(RectGfxInfo.FillClr);
 	}
-	else	
+	else
 		style = FRAME;
 
-	
+
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
-	
+
 }
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
 {
@@ -180,7 +215,7 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
 	P3.y = P1.y + 40;
 	DrawRect(P2, P3, SquareGfxInfo, selected);
 }
-void Output::DrawTriangle (Point P1,Point P2,Point P3,GfxInfo TriangleGfxInfo,bool selected) const
+void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)

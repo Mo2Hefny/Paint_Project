@@ -1,6 +1,6 @@
 #include "GUI\Input.h"
 #include "GUI\Output.h"
-
+#include<string>;
 //This is a test code to test the Input and Output classes
 
 int main()
@@ -187,9 +187,9 @@ int main()
 	// 1- Read a string from the user on the status bar
 	// 2- After reading the string clear the status bar
 	// 3- print on the status bar "You Entered" then print the string
-	
-	pIn->GetPointClicked(x,y);	//Wait for any click
-	pOut->ClearDrawArea();
+	string str = pIn->GetSrting(pOut);
+	pOut->PrintMessage("You entered " + str + " ,click any where to continue");
+	pIn->GetPointClicked(x, y);
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 4: 

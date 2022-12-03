@@ -198,6 +198,8 @@
     <ClInclude Include="GUI\UI_Info.h">
       <Filter>GUI Classes</Filter>
     </ClInclude>
-    <ClInclude Include="DEFS.h" />
+    <ClInclude Include="DEFS.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

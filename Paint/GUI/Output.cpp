@@ -13,7 +13,7 @@ Output::Output()
 
 
 	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 40;
+	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 46;
 
 	UI.DrawColor = BLUE;	//Drawing color
@@ -72,7 +72,8 @@ void Output::ClearStatusBar() const
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
-
+	pWind->SetPen(WHITE, UI.ToolBarHeight);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight, FILLED);
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
 
@@ -125,6 +126,8 @@ void Output::CreateDrawToolBar() const
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
+	pWind->SetPen(WHITE, UI.ToolBarHeight);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight, FILLED);
 	///TODO: write code to create Play mode menu
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[PLAY_ITM_TYPE] = "images\\MenuItems\\Menu_Exit.jpg";
@@ -208,11 +211,12 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const
 {
 	Point P2;
-	P2.x = P1.x - 40;
-	P2.y = P1.y - 40;
+	float length = 40.0;
+	P2.x = P1.x - length;
+	P2.y = P1.y - length;
 	Point P3;
-	P3.x = P1.x + 40;
-	P3.y = P1.y + 40;
+	P3.x = P1.x + length;
+	P3.y = P1.y + length;	
 	DrawRect(P2, P3, SquareGfxInfo, selected);
 }
 void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const
@@ -234,6 +238,26 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 		style = FRAME;
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
 }
+void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = CircleGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (CircleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(CircleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	float radius = sqrt(pow((P1.x - P2.x), 2) + pow((P1.y - P2.y), 2));
+	pWind->DrawCircle(P1.x, P1.y, radius, style);
+}
 void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
@@ -254,7 +278,7 @@ void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
 		style = FRAME;
 
 	int X[6], Y[6];
-	X[0] = C.x - l; X[1] = X[5] = C.x - (l / 2); X[2] = X[4] = C.x + (l / 2); X[3] = C.x + l;
+	X[0] = C.x - l / 1.5; X[1] = X[5] = C.x - (l / 2); X[2] = X[4] = C.x + (l / 2); X[3] = C.x + l / 1.5;
 	Y[0] = Y[3] = C.y; Y[1] = Y[2] = C.y + (0.866 * l / 2); Y[4] = Y[5] = C.y - (0.866 * l / 2);
 	pWind->DrawPolygon(X, Y, 6, style);
 }

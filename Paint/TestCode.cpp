@@ -1,6 +1,6 @@
 #include "GUI\Input.h"
 #include "GUI\Output.h"
-
+#include<string>;
 //This is a test code to test the Input and Output classes
 
 int main()
@@ -165,9 +165,28 @@ int main()
 
 	/// 2.5- Circle Test ///
 	/// =================== 
+	
 	pOut->PrintMessage("Drawing an Circle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
+
+	pOut->PrintMessage("Drawing a Cricle==>non filled, click the center & a point");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+	gfxInfo.isFilled = false;
+	pOut->DrawCircle(P1, P2, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Circle==>non filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawCircle(P1, P2, gfxInfo, true);
+	pOut->PrintMessage("Drawing a Circle==>filled,click the center & a point");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+
+	gfxInfo.isFilled = true;
+	pOut->DrawCircle(P1, P2, gfxInfo, false);
+	pOut->PrintMessage("Drawing a Circle==> filled highlighted, click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawCircle(P1, P2, gfxInfo, true);
 	///TODO: Add code to draw Circle in all possible states
 
 	pOut->PrintMessage("Drawing a Circle Test ==> OK,  Click anywhere to continue");
@@ -179,17 +198,15 @@ int main()
 	//			Input Class: Read strings from the user
 	///////////////////////////////////////////////////////////////////////////////////
 	pOut->PrintMessage("TEST3: Now Time to test class Input, Click anywhere to continue");
-	pIn->GetPointClicked(x, y);	//Wait for any click
-
-	pOut->PrintMessage("Testing Input ability to read strings");
-
+	pIn->GetPointClicked(x,y);	//Wait for any click
+	pOut->PrintMessage("Testing input ability to read strings");
 	///TODO: Add code here to 
 	// 1- Read a string from the user on the status bar
 	// 2- After reading the string clear the status bar
 	// 3- print on the status bar "You Entered" then print the string
-
-	pIn->GetPointClicked(x, y);	//Wait for any click
-	pOut->ClearDrawArea();
+	string str = pIn->GetSrting(pOut);
+	pOut->PrintMessage("You entered " + str + " ,click any where to continue");
+	pIn->GetPointClicked(x, y);
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 4: 

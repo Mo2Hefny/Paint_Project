@@ -81,32 +81,32 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_SQR] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_FillCol] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_DrawCol] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_BLACK] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_YELLOW] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_ORANGE] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_RED] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_BLUE] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[CLR_GREEN] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_CLEAR] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_StartRec] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_StopRec] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_PlayRec] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_SwitchPlay] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
+	MenuItemImages[ITM_SQR] = "images\\MenuItems\\square.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\triangle.jpg";
+	MenuItemImages[ITM_CRCL] = "images\\MenuItems\\circle.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\hexagon.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
+	MenuItemImages[ITM_FillCol] = "images\\MenuItems\\highlight_color.jpg";
+	MenuItemImages[ITM_DrawCol] = "images\\MenuItems\\border_color.jpg";
+	MenuItemImages[CLR_BLACK] = "images\\MenuItems\\black.jpg";
+	MenuItemImages[CLR_YELLOW] = "images\\MenuItems\\yellow 2.jpg";
+	MenuItemImages[CLR_ORANGE] = "images\\MenuItems\\orange.jpg";
+	MenuItemImages[CLR_RED] = "images\\MenuItems\\red.jpg";
+	MenuItemImages[CLR_BLUE] = "images\\MenuItems\\blue.jpg";
+	MenuItemImages[CLR_GREEN] = "images\\MenuItems\\green.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_selected.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo 2.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo 2.jpg";
+	MenuItemImages[ITM_CLEAR] = "images\\MenuItems\\delete_all.jpg";
+	MenuItemImages[ITM_StartRec] = "images\\MenuItems\\record.jpg";
+	MenuItemImages[ITM_StopRec] = "images\\MenuItems\\stop.jpg";
+	MenuItemImages[ITM_PlayRec] = "images\\MenuItems\\play.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load.jpg";
+	MenuItemImages[ITM_SwitchPlay] = "images\\MenuItems\\play_mode.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
@@ -130,11 +130,11 @@ void Output::CreatePlayToolBar() const
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight, FILLED);
 	///TODO: write code to create Play mode menu
 	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[PLAY_ITM_TYPE] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[PLAY_ITM_FILL] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[PLAY_ITM_TypeFill] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[PLAY_ITM_SwitchDraw] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[PLAY_ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[PLAY_ITM_TYPE] = "images\\MenuItems\\by_shape.jpg";
+	MenuItemImages[PLAY_ITM_FILL] = "images\\MenuItems\\by_color.jpg";
+	MenuItemImages[PLAY_ITM_TypeFill] = "images\\MenuItems\\by_both.jpg";
+	MenuItemImages[PLAY_ITM_SwitchDraw] = "images\\MenuItems\\draw_mode.jpg";
+	MenuItemImages[PLAY_ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)

@@ -1,71 +1,14 @@
 ﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   TestCode.cpp
-\\Mac\Home\Desktop\Phase 1\Paint\TestCode.cpp(3,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Paint project\Paint\TestCode.cpp(3,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Output.cpp
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(215,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(216,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(218,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(219,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(258,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(259,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(281,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(281,93): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(282,39): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-\\Mac\Home\Desktop\Phase 1\Paint\GUI\Output.cpp(282,76): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Input.cpp
-  windowinput.cpp
-  mousequeue.cpp
-  keyqueue.cpp
-  image.cpp
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\image.cpp(115,29): warning C4018: '<': signed/unsigned mismatch
-  colors.cpp
-  auxil.cpp
-  CMUgraphics.cpp
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(257,9): warning C4101: 'iX': unreferenced local variable
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(257,13): warning C4101: 'iY': unreferenced local variable
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(751,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(1164,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(1171,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(1202,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(1210,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\CMUgraphics.cpp(1357,23): warning C4018: '>': signed/unsigned mismatch
+D:\Paint project\Paint\GUI\Output.cpp(215,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Paint project\Paint\GUI\Output.cpp(216,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Paint project\Paint\GUI\Output.cpp(218,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Paint project\Paint\GUI\Output.cpp(219,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Paint project\Paint\GUI\Output.cpp(258,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Paint project\Paint\GUI\Output.cpp(259,32): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
   Generating Code...
-cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  jpegload.c
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\jpegload.c(23,12): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  jutils.c
-  jquant2.c
-  jquant1.c
-  jmemnobs.c
-  jmemmgr.c
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\jpeg\jmemmgr.c(1103,19): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\jpeg\jmemmgr.c(1106,11): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  jidctred.c
-  jidctint.c
-  jidctfst.c
-  jidctflt.c
-  jerror.c
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\jpeg\jerror.c(169,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-\\Mac\Home\Desktop\Phase 1\Paint\CMUgraphicsLib\jpeg\jerror.c(171,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  jdtrans.c
-  jdsample.c
-  jdpostct.c
-  jdphuff.c
-  jdmerge.c
-  jdmaster.c
-  jdmarker.c
-  jdmainct.c
-  jdinput.c
-  Generating Code...
-  Compiling...
-  jdhuff.c
-  jddctmgr.c
-  jdcolor.c
-  jdcoefct.c
-  jdatasrc.c
-  jdapistd.c
-  jdapimin.c
-  jcparam.c
-  jcomapi.c
-  Generating Code...
-  PT-Project.vcxproj -> \\Mac\Home\Desktop\Phase 1\Paint\Debug\PT Project.exe
+  LINK : .\Debug\PT Project.exe not found or not built by the last incremental link; performing full link
+auxil.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  PT-Project.vcxproj -> D:\Paint project\Paint\Debug\PT Project.exe

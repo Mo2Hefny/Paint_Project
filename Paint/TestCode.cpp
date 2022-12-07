@@ -224,6 +224,11 @@ int main()
 
 		switch (ActType)
 		{
+		case DRAW_SHAPE:
+			pOut->PrintMessage("Action: Select a shape to draw");
+			UI.InterfaceMode = MODE_SHAPE;
+			pOut->CreateDrawToolBar();
+			break;
 		case DRAW_RECT:
 			pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
 			break;
@@ -243,10 +248,14 @@ int main()
 			pOut->PrintMessage("Action: Select object , Click anywhere");
 			break;
 		case DRAW_FillCol:
-			pOut->PrintMessage("Action: Fill object , Click anywhere");
+			pOut->PrintMessage("Action: Fill object , Select color");
+			UI.InterfaceMode = MODE_COL;
+			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_DrawCol:
-			pOut->PrintMessage("Action: Draw color , Click anywhere");
+			pOut->PrintMessage("Action: Draw color , Select color");
+			UI.InterfaceMode = MODE_COL;
+			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
 			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
@@ -319,6 +328,7 @@ int main()
 
 		case TO_DRAW:
 			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			UI.InterfaceMode = MODE_DRAW;
 			pOut->CreateDrawToolBar();
 			break;
 

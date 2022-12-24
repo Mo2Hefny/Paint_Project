@@ -30,7 +30,7 @@ void AddTriAction::ReadActionParameters()
 	//Read vertix 3 and store in point P3
 	pIn->GetPointClicked(P3.x, P3.y);
 
-	TriGfxInfo.isFilled = false;	//default is not filled
+	TriGfxInfo.isFilled = UI.isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();

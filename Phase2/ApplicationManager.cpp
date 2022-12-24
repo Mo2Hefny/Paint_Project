@@ -5,7 +5,22 @@
 #include "Actions\AddCircAction.h"
 #include "Actions\AddHexAction.h"
 
+void setColoring(color col, GUI_MODE mode)
+{
+	if (mode == MODE_COL_FILL)
+	{
+		if (col == UI.FillColor && UI.isFilled)
+			UI.isFilled = false;
+		else
+		{
+			UI.isFilled = true;
+			UI.FillColor = col;
+		}
+	}
+	else
+		UI.DrawColor = col;
 
+}
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -62,31 +77,37 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_FillCol:
 			pOut->PrintMessage("Action: Fill object , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_FILL;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_DrawCol:
 			pOut->PrintMessage("Action: Draw color , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_DRW;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
 			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
+			setColoring(BLACK, UI.InterfaceMode);
 			break;
 		case DRAW_YELLOW:
 			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
+			setColoring(YELLOW, UI.InterfaceMode);
 			break;
 		case DRAW_ORANGE:
 			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
+			setColoring(ORANGE, UI.InterfaceMode);
 			break;
 		case DRAW_RED:
 			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
+			setColoring(RED, UI.InterfaceMode);
 			break;
 		case DRAW_BLUE:
 			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
+			setColoring(BLUE, UI.InterfaceMode);
 			break;
 		case DRAW_GREEN:
 			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
+			setColoring(GREEN, UI.InterfaceMode);
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");

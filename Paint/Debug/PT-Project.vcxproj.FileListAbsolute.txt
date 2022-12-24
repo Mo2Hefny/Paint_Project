@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 C:\Users\Moamen\Downloads\Phase1 - Code F22\Phase1 - Code F22\Debug\PT Project.exe
 D:\Paint project\Paint\Debug\PT Project.exe
 \\Mac\Home\Desktop\Phase 1\Paint\Debug\PT Project.exe
 C:\Users\zeyaddaowd\source\repos\Paint_Project\Paint\Debug\PT Project.exe
+=======
+\\Mac\Home\Desktop\Ph1_8\Paint\Debug\PT Project.exe
+\\Mac\Home\Desktop\Ph1_8_unzipped\Paint\Debug\PT Project.exe
+>>>>>>> Stashed changes

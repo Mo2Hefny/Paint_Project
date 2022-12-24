@@ -1,5 +1,5 @@
 #include "Output.h"
-
+#include <cmath>
 
 Output::Output()
 {
@@ -282,7 +282,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
-	int l = 80;
+	int l = 88;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
@@ -300,7 +300,7 @@ void Output::DrawHex(Point C, GfxInfo HexGfxInfo, bool selected) const
 
 	int X[6], Y[6];
 	X[0] = C.x - l / 2; X[1] = X[5] = C.x - (l / 4); X[2] = X[4] = C.x + (l / 4); X[3] = C.x + l / 2;
-	Y[0] = Y[3] = C.y; Y[1] = Y[2] = C.y + (l / 2); Y[4] = Y[5] = C.y - (l / 2);
+	Y[0] = Y[3] = C.y; Y[1] = Y[2] = C.y + round(l * 0.433); Y[4] = Y[5] = C.y - round(l * 0.433);
 	pWind->DrawPolygon(X, Y, 6, style);
 }
 

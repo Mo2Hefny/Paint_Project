@@ -1,5 +1,9 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "Actions\AddSqrAction.h"
+#include "Actions\AddTriAction.h"
+#include "Actions\AddCircAction.h"
+#include "Actions\AddHexAction.h"
 
 
 //Constructor
@@ -33,16 +37,120 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+		case DRAW_SHAPE:
+			pOut->PrintMessage("Action: Select a shape to draw");
+			UI.InterfaceMode = MODE_SHAPE;
+			pOut->CreateDrawToolBar();
+			break;
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
 			break;
+		case DRAW_SQR:
+			pAct = new AddSqrAction(this);
+			break;
+		case DRAW_TRI:
+			pAct = new AddTriAction(this);
+			break;
+		case DRAW_CRCL:
+			pAct = new AddCircAction(this);
+			break;
+		case DRAW_HEX:
+			pAct = new AddHexAction(this);
+			break;
+		case DRAW_SELECT:
+			pOut->PrintMessage("Action: Select object , Click anywhere");
+			break;
+		case DRAW_FillCol:
+			pOut->PrintMessage("Action: Fill object , Select color");
+			UI.InterfaceMode = MODE_COL;
+			pOut->CreateDrawToolBar();
+			break;
+		case DRAW_DrawCol:
+			pOut->PrintMessage("Action: Draw color , Select color");
+			UI.InterfaceMode = MODE_COL;
+			pOut->CreateDrawToolBar();
+			break;
+		case DRAW_BLACK:
+			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
+			break;
+		case DRAW_YELLOW:
+			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
+			break;
+		case DRAW_ORANGE:
+			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
+			break;
+		case DRAW_RED:
+			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
+			break;
+		case DRAW_BLUE:
+			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
+			break;
+		case DRAW_GREEN:
+			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
+			break;
+		case DRAW_MOVE:
+			pOut->PrintMessage("Action: Move object , Click anywhere");
+			break;
+		case DRAW_DEL:
+			pOut->PrintMessage("Action: Delete object , Click anywhere");
+			break;
+		case DRAW_UNDO:
+			pOut->PrintMessage("Action: Undo action , Click anywhere");
+			break;
+		case DRAW_REDO:
+			pOut->PrintMessage("Action: Redo action , Click anywhere");
+			break;
+		case DRAW_CLEAR:
+			pOut->PrintMessage("Action: Clear drawing area , Click anywhere");
+			break;
+		case DRAW_StartRec:
+			pOut->PrintMessage("Action: Start recording , Click anywhere");
+			break;
+		case DRAW_StopRec:
+			pOut->PrintMessage("Action: Stop recording , Click anywhere");
+			break;
+		case DRAW_PlayRec:
+			pOut->PrintMessage("Action: Play last record , Click anywhere");
+			break;
+		case DRAW_SAVE:
+			pOut->PrintMessage("Action: Save file , Click anywhere");
+			break;
+		case DRAW_LOAD:
+			pOut->PrintMessage("Action: Load file , Click anywhere");
+			break;
+		case PLAY_TYPE:
+			pOut->PrintMessage("Action: Select objects of the same type , Click anywhere");
+			break;
+		case PLAY_FILL:
+			pOut->PrintMessage("Action: Select objects of the same color , Click anywhere");
+			break;
+		case PLAY_TypeFill:
+			pOut->PrintMessage("Action: Select objects of the same type and color , Click anywhere");
+			break;
+		case DRAWING_AREA:
+			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
+			break;
 
+		case EMPTY:
+			pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
+			break;
+
+		case TO_DRAW:
+			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			UI.InterfaceMode = MODE_DRAW;
+			pOut->CreateDrawToolBar();
+			break;
+
+		case TO_PLAY:
+			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			pOut->CreatePlayToolBar();
+			break;
 		case EXIT:
 			///create ExitAction here
 			
 			break;
-		
 		case STATUS:	//a click on the status bar ==> no action
+			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
 			return;
 	}
 	

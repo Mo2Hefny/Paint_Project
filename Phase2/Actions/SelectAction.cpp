@@ -46,21 +46,19 @@ void SelectAction::ReadActionParameters()
 					SelectedFig[abs(i - 1)]->SetSelected(false);
 					SelectedFig[abs(i - 1)] = NULL;
 				}
-				pOut->PrintMessage("Different");
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
 				SelectedClr[i] = SelectedFig[i]->getFillClr();
+				SelectedFig[i]->PrintInfo(pOut);
 				SelectedFig[i]->ChngFillClr(MAGENTA);
-				//SelectedFig[i]->PrintInfo(pOut);
 			}
 			else if (SelectedFig[i] == SelectedFig[abs(i - 1)])
 			{
-				pOut->PrintMessage("Same");
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
 				if (SelectedFig[i]->IsSelected())
 				{
 					SelectedClr[i] = SelectedFig[i]->getFillClr();
+					SelectedFig[i]->PrintInfo(pOut);
 					SelectedFig[i]->ChngFillClr(MAGENTA);
-					//SelectedFig[i]->PrintInfo(pOut);
 				}
 				else
 				{

@@ -7,6 +7,6 @@
 #include "Actions\AddCircAction.h"
 #include "Actions\AddHexAction.h"
 #include "Actions\SelectAction.h"
-#include "Actions\ColorAction.h"
+#include "Actions\FillAction.h"
 
 #endif

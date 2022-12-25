@@ -34,6 +34,7 @@ void SelectAction::ReadActionParameters()
 		SelectedFig[i] = pManager->GetFigure(P.x, P.y);
 		if (SelectedFig[i] == NULL)
 			continue;
+		pManager->SetSelectedFig(SelectedFig[i]);
 		if (SelectedFig[i])
 		{
 			if (SelectedFig[i] != SelectedFig[abs(i - 1)])
@@ -64,6 +65,7 @@ void SelectAction::ReadActionParameters()
 				else
 				{
 					SelectedFig[i]->ChngFillClr(SelectedClr[abs(i-1)]);
+					pManager->SetSelectedFig(NULL);
 					pOut->PrintMessage("Unselected");
 				}
 				SelectedFig[abs(i - 1)] = NULL;

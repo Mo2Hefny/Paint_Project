@@ -74,27 +74,39 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_BLACK:
 			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
-			setColoring(BLACK, UI.InterfaceMode);
+			setColors(BLACK);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_YELLOW:
 			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
-			setColoring(YELLOW, UI.InterfaceMode);
+			setColors(YELLOW);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_ORANGE:
 			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
-			setColoring(ORANGE, UI.InterfaceMode);
+			setColors(ORANGE);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_RED:
 			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
-			setColoring(RED, UI.InterfaceMode);
+			setColors(RED);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_BLUE:
 			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
-			setColoring(BLUE, UI.InterfaceMode);
+			setColors(BLUE);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_GREEN:
 			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
-			setColoring(GREEN, UI.InterfaceMode);
+			setColors(GREEN);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");
@@ -188,12 +200,24 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsPointInFigure(x, y))
+		{
 			return FigList[i];
+		}
 	}
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
+}
+
+void ApplicationManager::SetSelectedFig(CFigure* pFig)
+{
+	SelectedFig = pFig;
+}
+
+CFigure* ApplicationManager::GetSelectedFig() const
+{
+	return SelectedFig;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -228,4 +252,20 @@ void ApplicationManager::SaveAll(ofstream& outfile)
 	outfile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(outfile);
+}
+
+void ApplicationManager::setColors(color c)
+{
+	if (UI.InterfaceMode == MODE_COL_FILL)
+	{
+		if (c == UI.FillColor && UI.isFilled)
+		{
+			UI.isFilled = false;
+		}
+		else
+			UI.isFilled = true;
+		UI.FillColor = c;
+	}
+	else
+		UI.DrawColor = c;
 }

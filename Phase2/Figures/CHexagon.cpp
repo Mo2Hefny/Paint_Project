@@ -26,16 +26,22 @@ void CHexagon::Save(ofstream& outfile)
 		outfile << "BLUE" << " ";
 	if (FigGfxInfo.DrawClr == GREEN)
 		outfile << "GREEN" << " ";
-	if (FigGfxInfo.FillClr == YELLOW)
-		outfile << "YELLOW" << endl;
-	if (FigGfxInfo.FillClr == RED)
-		outfile << "RED" << endl;
-	if (FigGfxInfo.FillClr == BLACK)
-		outfile << "BLACK" << endl;
-	if (FigGfxInfo.FillClr == ORANGE)
-		outfile << "ORANGE" << endl;
-	if (FigGfxInfo.FillClr == BLUE)
-		outfile << "BLUE" << endl;
-	if (FigGfxInfo.FillClr == GREEN)
-		outfile << "GREEN" << endl;
+	if (FigGfxInfo.isFilled)
+	{
+		if (FigGfxInfo.FillClr == YELLOW)
+			outfile << "YELLOW" << endl;
+		if (FigGfxInfo.FillClr == RED)
+			outfile << "RED" << endl;
+		if (FigGfxInfo.FillClr == BLACK)
+			outfile << "BLACK" << endl;
+		if (FigGfxInfo.FillClr == ORANGE)
+			outfile << "ORANGE" << endl;
+		if (FigGfxInfo.FillClr == BLUE)
+			outfile << "BLUE" << endl;
+		if (FigGfxInfo.FillClr == GREEN)
+			outfile << "GREEN" << endl;
+	}
+	else
+		outfile << "NOTFILLED" << endl;
+
 }

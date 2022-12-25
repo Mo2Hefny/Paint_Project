@@ -213,6 +213,8 @@ ApplicationManager::~ApplicationManager()
 }
 void ApplicationManager::SaveAll(ofstream& outfile)
 {
+	
+	outfile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(outfile);
 }

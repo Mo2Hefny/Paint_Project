@@ -43,3 +43,38 @@ void CFigure::ChngFill(bool c)
 {
 	FigGfxInfo.isFilled = c;
 }
+
+string CFigure::getFillClrStr() const
+{
+	if (FigGfxInfo.isFilled == false)
+		return "NOTFILLED";
+	if (FigGfxInfo.FillClr == BLACK)
+		return "BLACK";
+	if (FigGfxInfo.FillClr == YELLOW)
+		return "YELLOW";
+	if (FigGfxInfo.FillClr == ORANGE)
+		return "ORANGE";
+	if (FigGfxInfo.FillClr == RED)
+		return "RED";
+	if (FigGfxInfo.FillClr == BLUE)
+		return "BLUE";
+	if (FigGfxInfo.FillClr == GREEN)
+		return "GREEN";
+	return "NOTFILLED";
+}
+
+string CFigure::getDrawClrStr() const
+{
+	if (FigGfxInfo.DrawClr == BLACK)
+		return "BLACK";
+	if (FigGfxInfo.DrawClr == YELLOW)
+		return "YELLOW";
+	if (FigGfxInfo.DrawClr == ORANGE)
+		return "ORANGE";
+	if (FigGfxInfo.DrawClr == RED)
+		return "RED";
+	if (FigGfxInfo.DrawClr == BLUE)
+		return "BLUE";
+	if (FigGfxInfo.DrawClr == GREEN)
+		return "GREEN";
+}

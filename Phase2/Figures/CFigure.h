@@ -33,6 +33,8 @@ public:
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	void ChngFill(bool c);
 	virtual void PrintInfo(Output* pOut) const = 0;
+	string getDrawClrStr() const;
+	string getFillClrStr() const;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

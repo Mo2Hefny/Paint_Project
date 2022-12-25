@@ -19,42 +19,14 @@ void CRectangle::Draw(Output* pOut) const
 
 void CRectangle::Save(ofstream& outfile)
 {
-	outfile << "RECT" << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		outfile << "YELLOW" << " ";
-	if (FigGfxInfo.DrawClr == RED)
-		outfile << "RED" << " ";
-	if (FigGfxInfo.DrawClr == BLACK)
-		outfile << "BLACK" << " ";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		outfile << "ORANGE" << " ";
-	if (FigGfxInfo.DrawClr == BLUE)
-		outfile << "BLUE" << " ";
-	if (FigGfxInfo.DrawClr == GREEN)
-		outfile << "GREEN" << " ";
-	if (FigGfxInfo.isFilled)
-	{
-		if (FigGfxInfo.FillClr == YELLOW)
-			outfile << "YELLOW" << endl;
-		if (FigGfxInfo.FillClr == RED)
-			outfile << "RED" << endl;
-		if (FigGfxInfo.FillClr == BLACK)
-			outfile << "BLACK" << endl;
-		if (FigGfxInfo.FillClr == ORANGE)
-			outfile << "ORANGE" << endl;
-		if (FigGfxInfo.FillClr == BLUE)
-			outfile << "BLUE" << endl;
-		if (FigGfxInfo.FillClr == GREEN)
-			outfile << "GREEN" << endl;
-	}
-	else
-		outfile << "NOTFILLED" << endl;
+	outfile << "RECT" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " "
+		<< getDrawClrStr() << " " << getFillClrStr() << endl;
 }
 
 void CRectangle::PrintInfo(Output* pOut) const
 {
 	ostringstream oss;
 	oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Height: "
-		<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
+		<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x) << "Fill Color:" << getFillClrStr() << "Draw Color:" << getDrawClrStr();
 	pOut->PrintMessage(oss.str());
 }

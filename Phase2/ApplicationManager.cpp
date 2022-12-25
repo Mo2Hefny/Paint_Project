@@ -19,6 +19,7 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+	SelectedFig = NULL;
 }
 
 //==================================================================================//
@@ -248,7 +249,7 @@ ApplicationManager::~ApplicationManager()
 }
 void ApplicationManager::SaveAll(ofstream& outfile)
 {
-	
+	outfile << getCrntDrawClr() << " " << getCrntFillClr() << endl;
 	outfile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(outfile);
@@ -268,4 +269,37 @@ void ApplicationManager::setColors(color c)
 	}
 	else
 		UI.DrawColor = c;
+}
+string ApplicationManager::getCrntFillClr() const
+{
+	if (UI.isFilled == false)
+		return "NOTFILLED";
+	if (UI.FillColor == BLACK)
+		return "BLACK";
+	if (UI.FillColor == YELLOW)
+		return "YELLOW";
+	if (UI.FillColor == ORANGE)
+		return "ORANGE";
+	if (UI.FillColor == RED)
+		return "RED";
+	if (UI.FillColor == BLUE)
+		return "BLUE";
+	if (UI.FillColor == GREEN)
+		return "GREEN";
+}
+
+string ApplicationManager::getCrntDrawClr() const
+{
+	if (UI.DrawColor == BLACK)
+		return "BLACK";
+	if (UI.DrawColor == YELLOW)
+		return "YELLOW";
+	if (UI.DrawColor == ORANGE)
+		return "ORANGE";
+	if (UI.DrawColor == RED)
+		return "RED";
+	if (UI.DrawColor == BLUE)
+		return "BLUE";
+	if (UI.DrawColor == GREEN)
+		return "GREEN";
 }

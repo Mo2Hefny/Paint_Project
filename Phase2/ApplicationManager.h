@@ -43,6 +43,8 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream& outfile);
 	void setColors(color);
+	string getCrntFillClr() const;
+	string getCrntDrawClr() const;
 };
 
 #endif

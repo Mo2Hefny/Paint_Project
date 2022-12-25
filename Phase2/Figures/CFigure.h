@@ -8,7 +8,7 @@
 class CFigure
 {
 protected:
-	int ID;		//Each figure has an ID
+	int ID;//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 
@@ -19,7 +19,7 @@ public:
 
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
+	
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -30,7 +30,7 @@ public:
 
 	///Decide the parameters that you should pass to each function	
 
-
+	virtual void Save(ofstream& outfile)=0;
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 

@@ -10,6 +10,7 @@ private:
 public:
 	CSquare(Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	void Save(ofstream& outfile);
 };
 
 #endif

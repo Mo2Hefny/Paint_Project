@@ -46,3 +46,8 @@ void AddRectAction::Execute()
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(R);
 }
+
+int AddRectAction::ActType()
+{
+	return 1;
+}

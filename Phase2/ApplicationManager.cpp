@@ -1,9 +1,5 @@
 #include "ApplicationManager.h"
-#include "Actions\AddRectAction.h"
-#include "Actions\AddSqrAction.h"
-#include "Actions\AddTriAction.h"
-#include "Actions\AddCircAction.h"
-#include "Actions\AddHexAction.h"
+#include "Actions/Actions.h"
 
 void setColoring(color col, GUI_MODE mode)
 {
@@ -73,6 +69,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddHexAction(this);
 			break;
 		case DRAW_SELECT:
+			pAct = new SelectAction(this);
 			pOut->PrintMessage("Action: Select object , Click anywhere");
 			break;
 		case DRAW_FillCol:
@@ -198,8 +195,11 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
-
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsPointInFigure(x, y))
+			return FigList[i];
+	}
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 

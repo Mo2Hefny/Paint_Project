@@ -14,6 +14,11 @@ GfxInfo CFigure::getGfxInfo() const
 	return FigGfxInfo;
 }
 
+color CFigure::getFillClr() const
+{
+	return FigGfxInfo.FillClr;
+}
+
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
@@ -32,5 +37,6 @@ void CFigure::ChngFillClr(color Fclr)
 void CFigure::ChngFill(GfxInfo gfxinfo)
 {
 	FigGfxInfo.isFilled = gfxinfo.isFilled;
-	FigGfxInfo.FillClr = gfxinfo.FillClr;
+	if (FigGfxInfo.isFilled)
+		FigGfxInfo.FillClr = gfxinfo.FillClr;
 }

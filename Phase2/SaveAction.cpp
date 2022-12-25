@@ -12,8 +12,8 @@ void SaveAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the file name");
-	 file = pIn->GetSrting(pOut);
-
+	 file = pIn->GetSrting(pOut)+".txt";
+	 pOut->ClearStatusBar();
 }
 void SaveAction::Execute()
 {

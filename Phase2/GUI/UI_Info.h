@@ -11,7 +11,8 @@ enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,	//Drawing mode (startup mode)
 	MODE_PLAY,	//Playing mode
-	MODE_COL,
+	MODE_COL_FILL,
+	MODE_COL_DRW,
 	MODE_SHAPE
 };
 
@@ -103,6 +104,7 @@ struct UI_Info	//User Interface Info.
 	color BkGrndColor;		//Background color
 	color StatusBarColor;	//Status bar color
 	int PenWidth;			//width of the pen that draws shapes
+	bool isFilled;
 
 	/// Add more members if needed
 

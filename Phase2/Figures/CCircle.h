@@ -10,8 +10,10 @@ private:
 	Point Edge;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	bool IsPointInFigure(int x, int y) const;
 	virtual void Draw(Output* pOut) const;
 	void Save(ofstream& outfile);
+	virtual void PrintInfo(Output* pOut) const;
 };
 
 #endif

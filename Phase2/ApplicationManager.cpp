@@ -1,4 +1,5 @@
 #include "ApplicationManager.h"
+#include "Actions/Actions.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddSqrAction.h"
 #include "Actions\AddTriAction.h"
@@ -6,6 +7,7 @@
 #include "Actions\AddHexAction.h"
 #include"SaveAction.h"
 
+}
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -58,35 +60,42 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddHexAction(this);
 			break;
 		case DRAW_SELECT:
+			pAct = new SelectAction(this);
 			pOut->PrintMessage("Action: Select object , Click anywhere");
 			break;
 		case DRAW_FillCol:
 			pOut->PrintMessage("Action: Fill object , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_FILL;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_DrawCol:
 			pOut->PrintMessage("Action: Draw color , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_DRW;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
 			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
+			setColoring(BLACK, UI.InterfaceMode);
 			break;
 		case DRAW_YELLOW:
 			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
+			setColoring(YELLOW, UI.InterfaceMode);
 			break;
 		case DRAW_ORANGE:
 			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
+			setColoring(ORANGE, UI.InterfaceMode);
 			break;
 		case DRAW_RED:
 			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
+			setColoring(RED, UI.InterfaceMode);
 			break;
 		case DRAW_BLUE:
 			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
+			setColoring(BLUE, UI.InterfaceMode);
 			break;
 		case DRAW_GREEN:
 			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
+			setColoring(GREEN, UI.InterfaceMode);
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");
@@ -177,8 +186,11 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
-
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsPointInFigure(x, y))
+			return FigList[i];
+	}
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 

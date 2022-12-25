@@ -10,7 +10,9 @@ private:
 	Point Corner2;
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
+	bool IsPointInFigure(int x, int y) const;
 	virtual void Draw(Output* pOut) const;
+	virtual void PrintInfo(Output* pOut) const;
 	void Save(ofstream& outfile);
 };
 

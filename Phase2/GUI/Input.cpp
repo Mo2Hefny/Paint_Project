@@ -81,7 +81,7 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
-	else if (UI.InterfaceMode == MODE_COL)
+	else if (UI.InterfaceMode == MODE_COL_FILL || UI.InterfaceMode == MODE_COL_DRW)
 	{
 		//[1] If user clicks on the Toolbar
 		if (y >= 0 && y < UI.ToolBarHeight)

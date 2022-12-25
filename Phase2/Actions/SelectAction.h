@@ -1,0 +1,24 @@
+#ifndef SELECT_ACTION_H
+#define SELECT_ACTION_H
+
+#include "..\ApplicationManager.h"
+#include "Action.h"
+
+class SelectAction : public Action
+{
+private:
+	Point P; 
+	color SelectedClr[2];
+	CFigure* SelectedFig[2];
+public:
+	SelectAction(ApplicationManager* pApp);
+
+	//Reads rectangle parameters
+	virtual void ReadActionParameters();
+
+	//Add rectangle to the ApplicationManager
+	virtual void Execute();
+
+};
+
+#endif

@@ -7,7 +7,10 @@ CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 
 bool CHexagon::IsPointInFigure(int x, int y) const
 {
-	return ((x - Center.x) * (Center.x - x) > 0 && (Center.y - y) * (y - Center.y));
+	int Dx = abs(Center.x - x);
+	int Dy = abs(Center.y - y);
+	if (Dx > 23 * 2 || Dy > 46) return false;
+	return (46 * 2 * 30 - 46 * Dx - 2 * 30 * Dy >= 0);
 }
 void CHexagon::Draw(Output* pOut) const
 {
@@ -47,7 +50,6 @@ void CHexagon::Save(ofstream& outfile)
 	else
 		outfile << "NOTFILLED" << endl;
 
-}
 }
 
 void CHexagon::PrintInfo(Output* pOut) const

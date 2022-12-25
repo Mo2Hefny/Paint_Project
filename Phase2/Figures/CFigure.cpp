@@ -27,6 +27,9 @@ void CFigure::SetSelected(bool s)
 bool CFigure::IsSelected() const
 {	return Selected; }
 
+bool CFigure::IsFilled() const
+{	return FigGfxInfo.isFilled; }
+
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
 
@@ -36,9 +39,7 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
-void CFigure::ChngFill(GfxInfo gfxinfo)
+void CFigure::ChngFill(bool c)
 {
-	FigGfxInfo.isFilled = gfxinfo.isFilled;
-	if (FigGfxInfo.isFilled)
-		FigGfxInfo.FillClr = gfxinfo.FillClr;
+	FigGfxInfo.isFilled = c;
 }

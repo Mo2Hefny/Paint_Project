@@ -10,6 +10,7 @@ bool CCircle::IsPointInFigure(int x, int y) const
 {
 	return (pow(Center.x - x, 2) + pow(Center.y - y, 2) <= pow(Center.x - Edge.x, 2) + pow(Center.y - Edge.y, 2));
 }
+
 void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
@@ -23,7 +24,7 @@ void CCircle::PrintInfo(Output* pOut) const
 	//	<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
 	//pOut->PrintMessage(oss.str());
 }
-}
+
 void CCircle::Save(ofstream& outfile)
 {
 	outfile << "CIRC" << " " << Center.x << " " << Center.y << " " << Edge.x << " " << Edge.y << " ";

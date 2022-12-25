@@ -4,6 +4,7 @@
 #include "..\defs.h"
 #include "..\GUI\Output.h"
 #include <cmath>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 
@@ -23,13 +24,14 @@ public:
 
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
+	bool IsFilled() const;
 	virtual bool IsPointInFigure(int, int) const = 0;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 	GfxInfo getGfxInfo() const;
 	color getFillClr() const;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-	void ChngFill(GfxInfo);
+	void ChngFill(bool c);
 	virtual void PrintInfo(Output* pOut) const = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure

@@ -16,6 +16,7 @@ void CRectangle::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
+
 void CRectangle::Save(ofstream& outfile)
 {
 	outfile << "RECT" << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";
@@ -48,7 +49,6 @@ void CRectangle::Save(ofstream& outfile)
 	}
 	else
 		outfile << "NOTFILLED" << endl;
-}
 }
 
 void CRectangle::PrintInfo(Output* pOut) const

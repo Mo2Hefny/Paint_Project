@@ -3,6 +3,7 @@
 CSquare::CSquare(Point P, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P;
+	ID = IDcounter;
 }
 
 bool CSquare::IsPointInFigure(int x, int y) const
@@ -27,7 +28,7 @@ void CSquare::PrintInfo(Output* pOut) const
 
 void CSquare::Save(ofstream& outfile)
 {
-	outfile << "SQUARE" << " " << Center.x << " " << Center.y << " ";
+	outfile << "SQUARE" << " " << ID << " " << Center.x << " " << Center.y << " ";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		outfile << "YELLOW" << " ";
 	if (FigGfxInfo.DrawClr == RED)

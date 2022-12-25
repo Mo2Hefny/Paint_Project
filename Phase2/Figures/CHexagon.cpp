@@ -3,6 +3,7 @@
 CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P;
+	ID = IDcounter;
 }
 
 bool CHexagon::IsPointInFigure(int x, int y) const
@@ -25,7 +26,7 @@ void CHexagon::PrintInfo(Output* pOut) const
 
 void CHexagon::Save(ofstream& outfile)
 {
-	outfile << "HEXA" << " " << Center.x << " " << Center.y << " ";
+	outfile << "HEXA" << " " << ID << " " << Center.x << " " << Center.y << " ";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		outfile << "YELLOW" << " ";
 	if (FigGfxInfo.DrawClr == RED)

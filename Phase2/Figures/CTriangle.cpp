@@ -5,6 +5,7 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	Vertix1 = P1;
 	Vertix2 = P2;
 	Vertix3 = P3;
+	ID = IDcounter;
 }
 
 bool CTriangle::IsPointInFigure(int x, int y) const
@@ -18,7 +19,7 @@ void CTriangle::Draw(Output* pOut) const
 }
 void CTriangle::Save(ofstream& outfile)
 {
-	outfile << "TRI" << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " " << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y << " ";
+	outfile << "TRI" << " " << ID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " " << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y << " ";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		outfile << "YELLOW" << " ";
 	if (FigGfxInfo.DrawClr == RED)

@@ -4,6 +4,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInf
 {
 	Center = P1;
 	Edge = P2;
+	ID = IDcounter;
 }
 
 bool CCircle::IsPointInFigure(int x, int y) const
@@ -17,7 +18,7 @@ void CCircle::Draw(Output* pOut) const
 }
 void CCircle::Save(ofstream& outfile)
 {
-	outfile << "CIRC" << " " << Center.x << " " << Center.y << " " << Edge.x << " " << Edge.y << " ";
+	outfile << "CIRC" << " " <<ID <<" " << Center.x << " " << Center.y << " " << Edge.x << " " << Edge.y << " ";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		outfile << "YELLOW"<<" ";
 	if (FigGfxInfo.DrawClr == RED)

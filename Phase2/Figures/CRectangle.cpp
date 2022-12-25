@@ -4,6 +4,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 {
 	Corner1 = P1;
 	Corner2 = P2;
+	ID = IDcounter;
 }
 
 bool CRectangle::IsPointInFigure(int x, int y) const
@@ -27,7 +28,7 @@ void CRectangle::PrintInfo(Output* pOut) const
 
 void CRectangle::Save(ofstream& outfile)
 {
-	outfile << "RECT" << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";
+	outfile << "RECT" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		outfile << "YELLOW" << " ";
 	if (FigGfxInfo.DrawClr == RED)

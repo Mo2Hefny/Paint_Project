@@ -48,7 +48,7 @@ void CCircle::Save(ofstream& outfile)
 	else
 		outfile << "NOTFILLED" << endl;
 }
-}
+
 
 void CCircle::PrintInfo(Output* pOut) const
 {

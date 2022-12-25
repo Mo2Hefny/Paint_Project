@@ -24,7 +24,7 @@ void CRectangle::PrintInfo(Output* pOut) const
 		<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
 	pOut->PrintMessage(oss.str());
 }
-}
+
 void CRectangle::Save(ofstream& outfile)
 {
 	outfile << "RECT" << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";

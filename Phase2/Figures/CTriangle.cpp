@@ -49,7 +49,7 @@ void CTriangle::Save(ofstream& outfile)
 	else
 		outfile << "NOTFILLED" << endl;
 }
-}
+
 
 void CTriangle::PrintInfo(Output* pOut) const
 {

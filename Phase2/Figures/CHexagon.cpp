@@ -22,7 +22,7 @@ void CHexagon::PrintInfo(Output* pOut) const
 	//	<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
 	//pOut->PrintMessage(oss.str());
 }
-}
+
 void CHexagon::Save(ofstream& outfile)
 {
 	outfile << "HEXA" << " " << Center.x << " " << Center.y << " ";

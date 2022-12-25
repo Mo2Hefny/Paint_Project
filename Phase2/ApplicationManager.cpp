@@ -1,22 +1,12 @@
 #include "ApplicationManager.h"
 #include "Actions/Actions.h"
+#include "Actions\AddRectAction.h"
+#include "Actions\AddSqrAction.h"
+#include "Actions\AddTriAction.h"
+#include "Actions\AddCircAction.h"
+#include "Actions\AddHexAction.h"
+#include"SaveAction.h"
 
-void setColoring(color col, GUI_MODE mode)
-{
-	if (mode == MODE_COL_FILL)
-	{
-		if (col == UI.FillColor && UI.isFilled)
-			UI.isFilled = false;
-		else
-		{
-			UI.isFilled = true;
-			UI.FillColor = col;
-		}
-	}
-	else
-		UI.DrawColor = col;
-
-}
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -131,7 +121,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Action: Play last record , Click anywhere");
 			break;
 		case DRAW_SAVE:
-			pOut->PrintMessage("Action: Save file , Click anywhere");
+			pAct = new SaveAction(this);
 			break;
 		case DRAW_LOAD:
 			pOut->PrintMessage("Action: Load file , Click anywhere");
@@ -231,4 +221,11 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+void ApplicationManager::SaveAll(ofstream& outfile)
+{
+	
+	outfile << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+		FigList[i]->Save(outfile);
 }

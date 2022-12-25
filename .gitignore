@@ -2,3 +2,7 @@
 /Phase2/.vs
 /Phase1/Debug
 /Phase2/Debug
+/Phase1/*.filters
+/Phase2/*.filters
+/Phase1/*.user
+/Phase2/*.user

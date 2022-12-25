@@ -1,4 +1,6 @@
 #include "CFigure.h"
+#include<fstream>
+#include<string>
 
 unsigned int CFigure::IDcounter = 0;
 

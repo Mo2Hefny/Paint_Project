@@ -7,7 +7,7 @@
 #include "Actions\AddHexAction.h"
 #include"SaveAction.h"
 
-}
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -75,27 +75,27 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_BLACK:
 			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
-			setColoring(BLACK, UI.InterfaceMode);
+			
 			break;
 		case DRAW_YELLOW:
 			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
-			setColoring(YELLOW, UI.InterfaceMode);
+			
 			break;
 		case DRAW_ORANGE:
 			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
-			setColoring(ORANGE, UI.InterfaceMode);
+			
 			break;
 		case DRAW_RED:
 			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
-			setColoring(RED, UI.InterfaceMode);
+		
 			break;
 		case DRAW_BLUE:
 			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
-			setColoring(BLUE, UI.InterfaceMode);
+			
 			break;
 		case DRAW_GREEN:
 			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
-			setColoring(GREEN, UI.InterfaceMode);
+			
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");

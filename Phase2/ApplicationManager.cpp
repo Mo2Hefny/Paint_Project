@@ -78,36 +78,48 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			setColors(BLACK);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_YELLOW:
 			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
 			setColors(YELLOW);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_ORANGE:
 			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
 			setColors(ORANGE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_RED:
 			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
 			setColors(RED);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_BLUE:
 			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
 			setColors(BLUE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_GREEN:
 			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
 			setColors(GREEN);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");

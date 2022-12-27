@@ -8,5 +8,6 @@
 #include "Actions\AddHexAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\FillAction.h"
+#include "Actions\DrawClrAction.h"
 
 #endif

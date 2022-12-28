@@ -45,11 +45,63 @@ void CTriangle::Save(ofstream& outfile)
 	outfile << "TRI" << " " << ID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " " << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y << " "
 		<< getDrawClrStr() << " " << getFillClrStr() << endl;
 }
-
+CTriangle::CTriangle()
+{
+	GfxInfo FigGFxInfo;
+}
 void CTriangle::PrintInfo(Output* pOut) const
 {
 	ostringstream oss;
 	oss << "ID:" << ID << "\t Vertix1:(" << Vertix1.x << "," << Vertix1.y << ")  Vertix2:(" << Vertix2.x << "," << Vertix2.y << ")  Vertix3:(" 
 		<< Vertix3.x << "," << Vertix3.y <<  ")  Fill Color: " << getFillClrStr() << " Draw Color:" << getDrawClrStr();
 	pOut->PrintMessage(oss.str());
+}
+void CTriangle::load(ifstream& infile)
+{
+	int cx, cy, ex, ey,sx,sy, id;
+	infile >> id >> cx >> cy >> ex >> ey >> sx >> sy;
+	ID = id;
+	Vertix1.x = cx;
+	Vertix1.y = cy;
+	Vertix2.x = ex;
+	Vertix2.y = ey;
+	Vertix3.x = sx;
+	Vertix3.y = sy;
+	string DrawingColor, FillColor;
+	infile >> DrawingColor >> FillColor;
+	if (DrawingColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	if (DrawingColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
+	if (DrawingColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	if (DrawingColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	if (DrawingColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	if (DrawingColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+	if (FillColor == "NOTFILLED")
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.isFilled = true;
+		if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+
+		if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+
+		if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+
+		if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+
+		if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
 }

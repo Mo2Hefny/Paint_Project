@@ -10,6 +10,10 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = false;
 	ID = ++IDcounter;
 }
+CFigure::CFigure()
+{
+	Selected = false;
+}
 
 GfxInfo CFigure::getGfxInfo() const
 {

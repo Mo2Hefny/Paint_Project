@@ -13,6 +13,7 @@ void SaveAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the file name");
 	 file = pIn->GetSrting(pOut)+".txt";
+	 pOut->ClearDrawArea();
 	 pOut->ClearStatusBar();
 }
 void SaveAction::Execute()

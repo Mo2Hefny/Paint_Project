@@ -8,6 +8,10 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 	height = abs(Corner1.y - Corner2.y);
 }
 
+CRectangle::CRectangle()
+{
+	GfxInfo FigGFxInfo;
+}
 bool CRectangle::IsPointInFigure(int x, int y) const
 {
 	return !((x - Corner1.x) * (Corner2.x - x) < 0 || (Corner2.y - y) * (y - Corner1.y) < 0);
@@ -44,4 +48,51 @@ void CRectangle::PrintInfo(Output* pOut) const
 	oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Height: "
 		<< height << " Width:" << width << "Fill Color:" << getFillClrStr() << "Draw Color:" << getDrawClrStr();
 	pOut->PrintMessage(oss.str());
+}
+void CRectangle::load(ifstream& infile)
+{
+	int cx, cy, ex, ey, id;
+	infile >> id >> cx >> cy >> ex >> ey;
+	ID = id;
+	Corner1.x = cx;
+	Corner1.y = cy;
+	Corner2.x = ex;
+	Corner2.y = ey;
+	string DrawingColor, FillColor;
+	infile >> DrawingColor >> FillColor;
+	if (DrawingColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	if (DrawingColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
+	if (DrawingColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	if (DrawingColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	if (DrawingColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	if (DrawingColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+	if (FillColor == "NOTFILLED")
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.isFilled = true;
+		if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+
+		if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+
+		if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+
+		if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+
+		if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
 }

@@ -81,9 +81,12 @@
     <ClCompile Include="Actions\AddHexAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="SaveAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
+    <ClCompile Include="Actions\DrawClrAction.cpp" />
+    <ClCompile Include="Actions\FillAction.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="SaveAction.cpp" />
+    <ClCompile Include="Undo.cpp" />
+    <ClCompile Include="LoadAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -150,9 +153,12 @@
     <ClInclude Include="Actions\AddHexAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="SaveAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
+    <ClInclude Include="Actions\DrawClrAction.h" />
+    <ClInclude Include="Actions\FillAction.h" />
+    <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="SaveAction.h" />
+    <ClInclude Include="Undo.h" />
+    <ClInclude Include="LoadAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

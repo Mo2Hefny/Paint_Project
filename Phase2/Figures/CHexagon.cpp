@@ -34,6 +34,10 @@ void CHexagon::Save(ofstream& outfile)
 		<< getDrawClrStr() << " " << getFillClrStr() << endl;
 
 }
+CHexagon::CHexagon()
+{
+	GfxInfo FigGFxInfo;
+}
 
 void CHexagon::PrintInfo(Output* pOut) const
 {
@@ -42,3 +46,47 @@ void CHexagon::PrintInfo(Output* pOut) const
 		<< 88 << " Fill Color:" << getFillClrStr() << " Draw Color:" << getDrawClrStr();
 	//pOut->PrintMessage(oss.str());
 }
+void CHexagon::load(ifstream& infile)
+{
+		int cx, cy, id;
+		infile >> id >> cx >> cy;
+		ID = id;
+		Center.x = cx;
+		Center.y = cy;
+		string DrawingColor, FillColor;
+		infile >> DrawingColor >> FillColor;
+		if (DrawingColor == "RED")
+			FigGfxInfo.DrawClr = RED;
+		if (DrawingColor == "YELLOW")
+			FigGfxInfo.DrawClr = YELLOW;
+		if (DrawingColor == "GREEN")
+			FigGfxInfo.DrawClr = GREEN;
+		if (DrawingColor == "ORANGE")
+			FigGfxInfo.DrawClr = ORANGE;
+		if (DrawingColor == "BLACK")
+			FigGfxInfo.DrawClr = BLACK;
+		if (DrawingColor == "BLUE")
+			FigGfxInfo.DrawClr = BLUE;
+		if (FillColor == "NOTFILLED")
+			FigGfxInfo.isFilled = false;
+		else
+		{
+			if (FillColor == "RED")
+				FigGfxInfo.FillClr = RED;
+
+			if (FillColor == "YELLOW")
+				FigGfxInfo.FillClr = YELLOW;
+
+			if (FillColor == "GREEN")
+				FigGfxInfo.FillClr = GREEN;
+
+			if (FillColor == "BLACK")
+				FigGfxInfo.FillClr = BLACK;
+
+			if (FillColor == "ORANGE")
+				FigGfxInfo.FillClr = ORANGE;
+
+			if (FillColor == "BLUE")
+				FigGfxInfo.FillClr = BLUE;
+		}
+	}

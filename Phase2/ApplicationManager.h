@@ -45,6 +45,7 @@ public:
 	void setColors(color);
 	string getCrntFillClr() const;
 	string getCrntDrawClr() const;
+	void load()const;
 };
 
 #endif

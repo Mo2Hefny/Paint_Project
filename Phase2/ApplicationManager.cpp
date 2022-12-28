@@ -8,7 +8,8 @@
 #include"SaveAction.h"
 #include "Undo.h"
 #include "GUI/Output.h"
-
+#include"LoadAction.h"
+#include<iostream>
 Undo undo_tool;
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -170,7 +171,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new SaveAction(this);
 			break;
 		case DRAW_LOAD:
-			pOut->PrintMessage("Action: Load file , Click anywhere");
+			pAct = new LoadAction(this);
 			break;
 		case PLAY_TYPE:
 			pOut->PrintMessage("Action: Select objects of the same type , Click anywhere");
@@ -285,7 +286,16 @@ void ApplicationManager::SaveAll(ofstream& outfile)
 	outfile << getCrntDrawClr() << " " << getCrntFillClr() << endl;
 	outfile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->Save(outfile);
+	{
+		if (FigList[i]->IsSelected() == true)
+			FigList[i]->SetSelected(false);
+		
+	}
+	for (int i = 0; i < FigCount; i++)
+	{
+		
+			FigList[i]->Save(outfile);
+	}
 }
 
 void ApplicationManager::setColors(color c)

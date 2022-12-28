@@ -36,7 +36,8 @@ public:
 	void SetSelectedFig(CFigure* pFig);
 	CFigure* GetSelectedFig() const;
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-		
+	int GetFigCount() const;
+	CFigure* GetFigInList(int) const;
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output

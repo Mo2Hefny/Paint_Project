@@ -8,6 +8,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	Hidden = false;
 	ID = ++IDcounter;
 }
 CFigure::CFigure()
@@ -45,11 +46,29 @@ void CFigure::SetSelected(bool s)
 		OldFigGfxInfo.DrawClr = FigGfxInfo.DrawClr;
 }
 
+void CFigure::Hide(bool mode)
+{
+	Hidden = mode;
+	if (mode)
+	{
+		OldFigGfxInfo = FigGfxInfo;
+		FigGfxInfo.isFilled = false;
+		FigGfxInfo.DrawClr = UI.BkGrndColor;
+	}
+	else
+	{
+		FigGfxInfo = OldFigGfxInfo;
+	}
+}
+
 bool CFigure::IsSelected() const
 {	return Selected; }
 
 bool CFigure::IsFilled() const
 {	return FigGfxInfo.isFilled; }
+
+bool CFigure::IsHidden() const
+{	return Hidden; }
 
 void CFigure::ChngDrawClr(color Dclr)
 {	

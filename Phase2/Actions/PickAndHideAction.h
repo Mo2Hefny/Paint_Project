@@ -7,15 +7,21 @@
 class PickAndHideAction : public Action
 {
 private:
+	int mode;
 	Point P;
-	CFigure* Leader;
 	char LeaderType;
+	color LeaderColor;
+	unsigned int CountRight, CountWrong;
 public:
-	PickAndHideAction(ApplicationManager* pApp);
+	PickAndHideAction(ApplicationManager* pApp, int m);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	char GetFigType(CFigure*) const;
+	bool SameTypeLeft() const;
+	void PrintResults() const;
+	void Unhide() const;
+	void PickProperty();
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 

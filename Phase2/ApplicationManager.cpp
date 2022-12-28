@@ -174,13 +174,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new LoadAction(this);
 			break;
 		case PLAY_TYPE:
-			pOut->PrintMessage("Action: Select objects of the same type , Click anywhere");
+			pAct = new PickAndHideAction(this, 1);
 			break;
 		case PLAY_FILL:
-			pOut->PrintMessage("Action: Select objects of the same color , Click anywhere");
+			pAct = new PickAndHideAction(this, 2);
 			break;
 		case PLAY_TypeFill:
-			pOut->PrintMessage("Action: Select objects of the same type and color , Click anywhere");
+			pAct = new PickAndHideAction(this, 3);
 			break;
 		case DRAWING_AREA:
 			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
@@ -251,13 +251,20 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 }
 
 void ApplicationManager::SetSelectedFig(CFigure* pFig)
-{
-	SelectedFig = pFig;
-}
+{	SelectedFig = pFig; }
 
 CFigure* ApplicationManager::GetSelectedFig() const
+{	return SelectedFig; }
+
+int ApplicationManager::GetFigCount() const
+{	return FigCount; }
+
+CFigure* ApplicationManager::GetFigInList(int i) const
 {
-	return SelectedFig;
+	if (i < FigCount)
+		return FigList[i];
+	else
+		return NULL;
 }
 //==================================================================================//
 //							Interface Management Functions							//

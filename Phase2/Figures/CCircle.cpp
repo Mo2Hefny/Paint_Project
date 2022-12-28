@@ -1,6 +1,7 @@
 #include "CCircle.h"
 #include<fstream>
 #include <string>
+
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Center = P1;
@@ -23,7 +24,10 @@ void CCircle::move(int x, int y)
 {
 	Center.x = x;
 	Center.y = y;
+	Edge.x = Center.x + Radius;
+	Edge.y = Center.y;
 }
+
 CCircle::CCircle()
 {
 	GfxInfo FigGFxInfo;
@@ -40,14 +44,14 @@ void CCircle::Save(ofstream& outfile)
 	
 }
 
-
 void CCircle::PrintInfo(Output* pOut) const
 {
-	//ostringstream oss;
-	//oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Height: "
-	//	<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
-	//pOut->PrintMessage(oss.str());
+	ostringstream oss;
+	oss << "ID:" << ID << "\t Center:(" << Center.x << "," << Center.y << ")  Edge:(" << Edge.x << "," << Edge.y << ")  Radius: "
+		<< Radius << " Area:" << 3.14 * pow(Radius, 2);
+	pOut->PrintMessage(oss.str());
 }
+
 void CCircle::load(ifstream& infile)
 {
 	int cx, cy, ex, ey, id;

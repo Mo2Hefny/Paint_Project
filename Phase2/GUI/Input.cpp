@@ -7,9 +7,14 @@ Input::Input(window* pW)
 	pWind = pW; //point to the passed window
 }
 
-void Input::GetPointClicked(int& x, int& y) const
+clicktype Input::GetPointClicked(int& x, int& y) const
 {
-	pWind->WaitMouseClick(x, y);	//Wait for mouse click
+	return (pWind->WaitMouseClick(x, y));	//Wait for mouse click
+}
+
+buttonstate Input::GetButtonState(int& x, int& y)
+{
+	return pWind->GetButtonState(LEFT_BUTTON, x, y);
 }
 
 string Input::GetSrting(Output* pO) const

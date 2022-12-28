@@ -13,7 +13,8 @@ private:
 	window *pWind;	//Pointer to the Graphics Window
 public:
 	Input(window *pW);		//Consturctor
-	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
+	clicktype GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
+	buttonstate Input::GetButtonState(int& x, int& y);
 	string GetSrting(Output* pO) const ;	 //Returns a string entered by the user
 
 	ActionType GetUserAction() const; //Read the user click and map to an action

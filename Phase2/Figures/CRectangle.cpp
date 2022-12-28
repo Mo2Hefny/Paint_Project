@@ -4,7 +4,8 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	ID = IDcounter;
+	width = abs(Corner1.x - Corner2.x);
+	height = abs(Corner1.y - Corner2.y);
 }
 
 bool CRectangle::IsPointInFigure(int x, int y) const
@@ -18,44 +19,29 @@ void CRectangle::Draw(Output* pOut) const
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 
+void CRectangle::move(int x, int y)
+{
+	Corner1.x = x - width / 2;
+	Corner2.x = x + width / 2;
+	Corner1.y = y + height / 2;
+	Corner2.y = y - height / 2;
+	Center.x = x;
+	Center.y = y;
+}
+
+Point CRectangle::GetCenter() const
+{	return Center; }
+
+void CRectangle::Save(ofstream& outfile)
+{
+	outfile << "RECT" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " "
+		<< getDrawClrStr() << " " << getFillClrStr() << endl;
+}
+
 void CRectangle::PrintInfo(Output* pOut) const
 {
 	ostringstream oss;
 	oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Height: "
-		<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
+		<< height << " Width:" << width << "Fill Color:" << getFillClrStr() << "Draw Color:" << getDrawClrStr();
 	pOut->PrintMessage(oss.str());
-}
-
-void CRectangle::Save(ofstream& outfile)
-{
-	outfile << "RECT" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " ";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		outfile << "YELLOW" << " ";
-	if (FigGfxInfo.DrawClr == RED)
-		outfile << "RED" << " ";
-	if (FigGfxInfo.DrawClr == BLACK)
-		outfile << "BLACK" << " ";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		outfile << "ORANGE" << " ";
-	if (FigGfxInfo.DrawClr == BLUE)
-		outfile << "BLUE" << " ";
-	if (FigGfxInfo.DrawClr == GREEN)
-		outfile << "GREEN" << " ";
-	if (FigGfxInfo.isFilled)
-	{
-		if (FigGfxInfo.FillClr == YELLOW)
-			outfile << "YELLOW" << endl;
-		if (FigGfxInfo.FillClr == RED)
-			outfile << "RED" << endl;
-		if (FigGfxInfo.FillClr == BLACK)
-			outfile << "BLACK" << endl;
-		if (FigGfxInfo.FillClr == ORANGE)
-			outfile << "ORANGE" << endl;
-		if (FigGfxInfo.FillClr == BLUE)
-			outfile << "BLUE" << endl;
-		if (FigGfxInfo.FillClr == GREEN)
-			outfile << "GREEN" << endl;
-	}
-	else
-		outfile << "NOTFILLED" << endl;
 }

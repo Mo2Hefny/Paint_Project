@@ -8,12 +8,20 @@ class CCircle : public CFigure
 private:
 	Point Center;
 	Point Edge;
+	double Radius;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	bool IsPointInFigure(int x, int y) const;
 	virtual void Draw(Output* pOut) const;
+	virtual void move(int x, int y);
+	virtual Point GetCenter() const;
 	void Save(ofstream& outfile);
 	virtual void PrintInfo(Output* pOut) const;
+=========
+	void Save(ofstream& outfile);
+>>>>>>>>> Temporary merge branch 2
+	void Save(ofstream& outfile);
+>>>>>>>>> Temporary merge branch 2
 };
 
 #endif

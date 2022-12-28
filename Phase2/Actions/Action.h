@@ -21,6 +21,7 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
+	virtual int ActType(); //returns 1 if a figure is created & 2 if a color changed;
 
 };
 

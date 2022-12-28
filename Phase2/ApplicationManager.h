@@ -33,6 +33,8 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
+	void SetSelectedFig(CFigure* pFig);
+	CFigure* GetSelectedFig() const;
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 		
 	// -- Interface Management Functions
@@ -40,6 +42,9 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream& outfile);
+	void setColors(color);
+	string getCrntFillClr() const;
+	string getCrntDrawClr() const;
 };
 
 #endif

@@ -1,61 +1,55 @@
 #include "CTriangle.h"
 #include<fstream>
+
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Vertix1 = P1;
 	Vertix2 = P2;
 	Vertix3 = P3;
-	ID = IDcounter;
+	CenterX = (P3.x + P2.x + P1.x) / 3.0;
+	CenterY = (P3.y + P2.y + P1.y) / 3.0;
 }
 
 bool CTriangle::IsPointInFigure(int x, int y) const
 {
-	return ((x - Vertix2.x) * (Vertix2.x - x) > 0 && (Vertix2.y - y) * (y - Vertix2.y));
+	double Area1 = abs((x * (Vertix1.y - Vertix2.y) + Vertix1.x * (Vertix2.y - y) + Vertix2.x * (y - Vertix1.y)) / 2.0);
+	double Area2 = abs((x * (Vertix3.y - Vertix2.y) + Vertix3.x * (Vertix2.y - y) + Vertix2.x * (y - Vertix3.y)) / 2.0);
+	double Area3 = abs((x * (Vertix1.y - Vertix3.y) + Vertix1.x * (Vertix3.y - y) + Vertix3.x * (y - Vertix1.y)) / 2.0);
+	double AreaT = abs((Vertix3.x * (Vertix1.y - Vertix2.y) + Vertix1.x * (Vertix2.y - Vertix3.y) + Vertix2.x * (Vertix3.y - Vertix1.y)) / 2.0);
+	return (AreaT == Area1 + Area2 + Area3);
 }
+
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawTriangle(Vertix1, Vertix2, Vertix3, FigGfxInfo, Selected);
 }
-void CTriangle::Save(ofstream& outfile)
+
+void CTriangle::move(int x, int y)
 {
-	outfile << "TRI" << " " << ID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " " << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y << " ";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		outfile << "YELLOW" << " ";
-	if (FigGfxInfo.DrawClr == RED)
-		outfile << "RED" << " ";
-	if (FigGfxInfo.DrawClr == BLACK)
-		outfile << "BLACK" << " ";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		outfile << "ORANGE" << " ";
-	if (FigGfxInfo.DrawClr == BLUE)
-		outfile << "BLUE" << " ";
-	if (FigGfxInfo.DrawClr == GREEN)
-		outfile << "GREEN" << " ";
-	if (FigGfxInfo.isFilled)
-	{
-		if (FigGfxInfo.FillClr == YELLOW)
-			outfile << "YELLOW" << endl;
-		if (FigGfxInfo.FillClr == RED)
-			outfile << "RED" << endl;
-		if (FigGfxInfo.FillClr == BLACK)
-			outfile << "BLACK" << endl;
-		if (FigGfxInfo.FillClr == ORANGE)
-			outfile << "ORANGE" << endl;
-		if (FigGfxInfo.FillClr == BLUE)
-			outfile << "BLUE" << endl;
-		if (FigGfxInfo.FillClr == GREEN)
-			outfile << "GREEN" << endl;
-	}
-	else
-		outfile << "NOTFILLED" << endl;
+	Vertix1.x = x + (Vertix1.x - CenterX);
+	Vertix2.x = x + (Vertix2.x - CenterX);
+	Vertix3.x = x + (Vertix3.x - CenterX);
+	Vertix1.y = y + (Vertix1.y - CenterY);
+	Vertix2.y = y + (Vertix2.y - CenterY);
+	Vertix3.y = y + (Vertix3.y - CenterY);
+	CenterX = x;
+	CenterY = y;
 }
 
+Point CTriangle::GetCenter() const
+{	return Point{ (int)CenterX, (int)CenterY }; }
+
+void CTriangle::Save(ofstream& outfile)
+{
+	outfile << "TRI" << " " << ID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " " << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y << " "
+		<< getDrawClrStr() << " " << getFillClrStr() << endl;
+}
 
 void CTriangle::PrintInfo(Output* pOut) const
 {
-	//ostringstream oss;
-	//oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Height: "
-	//	<< abs(Corner1.y - Corner2.y) << " Width:" << abs(Corner1.x - Corner2.x);
-	//pOut->PrintMessage(oss.str());
+	ostringstream oss;
+	oss << "ID:" << ID << "\t Vertix1:(" << Vertix1.x << "," << Vertix1.y << ")  Vertix2:(" << Vertix2.x << "," << Vertix2.y << ")  Vertix3:(" 
+		<< Vertix3.x << "," << Vertix3.y <<  ")  Fill Color: " << getFillClrStr() << " Draw Color:" << getDrawClrStr();
+	pOut->PrintMessage(oss.str());
 }

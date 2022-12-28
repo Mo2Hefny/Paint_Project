@@ -41,3 +41,8 @@ void AddHexAction::Execute()
 	//Add the hexagon to the list of figures
 	pManager->AddFigure(H);
 }
+
+int AddHexAction::ActType()
+{
+	return 1;
+}

@@ -39,5 +39,5 @@ void CHexagon::PrintInfo(Output* pOut) const
 	ostringstream oss;
 	oss << "ID:" << ID << "\t Center:(" << Center.x << "," << Center.y << ")  Length: "
 		<< 88 << " Fill Color:" << getFillClrStr() << " Draw Color:" << getDrawClrStr();
-	//pOut->PrintMessage(oss.str());
+	pOut->PrintMessage(oss.str());
 }

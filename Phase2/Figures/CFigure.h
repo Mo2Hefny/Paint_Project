@@ -33,7 +33,6 @@ public:
 	color getDrawClr();
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-	void ChngSelectedDraw();
 	virtual void PrintInfo(Output* pOut) const = 0;
 	string getDrawClrStr() const;
 	string getFillClrStr() const;

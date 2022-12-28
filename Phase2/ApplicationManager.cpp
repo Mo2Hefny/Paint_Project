@@ -197,6 +197,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case TO_PLAY:
 			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			if (GetSelectedFig() != NULL)
+			{
+				GetSelectedFig()->SetSelected(false);
+				SetSelectedFig(NULL);
+			}
 			pOut->CreatePlayToolBar();
 			break;
 		case EXIT:

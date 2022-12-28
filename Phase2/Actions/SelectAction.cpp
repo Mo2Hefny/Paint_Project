@@ -38,14 +38,12 @@ void SelectAction::ReadActionParameters()
 			{
 				if (SelectedFig[abs(i - 1)] != NULL && SelectedFig[abs(i - 1)]->IsSelected())
 				{
-					SelectedFig[abs(i - 1)]->ChngSelectedDraw();
 					SelectedFig[abs(i - 1)]->SetSelected(false);
 					SelectedFig[abs(i - 1)] = NULL;
 				}
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
 				
 				SelectedFig[i]->PrintInfo(pOut);
-				SelectedFig[i]->ChngDrawClr(UI.HighlightColor);
 			}
 			else if (SelectedFig[i] == SelectedFig[abs(i - 1)])
 			{
@@ -54,11 +52,9 @@ void SelectAction::ReadActionParameters()
 				{
 					
 					SelectedFig[i]->PrintInfo(pOut);
-					SelectedFig[i]->ChngDrawClr(UI.HighlightColor);
 				}
 				else
 				{
-					SelectedFig[i]->ChngSelectedDraw();
 					pManager->SetSelectedFig(NULL);
 					pOut->PrintMessage("Unselected");
 				}

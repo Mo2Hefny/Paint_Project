@@ -46,3 +46,8 @@ void AddCircAction::Execute()
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
 }
+
+int AddCircAction::ActType()
+{
+	return 1;
+}

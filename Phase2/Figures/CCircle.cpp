@@ -4,6 +4,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInf
 {
 	Center = P1;
 	Edge = P2;
+	Radius = sqrt(pow(Center.x - Edge.x, 2) + pow(Center.y - Edge.y, 2));
 }
 
 bool CCircle::IsPointInFigure(int x, int y) const
@@ -17,11 +18,22 @@ void CCircle::Draw(Output* pOut) const
 	pOut->DrawCircle(Center, Edge, FigGfxInfo, Selected);
 }
 
+void CCircle::move(int x, int y)
+{
+	Center.x = x;
+	Center.y = y;
+	Edge.x = x + Radius;
+	Edge.y = Center.y;
+}
+
+Point CCircle::GetCenter() const
+{	return Center; }
+
 void CCircle::PrintInfo(Output* pOut) const
 {
 	ostringstream oss;
 	oss << "ID:" << ID << "\t Center:(" << Center.x << "," << Center.y << ")  Radius: "
-		<< sqrt(pow(Center.x - Edge.x, 2) + pow(Center.y - Edge.y, 2)) << " Area:" << 3.14 * sqrt(pow(Center.x - Edge.x, 2) + pow(Center.y - Edge.y, 2)) 
+		<< Radius << " Area:" << 3.14 * pow(Radius, 2)
 		<< " Fill Color:" << getFillClrStr() << " Draw Color:" << getDrawClrStr();
 	pOut->PrintMessage(oss.str());
 }

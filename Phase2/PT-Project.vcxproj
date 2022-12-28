@@ -128,6 +128,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\Action.cpp" />
     <ClCompile Include="Actions\AddCircAction.cpp" />
     <ClCompile Include="Actions\AddHexAction.cpp" />
     <ClCompile Include="Actions\AddSqrAction.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SaveAction.cpp" />
+    <ClCompile Include="Undo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="SaveAction.h" />
+    <ClInclude Include="Undo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

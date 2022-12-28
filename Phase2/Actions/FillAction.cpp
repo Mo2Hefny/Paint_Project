@@ -21,8 +21,6 @@ void FillAction::ReadActionParameters()
 	{
 		pOut->PrintMessage("Changed Selected Figure Fill Color");
 	}
-	
-	pOut->ClearStatusBar();
 }
 
 bool FillAction::FillSelected()
@@ -33,7 +31,8 @@ bool FillAction::FillSelected()
 	if (UI.FillColor == Fig->getFillClr() && Fig->IsFilled())
 	{
 		filled = false;
-		Fig->ChngFill(false);
+		Fig->SetIsFilled(false);
+		pManager->GetOutput()->ClearDrawArea();
 	}
 	else
 	{

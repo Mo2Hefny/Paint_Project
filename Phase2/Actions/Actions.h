@@ -9,5 +9,6 @@
 #include "Actions\SelectAction.h"
 #include "Actions\FillAction.h"
 #include "Actions\DrawClrAction.h"
+#include "Actions\MoveAction.h"
 
 #endif

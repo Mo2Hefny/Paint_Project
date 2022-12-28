@@ -7,6 +7,27 @@
 #include "Actions\AddHexAction.h"
 #include"SaveAction.h"
 
+=======
+#include "Actions/Actions.h"
+#include "Undo.h"
+#include "GUI/Output.h"
+Undo undo_tool;
+void setColoring(color col, GUI_MODE mode)
+{
+	if (mode == MODE_COL_FILL)
+	{
+		if (col == UI.FillColor && UI.isFilled)
+			UI.isFilled = false;
+		else
+		{
+			UI.isFilled = true;
+			UI.FillColor = col;
+		}
+	}
+	else
+		UI.DrawColor = col;
+>>>>>>> Stashed changes
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -46,18 +67,28 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
+			undo_tool.addAct(pAct);
+			undo_tool.clear_redo();
 			break;
 		case DRAW_SQR:
 			pAct = new AddSqrAction(this);
+			undo_tool.addAct(pAct);
+			undo_tool.clear_redo();
 			break;
 		case DRAW_TRI:
 			pAct = new AddTriAction(this);
+			undo_tool.addAct(pAct);
+			undo_tool.clear_redo();
 			break;
 		case DRAW_CRCL:
 			pAct = new AddCircAction(this);
+			undo_tool.addAct(pAct);
+			undo_tool.clear_redo();
 			break;
 		case DRAW_HEX:
 			pAct = new AddHexAction(this);
+			undo_tool.addAct(pAct);
+			undo_tool.clear_redo();
 			break;
 		case DRAW_SELECT:
 			pAct = new SelectAction(this);
@@ -128,9 +159,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Action: Delete object , Click anywhere");
 			break;
 		case DRAW_UNDO:
+			FigCount = undo_tool.undo(FigCount);
+			pOut->ClearDrawArea();
+			
+			this->UpdateInterface();
 			pOut->PrintMessage("Action: Undo action , Click anywhere");
 			break;
 		case DRAW_REDO:
+			FigCount = undo_tool.redo(FigCount);
+			pOut->ClearDrawArea();
+
+			this->UpdateInterface();
 			pOut->PrintMessage("Action: Redo action , Click anywhere");
 			break;
 		case DRAW_CLEAR:

@@ -6,7 +6,7 @@
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {
 	SelectedFig[0] = NULL;
-	SelectedFig[1] = NULL;
+	SelectedFig[1] = pApp->GetSelectedFig();
 }
 
 void SelectAction::ReadActionParameters()
@@ -16,13 +16,10 @@ void SelectAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("Select a figure");
-	int i;
-	if (SelectedFig[0] == NULL)
-		i = 0;
-	else
-		i = 1;
+
+	SelectedFig[1] = pManager->GetSelectedFig();
 	//Read 1st corner and store in point P
-	while (i < 2)
+	for (int i = 0; i < 2;)
 	{
 		GfxInfo SelectedGfxInfo;
 		pIn->GetPointClicked(P.x, P.y);
@@ -41,28 +38,27 @@ void SelectAction::ReadActionParameters()
 			{
 				if (SelectedFig[abs(i - 1)] != NULL && SelectedFig[abs(i - 1)]->IsSelected())
 				{
-					if (SelectedClr[abs(i - 1)] != MAGENTA)
-						SelectedFig[abs(i - 1)]->ChngFillClr(SelectedClr[abs(i - 1)]);
+					SelectedFig[abs(i - 1)]->ChngSelectedDraw();
 					SelectedFig[abs(i - 1)]->SetSelected(false);
 					SelectedFig[abs(i - 1)] = NULL;
 				}
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
-				SelectedClr[i] = SelectedFig[i]->getFillClr();
+				
 				SelectedFig[i]->PrintInfo(pOut);
-				SelectedFig[i]->ChngFillClr(MAGENTA);
+				SelectedFig[i]->ChngDrawClr(UI.HighlightColor);
 			}
 			else if (SelectedFig[i] == SelectedFig[abs(i - 1)])
 			{
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
 				if (SelectedFig[i]->IsSelected())
 				{
-					SelectedClr[i] = SelectedFig[i]->getFillClr();
+					
 					SelectedFig[i]->PrintInfo(pOut);
-					SelectedFig[i]->ChngFillClr(MAGENTA);
+					SelectedFig[i]->ChngDrawClr(UI.HighlightColor);
 				}
 				else
 				{
-					SelectedFig[i]->ChngFillClr(SelectedClr[abs(i-1)]);
+					SelectedFig[i]->ChngSelectedDraw();
 					pManager->SetSelectedFig(NULL);
 					pOut->PrintMessage("Unselected");
 				}
@@ -81,11 +77,5 @@ void SelectAction::ReadActionParameters()
 //Execute the action
 void SelectAction::Execute()
 {
-	//This action needs to read some parameters first
 	ReadActionParameters();
-
-	//Create a rectangle with the parameters read from the user
-
-	//Add the rectangle to the list of figures
-
 }

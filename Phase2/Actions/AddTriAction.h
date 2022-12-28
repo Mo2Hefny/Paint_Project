@@ -16,7 +16,7 @@ public:
 
 	//Add triangle to the ApplicationManager
 	virtual void Execute();
-
+	virtual int ActType();
 };
 
 #endif

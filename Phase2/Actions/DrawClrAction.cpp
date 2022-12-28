@@ -21,8 +21,6 @@ void DrawClrAction::ReadActionParameters()
 	{
 		pOut->PrintMessage("Changed Selected Figure Outline Color");
 	}
-
-	pOut->ClearStatusBar();
 }
 
 bool DrawClrAction::ClrSelected()

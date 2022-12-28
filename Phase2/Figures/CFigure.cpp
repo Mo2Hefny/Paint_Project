@@ -13,12 +13,18 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 GfxInfo CFigure::getGfxInfo() const
 {
-	return FigGfxInfo;
+	if (FigGfxInfo.FillClr != UI.HighlightColor)
+		return FigGfxInfo;
+	else
+		return OldFigGfxInfo;
 }
 
 color CFigure::getFillClr() const
+{	return FigGfxInfo.FillClr; }
+
+color CFigure::getDrawClr() 
 {
-	return FigGfxInfo.FillClr;
+	return FigGfxInfo.DrawClr;
 }
 
 void CFigure::SetSelected(bool s)
@@ -28,20 +34,31 @@ bool CFigure::IsSelected() const
 {	return Selected; }
 
 bool CFigure::IsFilled() const
-{	return FigGfxInfo.isFilled; }
+{	
+	if (FigGfxInfo.FillClr != UI.HighlightColor)
+		return FigGfxInfo.isFilled; 
+	else
+		return OldFigGfxInfo.isFilled;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
+{	
+	OldFigGfxInfo.DrawClr = FigGfxInfo.DrawClr;
+	FigGfxInfo.DrawClr = Dclr; 
+}
 
 void CFigure::ChngFillClr(color Fclr)
 {	
 	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.FillClr = Fclr;
 }
 
-void CFigure::ChngFill(bool c)
+void CFigure::ChngSelectedDraw()
+{	FigGfxInfo.DrawClr = OldFigGfxInfo.DrawClr; }
+
+void CFigure::SetIsFilled(bool Fill)
 {
-	FigGfxInfo.isFilled = c;
+	FigGfxInfo.isFilled = Fill;
 }
 
 string CFigure::getFillClrStr() const

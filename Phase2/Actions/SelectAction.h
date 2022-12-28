@@ -8,7 +8,6 @@ class SelectAction : public Action
 {
 private:
 	Point P; 
-	color SelectedClr[2];
 	CFigure* SelectedFig[2];
 public:
 	SelectAction(ApplicationManager* pApp);

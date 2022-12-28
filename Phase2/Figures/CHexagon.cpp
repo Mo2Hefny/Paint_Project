@@ -17,6 +17,16 @@ void CHexagon::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawHex(Center, FigGfxInfo, Selected);
 }
+
+void CHexagon::move(int x, int y)
+{
+	Center.x = x;
+	Center.y = y;
+}
+
+Point CHexagon::GetCenter() const
+{	return Center; }
+
 void CHexagon::Save(ofstream& outfile)
 {
 	outfile << "HEXA" << " " << ID << " " << Center.x << " " << Center.y << " "

@@ -16,31 +16,34 @@ protected:
 	static unsigned int IDcounter;
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-
+	GfxInfo OldFigGfxInfo;
 	/// Add more parameters if needed.
 
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 
 	void SetSelected(bool s);	//select/unselect the figure
+	void SetIsFilled(bool Fill);
 	bool IsSelected() const;	//check whether fig is selected
 	bool IsFilled() const;
 	virtual bool IsPointInFigure(int, int) const = 0;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 	GfxInfo getGfxInfo() const;
 	color getFillClr() const;
+	color getDrawClr();
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-	void ChngFill(bool c);
+	void ChngSelectedDraw();
 	virtual void PrintInfo(Output* pOut) const = 0;
 	string getDrawClrStr() const;
 	string getFillClrStr() const;
+	virtual Point GetCenter() const = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 
 	///Decide the parameters that you should pass to each function	
-
-	virtual void Save(ofstream& outfile)=0;
+	virtual void move(int x, int y) = 0;
+	virtual void Save(ofstream& outfile) = 0;
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 

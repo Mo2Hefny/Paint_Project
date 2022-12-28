@@ -3,15 +3,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-#include "FillAction.h"
-
-#include "..\GUI\input.h"
-#include "..\GUI\Output.h"
-
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
-{
-	x = 0; y = 0;
-}
+{	x = 0; y = 0; }
 
 void MoveAction::ReadActionParameters()
 {
@@ -37,7 +30,7 @@ void MoveAction::ReadActionParameters()
 			else
 			{
 				pManager->UpdateInterface();
-				pOut->ClearStatusBar();
+				pOut->PrintMessage("Moved.");
 			}
 			x = NewPos.x; y = NewPos.y;
 		}

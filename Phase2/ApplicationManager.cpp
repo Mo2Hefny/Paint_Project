@@ -6,28 +6,10 @@
 #include "Actions\AddCircAction.h"
 #include "Actions\AddHexAction.h"
 #include"SaveAction.h"
-
-=======
-#include "Actions/Actions.h"
 #include "Undo.h"
 #include "GUI/Output.h"
-Undo undo_tool;
-void setColoring(color col, GUI_MODE mode)
-{
-	if (mode == MODE_COL_FILL)
-	{
-		if (col == UI.FillColor && UI.isFilled)
-			UI.isFilled = false;
-		else
-		{
-			UI.isFilled = true;
-			UI.FillColor = col;
-		}
-	}
-	else
-		UI.DrawColor = col;
->>>>>>> Stashed changes
 
+Undo undo_tool;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -92,7 +74,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_SELECT:
 			pAct = new SelectAction(this);
-			pOut->PrintMessage("Action: Select object , Click anywhere");
 			break;
 		case DRAW_FillCol:
 			pOut->PrintMessage("Action: Fill object , Select color");
@@ -154,6 +135,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_MOVE:
 			pOut->PrintMessage("Action: Move object , Click anywhere");
+			pAct = new MoveAction(this);
 			break;
 		case DRAW_DEL:
 			pOut->PrintMessage("Action: Delete object , Click anywhere");

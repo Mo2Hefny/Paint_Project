@@ -10,5 +10,6 @@
 #include "Actions\FillAction.h"
 #include "Actions\DrawClrAction.h"
 #include "Actions\MoveAction.h"
+#include "Actions\PickAndHideAction.h"
 
 #endif

@@ -11,6 +11,7 @@ private:
 	Point P;
 	char LeaderType;
 	color LeaderColor;
+	bool filled;
 	unsigned int CountRight, CountWrong;
 public:
 	PickAndHideAction(ApplicationManager* pApp, int m);
@@ -21,7 +22,9 @@ public:
 	bool SameTypeLeft() const;
 	void PrintResults() const;
 	void Unhide() const;
+	bool Score(CFigure*) const;
 	void PickProperty();
+	void PrintProperty() const;
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 

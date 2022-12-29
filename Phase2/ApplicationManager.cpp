@@ -77,17 +77,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new SelectAction(this);
 			break;
 		case DRAW_FillCol:
-			pOut->PrintMessage("Action: Fill object , Select color");
 			UI.InterfaceMode = MODE_COL_FILL;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_DrawCol:
-			pOut->PrintMessage("Action: Draw color , Select color");
 			UI.InterfaceMode = MODE_COL_DRW;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
-			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
 			setColors(BLACK);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -95,7 +92,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_YELLOW:
-			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
 			setColors(YELLOW);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -103,7 +99,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_ORANGE:
-			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
 			setColors(ORANGE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -111,7 +106,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_RED:
-			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
 			setColors(RED);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -119,7 +113,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_BLUE:
-			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
 			setColors(BLUE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -127,7 +120,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_GREEN:
-			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
 			setColors(GREEN);
 			if (UI.InterfaceMode == MODE_COL_FILL)
 				pAct = new FillAction(this);
@@ -135,7 +127,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_MOVE:
-			pOut->PrintMessage("Action: Move object , Click anywhere");
 			pAct = new MoveAction(this);
 			break;
 		case DRAW_DEL:
@@ -191,13 +182,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case TO_DRAW:
-			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			pOut->PrintMessage("Switch to Draw Mode, creating Design tool bar");
 			UI.InterfaceMode = MODE_DRAW;
 			pOut->CreateDrawToolBar();
 			break;
 
 		case TO_PLAY:
-			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			pOut->PrintMessage("Switch to Play Mode, creating simualtion tool bar");
 			if (GetSelectedFig() != NULL)
 			{
 				GetSelectedFig()->SetSelected(false);

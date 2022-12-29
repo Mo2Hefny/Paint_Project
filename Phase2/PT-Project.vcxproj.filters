@@ -87,6 +87,7 @@
     <ClCompile Include="SaveAction.cpp" />
     <ClCompile Include="Undo.cpp" />
     <ClCompile Include="LoadAction.cpp" />
+    <ClCompile Include="Actions\PickAndHideAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -159,6 +160,8 @@
     <ClInclude Include="SaveAction.h" />
     <ClInclude Include="Undo.h" />
     <ClInclude Include="LoadAction.h" />
+    <ClInclude Include="Actions\PickAndHideAction.h" />
+    <ClInclude Include="Figures\Figures.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -136,6 +136,7 @@
     <ClCompile Include="Actions\DrawClrAction.cpp" />
     <ClCompile Include="Actions\FillAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\PickAndHideAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Actions\DrawClrAction.h" />
     <ClInclude Include="Actions\FillAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\PickAndHideAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
@@ -227,6 +229,7 @@
     <ClInclude Include="Actions\AddRectAction.h" />
     <ClInclude Include="Figures\CSquare.h" />
     <ClInclude Include="Figures\CTriangle.h" />
+    <ClInclude Include="Figures\Figures.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />

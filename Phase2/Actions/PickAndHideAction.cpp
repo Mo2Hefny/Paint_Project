@@ -6,12 +6,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
+#include<fstream>
+#include<string>
 
 PickAndHideAction::PickAndHideAction(ApplicationManager* pApp, int m) :Action(pApp)
 {
 	mode = m;
 	CountRight = 0; CountWrong = 0;
 	LeaderColor = NULL;
+	filled = true;
 }
 
 void PickAndHideAction::ReadActionParameters()
@@ -19,6 +22,12 @@ void PickAndHideAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	srand(time(0));
+	if (pManager->GetFigCount() == 0)
+	{
+		pOut->PrintMessage("No Figures To Play.");
+		return;
+	}
 	PickProperty();
 	CFigure* Fig;
 	while (SameTypeLeft())
@@ -28,129 +37,127 @@ void PickAndHideAction::ReadActionParameters()
 		pIn->GetPointClicked(P.x, P.y);
 		if (P.y < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("Clicked outside");
+			pOut->ClearStatusBar();
 			break;
 		}
 		Fig = pManager->GetFigure(P.x, P.y);
 		if (!Fig)
 		{
-			pOut->PrintMessage("Clicked on Draw Area");
 			continue;
 		}
 		if (Fig->IsHidden())
 		{
-			pOut->PrintMessage("Already selected");
 			continue;
 		}
 		else
 		{
-			Fig->Hide(true);
-				if (GetFigType(Fig) == LeaderType)
+				if (Score(Fig))
+				{
+					pOut->PrintMessage("RIGHT!");
 					CountRight++;
+				}
 				else
+				{
+					pOut->PrintMessage("WRONG....");
 					CountWrong++;
-			pOut->PrintMessage("New Fig selected");
+				}
+			Fig->Hide(true);
 		}
 	}
-	PrintResults();
+	if (CountRight && P.y > UI.ToolBarHeight)
+		PrintResults();
 	pOut->ClearDrawArea();
 	pManager->UpdateInterface();
 }
 
 void PickAndHideAction::PickProperty()
 {
-	srand(time(0));
-	ostringstream oss;
-	oss << "Select ";
-	if (mode == 2 || mode == 3)
-	{
-		switch (rand() % 6)
-		{
-		case 0:
-			LeaderColor = BLACK;
-			oss << "Black ";
-			break;
-		case 1:
-			LeaderColor = RED;
-			oss << "Red ";
-			break;
-		case 2:
-			LeaderColor = GREEN;
-			oss << "Green ";
-			break;
-		case 3:
-			LeaderColor = YELLOW;
-			oss << "Yellow ";
-			break;
-		case 4:
-			LeaderColor = BLUE;
-			oss << "Blue ";
-			break;
-		case 5:
-			LeaderColor = ORANGE;
-			oss << "Orange ";
-			break;
-		}
-	}
 	if (mode == 1 || mode == 3)
 	{
-		switch (rand() % 5)
+		switch (abs(rand()) % 5)
 		{
 		case 0:
 			LeaderType = 'R';
-			oss << "Rectangles.";
 			break;
 		case 1:
 			LeaderType = 'S';
-			oss << "Squares.";
 			break;
 		case 2:
 			LeaderType = 'T';
-			oss << "Triangles.";
 			break;
 		case 3:
 			LeaderType = 'C';
-			oss << "Circles.";
 			break;
 		case 4:
 			LeaderType = 'H';
-			oss << "Hexagons.";
 			break;
 		}
 	}
-	pManager->GetOutput()->PrintMessage(oss.str());
+	if (mode == 2 || mode == 3)
+	{
+		switch (abs(rand()) % 7)
+		{
+		case 0:
+			LeaderColor = BLACK;
+			filled = true;
+			break;
+		case 1:
+			LeaderColor = RED;
+			filled = true;
+			break;
+		case 2:
+			LeaderColor = GREEN;
+			filled = true;
+			break;
+		case 3:
+			LeaderColor = YELLOW;
+			filled = true;
+			break;
+		case 4:
+			LeaderColor = BLUE;
+			filled = true;
+			break;
+		case 5:
+			LeaderColor = ORANGE;
+			filled = true;
+			break;
+		case 6:
+			filled = false;
+			break;
+		}
+	}
+	if (!SameTypeLeft())
+		PickProperty();
+	else
+		PrintProperty();
 }
+
 
 char PickAndHideAction::GetFigType(CFigure* Fig) const
 {
 	CRectangle* R = dynamic_cast <CRectangle*> (Fig);
 	if (R)
 	{
-		pManager->GetOutput()->PrintMessage("Selected Rectangle");
 		return 'R';
 	}
 	CSquare* S = dynamic_cast <CSquare*> (Fig);
 	if (S)
 	{
-		pManager->GetOutput()->PrintMessage("Selected Square");
 		return 'S';
 	}
 	CTriangle* T = dynamic_cast <CTriangle*> (Fig);
 	if (T)
 	{
-		pManager->GetOutput()->PrintMessage("Selected Triangle");
 		return 'T';
 	}
 	CCircle* C = dynamic_cast <CCircle*> (Fig);
 	if (C)
 	{
-		pManager->GetOutput()->PrintMessage("Selected Circle");
 		return 'C';
 	}
 	CHexagon* H = dynamic_cast <CHexagon*> (Fig);
 	if (H)
 	{
-		pManager->GetOutput()->PrintMessage("Selected Hexagon");
 		return 'H';
 	}
 
@@ -162,7 +169,24 @@ bool PickAndHideAction::SameTypeLeft() const
 	for (int i = 0; i < pManager->GetFigCount(); i++)
 	{
 		Fig = pManager->GetFigInList(i);
-		if (GetFigType(Fig) == LeaderType && !Fig->IsHidden())
+		if (!Fig->IsHidden() && Score(Fig))
+			return true;
+	}
+	return false;
+}
+
+bool PickAndHideAction::Score(CFigure* Fig) const
+{
+	if (mode == 1 && GetFigType(Fig) == LeaderType)
+		return true;
+	else if (mode == 2 && Fig->IsFilled() == filled)
+	{
+		if (Fig->getFillClr() == LeaderColor || filled == false)
+			return true;
+	}
+	else if (mode == 3 && Fig->IsFilled() == filled && GetFigType(Fig) == LeaderType)
+	{
+		if (Fig->getFillClr() == LeaderColor || filled == false)
 			return true;
 	}
 	return false;
@@ -172,6 +196,54 @@ void PickAndHideAction::PrintResults() const
 {
 	ostringstream oss;
 	oss << "Correct: " << CountRight << "\t Incorrect: " << CountWrong;
+	pManager->GetOutput()->PrintMessage(oss.str());
+}
+
+void PickAndHideAction::PrintProperty() const
+{
+	string clr = " ", figure = " ";
+	ostringstream oss;
+	if (mode == 1 || mode == 3)
+	{
+		switch (LeaderType)
+		{
+		case 'R':
+			figure = "Rectangles.";
+			break;
+		case 'S':
+			figure = "Squares.";
+			break;
+		case 'T':
+			figure = "Triangles.";
+			break;
+		case 'C':
+			figure = "Circles.";
+			break;
+		case 'H':
+			figure = "Hexagons.";
+			break;
+		}
+	}
+	if (mode == 2 || mode == 3)
+	{
+		if (filled == false)
+			clr = "Unfilled ";
+		else if (LeaderColor == BLACK)
+			clr = "Black ";
+		else if (LeaderColor == YELLOW)
+			clr = "Yellow ";
+		else if (LeaderColor == RED)
+			clr = "Red ";
+		else if (LeaderColor == ORANGE)
+			clr = "Orange ";
+		else if (LeaderColor == BLUE)
+			clr = "Blue ";
+		else if (LeaderColor == GREEN)
+			clr = "Green ";
+		else
+			clr = "empty";
+	}
+	oss << "Select " << clr << figure;
 	pManager->GetOutput()->PrintMessage(oss.str());
 }
 

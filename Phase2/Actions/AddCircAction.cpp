@@ -25,7 +25,7 @@ void AddCircAction::ReadActionParameters()
 	//Read edge and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	CircGfxInfo.isFilled = false;	//default is not filled
+	CircGfxInfo.isFilled = UI.isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -45,4 +45,9 @@ void AddCircAction::Execute()
 
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
+}
+
+int AddCircAction::ActType()
+{
+	return 1;
 }

@@ -6,6 +6,7 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 
+#include<fstream>
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -32,12 +33,20 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
+	void SetSelectedFig(CFigure* pFig);
+	CFigure* GetSelectedFig() const;
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-		
+	int GetFigCount() const;
+	CFigure* GetFigInList(int) const;
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
+	void SaveAll(ofstream& outfile);
+	void setColors(color);
+	string getCrntFillClr() const;
+	string getCrntDrawClr() const;
+	void load()const;
 };
 
 #endif

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Phase2",
+    "\\Phase2\\Actions"
   ],
-  "SelectedNode": "\\PT-Project.sln",
+  "SelectedNode": "\\Phase2",
   "PreviewInSolutionExplorer": false
 }

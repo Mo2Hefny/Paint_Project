@@ -17,7 +17,7 @@ Output::Output()
 	UI.MenuItemWidth = 50;
 
 	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
+	UI.FillColor = LIGHTGOLDENRODYELLOW;	//Filling color
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -98,7 +98,9 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
 	string ShapeImages[NUM_SHAPES];
 	string ColorImages[NUM_COL];
-	if (UI.InterfaceMode == MODE_SHAPE)
+	bool shapes = UI.InterfaceMode == MODE_SHAPE;
+	bool colours = UI.InterfaceMode == MODE_COL_DRW || UI.InterfaceMode == MODE_COL_FILL;
+	if (shapes)
 	{
 		ShapeImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
 		ShapeImages[ITM_SQR] = "images\\MenuItems\\square.jpg";
@@ -107,7 +109,7 @@ void Output::CreateDrawToolBar() const
 		ShapeImages[ITM_HEX] = "images\\MenuItems\\hexagon.jpg";
 		ShapeImages[SHAPE_BACK] = "images\\MenuItems\\back.jpg";
 	}
-	else if (UI.InterfaceMode == MODE_COL)
+	else if (colours)
 	{
 		ColorImages[CLR_BLACK] = "images\\MenuItems\\black.jpg";
 		ColorImages[CLR_YELLOW] = "images\\MenuItems\\yellow 2.jpg";
@@ -122,12 +124,12 @@ void Output::CreateDrawToolBar() const
 	//Draw menu item one image at a time
 	for (int i = 0, j = 0; i < DRAW_ITM_COUNT; i++)
 	{
-		if (UI.InterfaceMode == MODE_SHAPE && i == 1)
+		if (shapes && i == 1)
 		{
 			for (int k = 0; k < NUM_SHAPES; k++)
 				pWind->DrawImage(ShapeImages[k], j++ * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		}
-		if (UI.InterfaceMode == MODE_COL && i == ITM_DrawCol + 1)
+		if (colours && i == ITM_DrawCol + 1)
 		{
 			for (int k = 0; k < NUM_COL; k++)
 				pWind->DrawImage(ColorImages[k], j++ * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);

@@ -20,7 +20,7 @@ void AddSqrAction::ReadActionParameters()
 	//Read center and store in point P
 	pIn->GetPointClicked(P.x, P.y);
 
-	SqrGfxInfo.isFilled = false;	//default is not filled
+	SqrGfxInfo.isFilled = UI.isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -40,4 +40,9 @@ void AddSqrAction::Execute()
 
 	//Add the square to the list of figures
 	pManager->AddFigure(S);
+}
+
+int AddSqrAction::ActType()
+{
+	return 1;
 }

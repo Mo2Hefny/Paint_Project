@@ -47,19 +47,7 @@ void CFigure::SetSelected(bool s)
 }
 
 void CFigure::Hide(bool mode)
-{
-	Hidden = mode;
-	if (mode)
-	{
-		OldFigGfxInfo = FigGfxInfo;
-		FigGfxInfo.isFilled = false;
-		FigGfxInfo.DrawClr = UI.BkGrndColor;
-	}
-	else
-	{
-		FigGfxInfo = OldFigGfxInfo;
-	}
-}
+{	Hidden = mode; }
 
 bool CFigure::IsSelected() const
 {	return Selected; }

@@ -39,7 +39,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -265,7 +265,8 @@ CFigure* ApplicationManager::GetFigInList(int i) const
 void ApplicationManager::UpdateInterface() const
 {	
 	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		if (!FigList[i]->IsHidden())
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

@@ -46,9 +46,7 @@ void CTriangle::Save(ofstream& outfile)
 		<< getDrawClrStr() << " " << getFillClrStr() << endl;
 }
 CTriangle::CTriangle()
-{
-	GfxInfo FigGFxInfo;
-}
+{}
 void CTriangle::PrintInfo(Output* pOut) const
 {
 	ostringstream oss;
@@ -67,6 +65,8 @@ void CTriangle::load(ifstream& infile)
 	Vertix2.y = ey;
 	Vertix3.x = sx;
 	Vertix3.y = sy;
+	CenterX = (Vertix1.x + Vertix2.x + Vertix3.x) / 3.0;
+	CenterY = (Vertix1.y + Vertix2.y + Vertix3.y) / 3.0;
 	string DrawingColor, FillColor;
 	infile >> DrawingColor >> FillColor;
 	if (DrawingColor == "RED")

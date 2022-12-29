@@ -61,6 +61,7 @@ void CCircle::load(ifstream& infile)
 	Center.y = cy;
 	Edge.x = ex;
 	Edge.y = ey;
+	Radius = sqrt(pow(Center.x - Edge.x, 2) + pow(Center.y - Edge.y, 2));
 	string DrawingColor, FillColor;
 	infile >> DrawingColor >> FillColor;
 	if (DrawingColor == "RED")

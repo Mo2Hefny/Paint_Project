@@ -42,6 +42,7 @@ void MoveAction::ReadActionParameters()
 	}
 }
 
+
 //Execute the action
 void MoveAction::Execute()
 {

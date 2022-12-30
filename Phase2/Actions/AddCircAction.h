@@ -18,6 +18,7 @@ public:
 	//Add circle to the ApplicationManager
 	virtual void Execute();
 	virtual int ActType();
+	virtual void undo() {};
 };
 
 #endif

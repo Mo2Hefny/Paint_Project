@@ -44,3 +44,9 @@ void DrawClrAction::Execute()
 	//Add the rectangle to the list of figures
 
 }
+
+int DrawClrAction::ActType()
+{	return 2; }
+
+void DrawClrAction::undo()
+{}

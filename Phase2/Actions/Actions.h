@@ -11,5 +11,9 @@
 #include "Actions\DrawClrAction.h"
 #include "Actions\MoveAction.h"
 #include "Actions\PickAndHideAction.h"
+#include "Actions/ClearAll.h"
+#include "Actions/UndoAction.h"
+#include "Actions/RedoAction.h"
+#include "Actions/DeleteAction.h"
 
 #endif

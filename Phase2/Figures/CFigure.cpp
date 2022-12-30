@@ -16,6 +16,9 @@ CFigure::CFigure()
 	Selected = false;
 }
 
+int CFigure::get_ID() const
+{	return ID; }
+
 GfxInfo CFigure::getGfxInfo() const
 {
 	if (FigGfxInfo.FillClr != UI.HighlightColor)

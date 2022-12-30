@@ -59,4 +59,6 @@ int MoveAction::ActType()
 {	return 4; }
 
 void MoveAction::undo()
-{}
+{
+	pManager->GetOutput()->PrintMessage("Undo Move");
+}

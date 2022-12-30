@@ -7,3 +7,9 @@ int Action::ActType()
 
 CFigure* Action::get_deleted()
 {  return nullptr; }
+
+void Action::redo()
+{}
+
+void Action::undo()
+{}

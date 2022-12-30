@@ -70,46 +70,40 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
-			setColors(BLACK);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, BLACK);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, BLACK);
 			break;
 		case DRAW_YELLOW:
-			setColors(YELLOW);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, YELLOW);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, YELLOW);
 			break;
 		case DRAW_ORANGE:
-			setColors(ORANGE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, ORANGE);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, ORANGE);
 			break;
 		case DRAW_RED:
-			setColors(RED);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, RED);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, RED);
 			break;
 		case DRAW_BLUE:
-			setColors(BLUE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, BLUE);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, BLUE);
 			break;
 		case DRAW_GREEN:
-			setColors(GREEN);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, GREEN);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, GREEN);
 			break;
 		case DRAW_MOVE:
 			pAct = new MoveAction(this);
@@ -119,11 +113,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Action: Delete object , Click anywhere");
 			break;
 		case DRAW_UNDO:
-			pAct = undo_tool;
+			undo_tool->Execute();
 			pOut->ClearDrawArea();
 
 			this->UpdateInterface();
-			pOut->PrintMessage("Action: Undo action , Click anywhere");
 			break;
 		case DRAW_REDO:
 			pOut->ClearDrawArea();
@@ -305,21 +298,7 @@ void ApplicationManager::SaveAll(ofstream& outfile)
 	}
 }
 
-void ApplicationManager::setColors(color c)
-{
-	if (UI.InterfaceMode == MODE_COL_FILL)
-	{
-		if (c == UI.FillColor && UI.isFilled)
-		{
-			UI.isFilled = false;
-		}
-		else
-			UI.isFilled = true;
-		UI.FillColor = c;
-	}
-	else
-		UI.DrawColor = c;
-}
+
 string ApplicationManager::getCrntFillClr() const
 {
 	if (UI.isFilled == false)

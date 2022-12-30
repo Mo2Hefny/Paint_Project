@@ -24,8 +24,8 @@ public:
 	virtual void Execute() =0;
 	virtual int ActType(); //returns 1 if a figure is created & 2 if a color changed;
 	virtual CFigure* get_deleted();
-	virtual void undo() = 0;
-
+	virtual void undo();
+	virtual void redo();
 };
 
 #endif

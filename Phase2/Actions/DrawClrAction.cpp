@@ -3,8 +3,11 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-DrawClrAction::DrawClrAction(ApplicationManager* pApp) :Action(pApp)
-{}
+DrawClrAction::DrawClrAction(ApplicationManager* pApp, color c) :Action(pApp)
+{
+	OldOutline = UI.DrawColor;
+	UI.DrawColor = c;
+}
 
 void DrawClrAction::ReadActionParameters()
 {
@@ -15,7 +18,7 @@ void DrawClrAction::ReadActionParameters()
 	if (!ClrSelected())
 	{
 		pOut->PrintMessage("Changed Outline Color");
-		outline = UI.DrawColor;
+		NewOutline = UI.DrawColor;
 	}
 	else
 	{
@@ -25,11 +28,11 @@ void DrawClrAction::ReadActionParameters()
 
 bool DrawClrAction::ClrSelected()
 {
-	CFigure* Fig = pManager->GetSelectedFig();
+	Fig = pManager->GetSelectedFig();
 	if (Fig == NULL)
 		return false;
-	outline = UI.DrawColor;
-	Fig->ChngDrawClr(outline);
+	NewOutline = UI.DrawColor;
+	Fig->ChngDrawClr(NewOutline);
 	return true;
 }
 
@@ -49,4 +52,29 @@ int DrawClrAction::ActType()
 {	return 2; }
 
 void DrawClrAction::undo()
-{}
+{
+	if (Fig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Returned Previous Figure Outline Color");
+		Fig->ChngDrawClr(OldOutline);
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("Returned Previous Outline Color to Draw");
+		UI.DrawColor = OldOutline;
+	}
+}
+
+void DrawClrAction::redo()
+{
+	if (Fig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Redo Figure Outline Color Change");
+		Fig->ChngDrawClr(NewOutline);
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("Redo Outline Color Change");
+		UI.DrawColor = NewOutline;
+	}
+}

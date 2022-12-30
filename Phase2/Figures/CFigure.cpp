@@ -32,6 +32,8 @@ color CFigure::getFillClr() const
 
 color CFigure::getDrawClr() 
 {
+	if (IsSelected())
+		return OldFigGfxInfo.DrawClr;
 	return FigGfxInfo.DrawClr;
 }
 

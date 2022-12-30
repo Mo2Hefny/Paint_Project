@@ -6,6 +6,8 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 	Corner2 = P2;
 	width = abs(Corner1.x - Corner2.x);
 	height = abs(Corner1.y - Corner2.y);
+	Center.x = (Corner1.x + Corner2.x) / 2;
+	Center.y = (Corner1.y + Corner2.y) / 2;
 }
 
 CRectangle::CRectangle()

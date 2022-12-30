@@ -4,7 +4,10 @@
 #include "..\GUI\Output.h"
 
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
-{	x = 0; y = 0; }
+{	
+	x = 0; y = 0;
+	MoveFig = NULL;
+}
 
 void MoveAction::ReadActionParameters()
 {
@@ -60,5 +63,22 @@ int MoveAction::ActType()
 
 void MoveAction::undo()
 {
-	pManager->GetOutput()->PrintMessage("Undo Move");
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Returned to previous location.");
+		MoveFig->move(OldPos.x, OldPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to undo.");
+}
+
+void MoveAction::redo()
+{
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Redo move.");
+		MoveFig->move(NewPos.x, NewPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to redo.");
 }

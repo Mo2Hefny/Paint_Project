@@ -18,6 +18,8 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
+	virtual int ActType();
+	virtual void undo();
 
 };
 

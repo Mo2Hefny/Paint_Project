@@ -1,32 +1,17 @@
 #include "ApplicationManager.h"
-<<<<<<< Updated upstream
+#include "Actions/Actions.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddSqrAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\AddHexAction.h"
-
-=======
-#include "Actions/Actions.h"
+#include"SaveAction.h"
 #include "Undo.h"
 #include "GUI/Output.h"
-Undo undo_tool;
-void setColoring(color col, GUI_MODE mode)
-{
-	if (mode == MODE_COL_FILL)
-	{
-		if (col == UI.FillColor && UI.isFilled)
-			UI.isFilled = false;
-		else
-		{
-			UI.isFilled = true;
-			UI.FillColor = col;
-		}
-	}
-	else
-		UI.DrawColor = col;
->>>>>>> Stashed changes
-
+#include"LoadAction.h"
+#include<iostream>
+#include "Actions/ClearAll.h"
+//Undo undo_tool;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -35,10 +20,13 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-		
+	undo_tool = new UndoAction(this);
+	redo_tool = new RedoAction(this);
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+	SelectedFig = NULL;
+
 }
 
 //==================================================================================//
@@ -65,81 +53,106 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
+			//undo_tool.addAct(pAct);
+			//undo_tool.clear_redo();
 			break;
 		case DRAW_SQR:
 			pAct = new AddSqrAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
+			//undo_tool.addAct(pAct);
+			//undo_tool.clear_redo();
 			break;
 		case DRAW_TRI:
 			pAct = new AddTriAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
+			//undo_tool.addAct(pAct);
+			//undo_tool.clear_redo();
 			break;
 		case DRAW_CRCL:
 			pAct = new AddCircAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
+			//undo_tool.addAct(pAct);
+			//undo_tool.clear_redo();
 			break;
 		case DRAW_HEX:
 			pAct = new AddHexAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
+			//undo_tool.addAct(pAct);
+			//undo_tool.clear_redo();
 			break;
 		case DRAW_SELECT:
-			pOut->PrintMessage("Action: Select object , Click anywhere");
+			pAct = new SelectAction(this);
 			break;
 		case DRAW_FillCol:
-			pOut->PrintMessage("Action: Fill object , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_FILL;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_DrawCol:
-			pOut->PrintMessage("Action: Draw color , Select color");
-			UI.InterfaceMode = MODE_COL;
+			UI.InterfaceMode = MODE_COL_DRW;
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
-			pOut->PrintMessage("Action: Selected color Black , Click anywhere");
+			setColors(BLACK);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_YELLOW:
-			pOut->PrintMessage("Action: Selected color Yellow , Click anywhere");
+			setColors(YELLOW);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_ORANGE:
-			pOut->PrintMessage("Action: Selected color Orange , Click anywhere");
+			setColors(ORANGE);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_RED:
-			pOut->PrintMessage("Action: Selected color Red , Click anywhere");
+			setColors(RED);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_BLUE:
-			pOut->PrintMessage("Action: Selected color Blue , Click anywhere");
+			setColors(BLUE);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_GREEN:
-			pOut->PrintMessage("Action: Selected color Green , Click anywhere");
+			setColors(GREEN);
+			if (UI.InterfaceMode == MODE_COL_FILL)
+				pAct = new FillAction(this);
+			else
+				pAct = new DrawClrAction(this);
 			break;
 		case DRAW_MOVE:
-			pOut->PrintMessage("Action: Move object , Click anywhere");
+			pAct = new MoveAction(this);
 			break;
 		case DRAW_DEL:
+			pAct = new DeleteAction(this);
 			pOut->PrintMessage("Action: Delete object , Click anywhere");
 			break;
 		case DRAW_UNDO:
-			FigCount = undo_tool.undo(FigCount);
+			//FigCount = undo_tool.undo(FigCount);
+			undo_tool->Execute();
 			pOut->ClearDrawArea();
 			
 			this->UpdateInterface();
 			pOut->PrintMessage("Action: Undo action , Click anywhere");
 			break;
 		case DRAW_REDO:
-			FigCount = undo_tool.redo(FigCount);
+			//FigCount = undo_tool.redo(FigCount);
 			pOut->ClearDrawArea();
 
 			this->UpdateInterface();
 			pOut->PrintMessage("Action: Redo action , Click anywhere");
 			break;
 		case DRAW_CLEAR:
+			pAct = new ClearAll(this);
 			pOut->PrintMessage("Action: Clear drawing area , Click anywhere");
 			break;
 		case DRAW_StartRec:
@@ -152,19 +165,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Action: Play last record , Click anywhere");
 			break;
 		case DRAW_SAVE:
-			pOut->PrintMessage("Action: Save file , Click anywhere");
+			pAct = new SaveAction(this);
 			break;
 		case DRAW_LOAD:
-			pOut->PrintMessage("Action: Load file , Click anywhere");
+			pAct = new LoadAction(this);
 			break;
 		case PLAY_TYPE:
-			pOut->PrintMessage("Action: Select objects of the same type , Click anywhere");
+			pAct = new PickAndHideAction(this, 1);
 			break;
 		case PLAY_FILL:
-			pOut->PrintMessage("Action: Select objects of the same color , Click anywhere");
+			pAct = new PickAndHideAction(this, 2);
 			break;
 		case PLAY_TypeFill:
-			pOut->PrintMessage("Action: Select objects of the same type and color , Click anywhere");
+			pAct = new PickAndHideAction(this, 3);
 			break;
 		case DRAWING_AREA:
 			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
@@ -175,13 +188,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case TO_DRAW:
-			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			pOut->PrintMessage("Switch to Draw Mode, creating Design tool bar");
 			UI.InterfaceMode = MODE_DRAW;
 			pOut->CreateDrawToolBar();
 			break;
 
 		case TO_PLAY:
-			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			pOut->PrintMessage("Switch to Play Mode, creating simualtion tool bar");
+			if (GetSelectedFig() != NULL)
+			{
+				GetSelectedFig()->SetSelected(false);
+				SetSelectedFig(NULL);
+			}
 			pOut->CreatePlayToolBar();
 			break;
 		case EXIT:
@@ -196,8 +214,25 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if(pAct != NULL)
 	{
+		if (pAct->ActType() == 1 || pAct->ActType() == 2 || pAct->ActType() == 3 || pAct->ActType() == 4)
+			redo_tool->clear();
+		if (pAct->ActType() == 3)
+		{
+
+			undo_tool->add_fig(this->GetSelectedFig());
+		}
 		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
+		if (pAct->ActType() == 4 || pAct->ActType() == 2) //to be done
+		{
+			//test:
+			this->add_act(pAct);
+		}
+		undo_tool->add_act(pAct->ActType());
+		
+		
+
+		if (pAct->ActType() != 4 && pAct->ActType() != 2)
+			delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
 }
@@ -216,12 +251,34 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
-
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsPointInFigure(x, y))
+		{
+			return FigList[i];
+		}
+	}
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
+}
+
+void ApplicationManager::SetSelectedFig(CFigure* pFig)
+{	SelectedFig = pFig; }
+
+CFigure* ApplicationManager::GetSelectedFig() const
+{	return SelectedFig; }
+
+int ApplicationManager::GetFigCount() const
+{	return FigCount; }
+
+CFigure* ApplicationManager::GetFigInList(int i) const
+{
+	if (i < FigCount)
+		return FigList[i];
+	else
+		return NULL;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -249,4 +306,138 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+void ApplicationManager::SaveAll(ofstream& outfile)
+{
+	outfile << getCrntDrawClr() << " " << getCrntFillClr() << endl;
+	outfile << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected() == true)
+			FigList[i]->SetSelected(false);
+		
+	}
+	for (int i = 0; i < FigCount; i++)
+	{
+		
+			FigList[i]->Save(outfile);
+	}
+}
+
+void ApplicationManager::setColors(color c)
+{
+	if (UI.InterfaceMode == MODE_COL_FILL)
+	{
+		if (c == UI.FillColor && UI.isFilled)
+		{
+			UI.isFilled = false;
+		}
+		else
+			UI.isFilled = true;
+		UI.FillColor = c;
+	}
+	else
+		UI.DrawColor = c;
+}
+string ApplicationManager::getCrntFillClr() const
+{
+	if (UI.isFilled == false)
+		return "NOTFILLED";
+	if (UI.FillColor == BLACK)
+		return "BLACK";
+	if (UI.FillColor == YELLOW)
+		return "YELLOW";
+	if (UI.FillColor == ORANGE)
+		return "ORANGE";
+	if (UI.FillColor == RED)
+		return "RED";
+	if (UI.FillColor == BLUE)
+		return "BLUE";
+	if (UI.FillColor == GREEN)
+		return "GREEN";
+}
+
+string ApplicationManager::getCrntDrawClr() const
+{
+	if (UI.DrawColor == BLACK)
+		return "BLACK";
+	if (UI.DrawColor == YELLOW)
+		return "YELLOW";
+	if (UI.DrawColor == ORANGE)
+		return "ORANGE";
+	if (UI.DrawColor == RED)
+		return "RED";
+	if (UI.DrawColor == BLUE)
+		return "BLUE";
+	if (UI.DrawColor == GREEN)
+		return "GREEN";
+}
+void ApplicationManager::deleteFig(int index)
+{
+	if (index == FigCount - 1)
+	{
+		FigList[FigCount - 1] = NULL;
+		FigCount--;
+	}
+	else
+	{
+		FigList[index] = FigList[FigCount - 1];
+		FigList[FigCount - 1] = NULL;
+		FigCount--;
+	}
+
+
+}
+
+int ApplicationManager::get_index(CFigure* ptr)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (ptr == FigList[i])
+			return i;
+	}
+	return -1;
+}
+int ApplicationManager::get_max_ID_index()
+{
+	int max = (FigList[0]->get_ID());
+	int index = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->get_ID() > max)
+		{
+			max = FigList[i]->get_ID();
+			index = i;
+		}
+	}
+	return index;
+
+}
+
+void ApplicationManager::clear_figs()
+{
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
+	FigCount = 0;
+}
+
+void ApplicationManager::clear_undo()
+{
+	undo_tool->clear();
+}
+
+void ApplicationManager::clear_gui()
+{
+	UI.InterfaceMode = MODE_DRAW;
+	pOut->CreateDrawToolBar();
+	UI.FillColor = GREEN;
+	UI.isFilled = false;
+	UI.DrawColor = BLUE;
+}
+
+void ApplicationManager::add_act(Action* pointer)
+{
+	if (pointer != NULL)
+		undo_tool->add_action(pointer);
+	pointer = NULL;
 }

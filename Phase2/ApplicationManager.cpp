@@ -1,5 +1,6 @@
 #include "ApplicationManager.h"
 #include "Actions/Actions.h"
+
 #include "Actions\AddRectAction.h"
 #include "Actions\AddSqrAction.h"
 #include "Actions\AddTriAction.h"

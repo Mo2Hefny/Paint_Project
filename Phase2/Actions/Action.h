@@ -26,6 +26,7 @@ public:
 	virtual CFigure* get_deleted();
 	//test:
 	virtual void undo() = 0;
+	
 
 
 };

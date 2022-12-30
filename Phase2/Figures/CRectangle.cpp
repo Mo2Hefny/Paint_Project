@@ -34,7 +34,10 @@ void CRectangle::move(int x, int y)
 }
 
 Point CRectangle::GetCenter() const
-{	return Center; }
+{	
+	
+	return Center; 
+}
 
 void CRectangle::Save(ofstream& outfile)
 {

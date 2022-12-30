@@ -46,6 +46,7 @@ void LoadAction::Execute()
 		UI.isFilled = false;
 	else
 	{
+		
 		if (fillclr == "RED")
 			UI.FillColor = RED;
 		if (fillclr == "YELLOW")

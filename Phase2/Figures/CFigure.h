@@ -49,7 +49,7 @@ public:
 		//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 		//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual void load(ifstream& infile) = 0;
-	int get_ID() const;
+
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 

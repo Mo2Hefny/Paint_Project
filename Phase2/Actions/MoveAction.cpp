@@ -54,13 +54,3 @@ void MoveAction::Execute()
 	//Add the rectangle to the list of figures
 
 }
-
-int MoveAction::ActType()
-{
-	return 4;
-}
-
-void MoveAction::undo()
-{
-
-}

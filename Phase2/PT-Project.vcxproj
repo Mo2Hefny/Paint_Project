@@ -138,7 +138,6 @@
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PickAndHideAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
-    <ClCompile Include="Actions\ClearAll.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -175,7 +174,6 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
-    <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="Figures\CFigure.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
@@ -188,10 +186,8 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="LoadAction.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="SaveAction.cpp" />
     <ClCompile Include="Undo.cpp" />
-    <ClCompile Include="Actions\UndoAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -205,7 +201,6 @@
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PickAndHideAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
-    <ClInclude Include="Actions\ClearAll.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -226,7 +221,6 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
-    <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CFigure.h" />
     <ClInclude Include="Figures\CHexagon.h" />
@@ -242,10 +236,8 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="LoadAction.h" />
-    <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="SaveAction.h" />
     <ClInclude Include="Undo.h" />
-    <ClInclude Include="Actions\UndoAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

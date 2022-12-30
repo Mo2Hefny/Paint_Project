@@ -53,12 +53,3 @@ void FillAction::Execute()
 	//Add the rectangle to the list of figures
 
 }
-
-int FillAction::ActType()
-{
-	return 2;
-}
-
-void FillAction::undo()
-{
-}

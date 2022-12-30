@@ -47,21 +47,6 @@ void CFigure::SetSelected(bool s)
 }
 
 void CFigure::Hide(bool mode)
-{
-	Hidden = mode;
-	if (mode)
-	{
-		OldFigGfxInfo = FigGfxInfo;
-		FigGfxInfo.isFilled = false;
-		FigGfxInfo.DrawClr = UI.BkGrndColor;
-	}
-	else
-	{
-		FigGfxInfo = OldFigGfxInfo;
-	}
-}
-
-void CFigure::Hide(bool mode)
 {	Hidden = mode; }
 
 bool CFigure::IsSelected() const
@@ -105,11 +90,6 @@ string CFigure::getFillClrStr() const
 	if (FigGfxInfo.FillClr == GREEN)
 		return "GREEN";
 	return "NOTFILLED";
-}
-
-int CFigure::get_ID() const
-{
-	return ID;
 }
 
 string CFigure::getDrawClrStr() const

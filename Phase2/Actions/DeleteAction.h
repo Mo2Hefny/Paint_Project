@@ -6,6 +6,7 @@ class DeleteAction : public Action
 private:
 	int index;
 	CFigure* deleted;
+	Point P;
 public:
 	DeleteAction(ApplicationManager* pApp);
 	void Execute();
@@ -13,6 +14,7 @@ public:
 	CFigure* get_deleted();
 	int ActType();
 	virtual void undo() {};
+	virtual void play();
 	
 };
 

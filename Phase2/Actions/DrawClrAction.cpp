@@ -20,12 +20,18 @@ void DrawClrAction::ReadActionParameters()
 		P = Fig->GetCenter();
 	if (!ClrSelected())
 	{
-		pOut->PrintMessage("Changed Outline Color");
+		if (OldOutline == UI.DrawColor)
+			pOut->PrintMessage("Same Outline Color");
+		else
+			pOut->PrintMessage("Changed Outline Color");
 		NewOutline = UI.DrawColor;
 	}
 	else
 	{
-		pOut->PrintMessage("Changed Selected Figure Outline Color");
+		if (OldOutline == NewOutline)
+			pOut->PrintMessage("Same Selected Figure Outline Color");
+		else
+			pOut->PrintMessage("Changed Selected Figure Outline Color");
 	}
 }
 
@@ -34,6 +40,7 @@ bool DrawClrAction::ClrSelected()
 	if (Fig == NULL)
 		return false;
 	NewOutline = UI.DrawColor;
+	OldOutline = Fig->getDrawClr();
 	Fig->ChngDrawClr(NewOutline);
 	return true;
 }
@@ -43,7 +50,7 @@ void DrawClrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	if (pManager->get_IsRecording() == true)
+	if (pManager->get_IsRecording() == true && OldOutline != UI.DrawColor)
 		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user
 
@@ -85,11 +92,11 @@ void DrawClrAction::redo()
 void DrawClrAction::play()
 {
 	UI.DrawColor = NewOutline;
-	pManager->GetOutput()->PrintMessage("Changed Outline Color");
+	pManager->GetOutput()->PrintMessage("Changed Outline Color in Record.");
 	if (P.x)
 	{
 		Fig = pManager->GetFigure(P.x, P.y);
 		Fig->ChngDrawClr(UI.DrawColor);
-		pManager->GetOutput()->PrintMessage("Changed Selected Figure Outline Color");
+		pManager->GetOutput()->PrintMessage("Changed Selected Figure Outline Color in Record.");
 	}
 }

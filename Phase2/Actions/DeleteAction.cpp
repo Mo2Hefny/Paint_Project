@@ -3,18 +3,23 @@
 DeleteAction::DeleteAction(ApplicationManager* pApp) : Action(pApp)
 {
 	index = -1;
+	P.x = 0;
 }
 
 void DeleteAction::Execute()
 {
 	deleted = pManager->GetSelectedFig();
-	index = pManager->get_index(deleted);
-	if (index != -1)
-		pManager->deleteFig(index);
+	if (deleted != NULL)
+	{
+		P = deleted->GetCenter();
+		deleted->Delete(true);
+		deleted->Hide(true);
+		pManager->SetSelectedFig(NULL);
+	}
 	Output* p_out = pManager->GetOutput();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
-	if (pManager->get_IsRecording() == true)
+	if (pManager->get_IsRecording() == true && deleted != NULL)
 		pManager->AddToRecordingList(this);
 }
 
@@ -31,4 +36,15 @@ CFigure* DeleteAction::get_deleted()
 int DeleteAction::ActType()
 {
 	return 3;
+}
+
+void DeleteAction::play()
+{
+	if (P.x)
+	{
+		deleted = pManager->GetFigure(P.x, P.y);
+		deleted->Delete(true);
+		deleted->Hide(true);
+		pManager->GetOutput()->PrintMessage("Deleted Object in Record.");
+	}
 }

@@ -370,10 +370,6 @@ void ApplicationManager::deleteFig(int index)
 	}*/
 	FigList[index]->Hide(true);
 	FigList[index]->Delete(true);
-
-
-
-
 }
 
 int ApplicationManager::get_index(CFigure* ptr)

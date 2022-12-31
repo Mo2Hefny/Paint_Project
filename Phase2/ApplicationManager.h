@@ -57,7 +57,6 @@ public:
 	void SaveAll(ofstream& outfile);
 	string getCrntFillClr() const;
 	string getCrntDrawClr() const;
-	void load()const;
 	void deleteFig(int); //deletes the figure of an index;
 	int get_index(CFigure* ptr); // gets an index of a figure;
 	int get_max_ID_index(bool);		//returns index of max id

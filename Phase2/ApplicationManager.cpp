@@ -429,4 +429,9 @@ void ApplicationManager::AddToRecordingList(Action* p)
 {
 	if(RecordedCount<MaxRecordedCount)
 	RecordingList[RecordedCount++] = p;
+	else
+	{
+		pOut->PrintMessage("You exceeded the allowable number of actions to record, Recording Stopped ");
+			set_IsRecording(false);
+	}
 }

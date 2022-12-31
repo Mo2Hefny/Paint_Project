@@ -13,6 +13,6 @@ public:
 	CFigure* get_deleted();
 	int ActType();
 	virtual void undo() {};
-	void play();
+	
 };
 

@@ -15,3 +15,13 @@ void ClearAll::Execute()
 	if (pManager->get_IsRecording() == true)
 		pManager->AddToRecordingList(this);
 }
+void ClearAll::play()
+{
+
+	Output* p_out = pManager->GetOutput();
+	pManager->clear_figs();
+	pManager->clear_undo();
+	pManager->clear_gui();
+	p_out->ClearDrawArea();
+	
+}

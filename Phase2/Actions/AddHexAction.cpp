@@ -49,3 +49,8 @@ int AddHexAction::ActType()
 {
 	return 1;
 }
+void AddHexAction::play()
+{
+	CHexagon* H = new CHexagon(P, HexGfxInfo);
+	pManager->AddFigure(H);
+}

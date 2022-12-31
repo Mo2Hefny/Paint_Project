@@ -49,3 +49,8 @@ int AddSqrAction::ActType()
 {
 	return 1;
 }
+void AddSqrAction::play()
+{
+	CSquare* S = new CSquare(P, SqrGfxInfo);
+	pManager->AddFigure(S);
+}

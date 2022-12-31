@@ -59,3 +59,8 @@ int AddTriAction::ActType()
 {
 	return 1;
 }
+void AddTriAction::play()
+{
+	CTriangle* T = new CTriangle(P1, P2, P3, TriGfxInfo);
+	pManager->AddFigure(T);
+}

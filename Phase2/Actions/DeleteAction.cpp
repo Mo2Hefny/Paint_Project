@@ -32,3 +32,12 @@ int DeleteAction::ActType()
 {
 	return 3;
 }
+void DeleteAction::play()
+{
+	deleted = pManager->GetSelectedFig();
+	index = pManager->get_index(deleted);
+	if (index != -1)
+		pManager->deleteFig(index);
+	Output* p_out = pManager->GetOutput();
+	p_out->ClearDrawArea();
+}

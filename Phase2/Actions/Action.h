@@ -27,7 +27,7 @@ public:
 	virtual CFigure* get_deleted();
 	virtual void undo();
 	virtual void redo();
-	
+	virtual void play();
 };
 
 #endif

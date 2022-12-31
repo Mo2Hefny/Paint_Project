@@ -13,3 +13,5 @@ void Action::redo()
 
 void Action::undo()
 {}
+void Action::play()
+{}

@@ -71,7 +71,7 @@ public:
 	bool get_IsRecording();
 	void set_IsRecording(bool b);
 	void AddToRecordingList(Action* p);
-	
+	void PlayAll();
 };
 
 #endif

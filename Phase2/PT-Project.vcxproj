@@ -190,6 +190,7 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="LoadAction.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayRecordAction.cpp" />
     <ClCompile Include="SaveAction.cpp" />
     <ClCompile Include="StartRecordingAction.cpp" />
     <ClCompile Include="StopRecordingAction.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="LoadAction.h" />
+    <ClInclude Include="PlayRecordAction.h" />
     <ClInclude Include="SaveAction.h" />
     <ClInclude Include="StartRecordingAction.h" />
     <ClInclude Include="StopRecordingAction.h" />

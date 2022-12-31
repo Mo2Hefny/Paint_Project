@@ -8,6 +8,7 @@
 #include"Actions/UndoAction.h"
 #include"StartRecordingAction.h"
 #include"StopRecordingAction.h"
+#include"PlayRecordAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -142,7 +143,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new StopRecordingAction(this);
 			break;
 		case DRAW_PlayRec:
-			pOut->PrintMessage("Action: Play Record , Click anywhere");
+			pAct = new PlayRecordAction(this);
 			break;
 		case DRAW_SAVE:
 			pAct = new SaveAction(this);
@@ -433,5 +434,19 @@ void ApplicationManager::AddToRecordingList(Action* p)
 	{
 		pOut->PrintMessage("You exceeded the allowable number of actions to record, Recording Stopped ");
 			set_IsRecording(false);
+	}
+}
+void ApplicationManager::PlayAll()
+{
+	clear_figs();
+	clear_undo();
+	clear_gui();
+	pOut->ClearDrawArea();
+	for (int i = 0; i < RecordedCount; i++)
+	{
+		
+		RecordingList[i]->play();
+		Sleep(1000);
+		UpdateInterface();
 	}
 }

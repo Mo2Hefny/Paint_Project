@@ -8,5 +8,6 @@ public:
 	ClearAll(ApplicationManager* pApp);
 	void Execute();
 	void ReadActionParameters() {};
+	void play();
 };
 

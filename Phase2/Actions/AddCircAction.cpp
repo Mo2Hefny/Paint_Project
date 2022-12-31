@@ -55,3 +55,8 @@ int AddCircAction::ActType()
 	return 1;
 }
 
+void AddCircAction::play()
+{
+	CCircle* C = new CCircle(P1, P2, CircGfxInfo);
+	pManager->AddFigure(C);
+}

@@ -54,3 +54,8 @@ int AddRectAction::ActType()
 {
 	return 1;
 }
+void AddRectAction::play()
+{
+	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
+	pManager->AddFigure(R);
+}

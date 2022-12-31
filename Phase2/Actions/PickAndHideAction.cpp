@@ -51,16 +51,16 @@ void PickAndHideAction::ReadActionParameters()
 		}
 		else
 		{
-				if (Score(Fig))
-				{
-					pOut->PrintMessage("RIGHT!");
-					CountRight++;
-				}
-				else
-				{
-					pOut->PrintMessage("WRONG....");
-					CountWrong++;
-				}
+			if (Score(Fig))
+			{
+				pOut->PrintMessage("RIGHT!");
+				CountRight++;
+			}
+			else
+			{
+				pOut->PrintMessage("WRONG....");
+				CountWrong++;
+			}
 			Fig->Hide(true);
 		}
 	}
@@ -166,10 +166,10 @@ char PickAndHideAction::GetFigType(CFigure* Fig) const
 bool PickAndHideAction::SameTypeLeft() const
 {
 	CFigure* Fig;
-	for (int i = 0; i < pManager->GetFigCount(); i++)
+	for (int i = 0; i < pManager->Get_Real_FigCount(); i++)
 	{
 		Fig = pManager->GetFigInList(i);
-		if (!Fig->IsHidden() && Score(Fig))
+		if (!Fig->IsHidden() && Score(Fig) && !Fig->IsDeleted())
 			return true;
 	}
 	return false;
@@ -250,10 +250,10 @@ void PickAndHideAction::PrintProperty() const
 void PickAndHideAction::Unhide() const
 {
 	CFigure* Fig;
-	for (int i = 0; i < pManager->GetFigCount(); i++)
+	for (int i = 0; i < pManager->Get_Real_FigCount(); i++)
 	{
 		Fig = pManager->GetFigInList(i);
-		if (Fig->IsHidden())
+		if (Fig->IsHidden() && !Fig->IsDeleted())
 			Fig->Hide(false);
 	}
 

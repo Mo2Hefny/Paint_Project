@@ -10,6 +10,7 @@
 #include "GUI/Output.h"
 #include"LoadAction.h"
 #include<iostream>
+#include"Actions/Action.h"
 Undo undo_tool;
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -24,6 +25,7 @@ ApplicationManager::ApplicationManager()
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
 	SelectedFig = NULL;
+	
 }
 
 //==================================================================================//

@@ -1,12 +1,6 @@
 #include "ApplicationManager.h"
 #include "Actions/Actions.h"
-#include "Actions\AddRectAction.h"
-#include "Actions\AddSqrAction.h"
-#include "Actions\AddTriAction.h"
-#include "Actions\AddCircAction.h"
-#include "Actions\AddHexAction.h"
 #include"SaveAction.h"
-#include "Undo.h"
 #include "GUI/Output.h"
 #include"LoadAction.h"
 #include<iostream>
@@ -18,14 +12,15 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+
 	FigCount = 0;
-		
+	undo_tool = new UndoAction(this);
+	redo_tool = new RedoAction(this);
 	//Create an array of figure pointers and set them to NULL		
-	for(int i=0; i<MaxFigCount; i++)
-		FigList[i] = NULL;	
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
 	SelectedFig = NULL;
-	
+
 }
 
 //==================================================================================//
@@ -41,7 +36,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -52,28 +47,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
 			break;
 		case DRAW_SQR:
 			pAct = new AddSqrAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
 			break;
 		case DRAW_TRI:
 			pAct = new AddTriAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
 			break;
 		case DRAW_CRCL:
 			pAct = new AddCircAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
 			break;
 		case DRAW_HEX:
 			pAct = new AddHexAction(this);
-			undo_tool.addAct(pAct);
-			undo_tool.clear_redo();
 			break;
 		case DRAW_SELECT:
 			pAct = new SelectAction(this);
@@ -87,68 +72,62 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->CreateDrawToolBar();
 			break;
 		case DRAW_BLACK:
-			setColors(BLACK);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, BLACK);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, BLACK);
 			break;
 		case DRAW_YELLOW:
-			setColors(YELLOW);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, YELLOW);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, YELLOW);
 			break;
 		case DRAW_ORANGE:
-			setColors(ORANGE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, ORANGE);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, ORANGE);
 			break;
 		case DRAW_RED:
-			setColors(RED);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, RED);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, RED);
 			break;
 		case DRAW_BLUE:
-			setColors(BLUE);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, BLUE);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, BLUE);
 			break;
 		case DRAW_GREEN:
-			setColors(GREEN);
 			if (UI.InterfaceMode == MODE_COL_FILL)
-				pAct = new FillAction(this);
+				pAct = new FillAction(this, GREEN);
 			else
-				pAct = new DrawClrAction(this);
+				pAct = new DrawClrAction(this, GREEN);
 			break;
 		case DRAW_MOVE:
 			pAct = new MoveAction(this);
 			break;
 		case DRAW_DEL:
+			pAct = new DeleteAction(this);
 			pOut->PrintMessage("Action: Delete object , Click anywhere");
 			break;
 		case DRAW_UNDO:
-			FigCount = undo_tool.undo(FigCount);
+			undo_tool->Execute();
 			pOut->ClearDrawArea();
-			
+
 			this->UpdateInterface();
-			pOut->PrintMessage("Action: Undo action , Click anywhere");
 			break;
 		case DRAW_REDO:
-			FigCount = undo_tool.redo(FigCount);
 			pOut->ClearDrawArea();
 
 			this->UpdateInterface();
 			pOut->PrintMessage("Action: Redo action , Click anywhere");
 			break;
 		case DRAW_CLEAR:
+			pAct = new ClearAll(this);
 			pOut->PrintMessage("Action: Clear drawing area , Click anywhere");
 			break;
 		case DRAW_StartRec:
@@ -208,10 +187,27 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 	
 	//Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
+		if (pAct->ActType() == 1 || pAct->ActType() == 2 || pAct->ActType() == 3 || pAct->ActType() == 4)
+			redo_tool->clear();
+		if (pAct->ActType() == 3)
+		{
+
+			undo_tool->add_fig(this->GetSelectedFig());
+		}
 		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
+		if (pAct->ActType() == 4 || pAct->ActType() == 2) //to be done
+		{
+			//test:
+			this->add_act(pAct);
+		}
+		undo_tool->add_act(pAct->ActType());
+
+
+
+		if (pAct->ActType() != 4 && pAct->ActType() != 2)
+			delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
 }
@@ -267,7 +263,8 @@ CFigure* ApplicationManager::GetFigInList(int i) const
 void ApplicationManager::UpdateInterface() const
 {	
 	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		if (!FigList[i]->IsHidden())
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -303,21 +300,7 @@ void ApplicationManager::SaveAll(ofstream& outfile)
 	}
 }
 
-void ApplicationManager::setColors(color c)
-{
-	if (UI.InterfaceMode == MODE_COL_FILL)
-	{
-		if (c == UI.FillColor && UI.isFilled)
-		{
-			UI.isFilled = false;
-		}
-		else
-			UI.isFilled = true;
-		UI.FillColor = c;
-	}
-	else
-		UI.DrawColor = c;
-}
+
 string ApplicationManager::getCrntFillClr() const
 {
 	if (UI.isFilled == false)
@@ -350,4 +333,74 @@ string ApplicationManager::getCrntDrawClr() const
 		return "BLUE";
 	if (UI.DrawColor == GREEN)
 		return "GREEN";
+}
+
+void ApplicationManager::deleteFig(int index)
+{
+	if (index == FigCount - 1)
+	{
+		FigList[FigCount - 1] = NULL;
+		FigCount--;
+	}
+	else
+	{
+		FigList[index] = FigList[FigCount - 1];
+		FigList[FigCount - 1] = NULL;
+		FigCount--;
+	}
+
+
+}
+
+int ApplicationManager::get_index(CFigure* ptr)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (ptr == FigList[i])
+			return i;
+	}
+	return -1;
+}
+int ApplicationManager::get_max_ID_index()
+{
+	int max = (FigList[0]->get_ID());
+	int index = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->get_ID() > max)
+		{
+			max = FigList[i]->get_ID();
+			index = i;
+		}
+	}
+	return index;
+
+}
+
+void ApplicationManager::clear_figs()
+{
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
+	FigCount = 0;
+}
+
+void ApplicationManager::clear_undo()
+{
+	undo_tool->clear();
+}
+
+void ApplicationManager::clear_gui()
+{
+	UI.InterfaceMode = MODE_DRAW;
+	pOut->CreateDrawToolBar();
+	UI.FillColor = GREEN;
+	UI.isFilled = false;
+	UI.DrawColor = BLUE;
+}
+
+void ApplicationManager::add_act(Action* pointer)
+{
+	if (pointer != NULL)
+		undo_tool->add_action(pointer);
+	pointer = NULL;
 }

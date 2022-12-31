@@ -7,18 +7,22 @@
 class FillAction : public Action
 {
 private:
-	GfxInfo CurrentGfxInfo;
+	CFigure* Fig;
+	color NewFill;
+	color OldFill;
 	bool filled;
 public:
-	FillAction(ApplicationManager* pApp);
+	FillAction(ApplicationManager* pApp, color);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	bool FillSelected();
-
+	bool SetFilling(color, bool&);
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
+	virtual int ActType();
+	virtual void undo();
+	virtual void redo();
 };
 
 #endif

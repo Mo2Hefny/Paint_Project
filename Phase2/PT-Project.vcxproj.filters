@@ -85,9 +85,12 @@
     <ClCompile Include="Actions\FillAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="SaveAction.cpp" />
-    <ClCompile Include="Undo.cpp" />
     <ClCompile Include="LoadAction.cpp" />
     <ClCompile Include="Actions\PickAndHideAction.cpp" />
+    <ClCompile Include="Actions\ClearAll.cpp" />
+    <ClCompile Include="Actions\DeleteAction.cpp" />
+    <ClCompile Include="Actions\RedoAction.cpp" />
+    <ClCompile Include="Actions\UndoAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -158,10 +161,13 @@
     <ClInclude Include="Actions\FillAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="SaveAction.h" />
-    <ClInclude Include="Undo.h" />
     <ClInclude Include="LoadAction.h" />
     <ClInclude Include="Actions\PickAndHideAction.h" />
     <ClInclude Include="Figures\Figures.h" />
+    <ClInclude Include="Actions\ClearAll.h" />
+    <ClInclude Include="Actions\DeleteAction.h" />
+    <ClInclude Include="Actions\RedoAction.h" />
+    <ClInclude Include="Actions\UndoAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

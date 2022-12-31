@@ -4,7 +4,10 @@
 #include "..\GUI\Output.h"
 
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
-{	x = 0; y = 0; }
+{	
+	x = 0; y = 0;
+	MoveFig = NULL;
+}
 
 void MoveAction::ReadActionParameters()
 {
@@ -42,6 +45,7 @@ void MoveAction::ReadActionParameters()
 	}
 }
 
+
 //Execute the action
 void MoveAction::Execute()
 {
@@ -52,4 +56,29 @@ void MoveAction::Execute()
 
 	//Add the rectangle to the list of figures
 
+}
+
+int MoveAction::ActType()
+{	return 4; }
+
+void MoveAction::undo()
+{
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Returned to previous location.");
+		MoveFig->move(OldPos.x, OldPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to undo.");
+}
+
+void MoveAction::redo()
+{
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Redo move.");
+		MoveFig->move(NewPos.x, NewPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to redo.");
 }

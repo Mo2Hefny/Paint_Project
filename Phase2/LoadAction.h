@@ -12,5 +12,6 @@ public:
 	LoadAction(ApplicationManager* pApp);
 	void ReadActionParameters();
 	void Execute();
+	virtual void undo() {};
 };
 

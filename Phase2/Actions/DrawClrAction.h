@@ -7,17 +7,20 @@
 class DrawClrAction : public Action
 {
 private:
-	color outline;
+	CFigure* Fig;
+	color NewOutline;
+	color OldOutline;
 public:
-	DrawClrAction(ApplicationManager* pApp);
+	DrawClrAction(ApplicationManager* pApp, color c);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	bool ClrSelected();
-
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
+	int ActType();
+	virtual void undo();
+	virtual void redo();
 };
 
 #endif

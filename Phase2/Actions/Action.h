@@ -2,6 +2,7 @@
 #define ACTION_H
 
 #include "..\DefS.h"
+#include"../Figures/CFigure.h"
 
 class ApplicationManager; //forward class declaration
 
@@ -22,7 +23,9 @@ public:
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
 	virtual int ActType(); //returns 1 if a figure is created & 2 if a color changed;
-
+	virtual CFigure* get_deleted();
+	virtual void undo();
+	virtual void redo();
 };
 
 #endif

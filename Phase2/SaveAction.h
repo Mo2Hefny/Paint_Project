@@ -11,5 +11,6 @@ public:
 	SaveAction(ApplicationManager* pApp);
 	void ReadActionParameters();
 	void Execute();
+	virtual void undo() {};
 };
 

@@ -42,7 +42,7 @@ void SelectAction::ReadActionParameters()
 					SelectedFig[abs(i - 1)] = NULL;
 				}
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
-				
+
 				SelectedFig[i]->PrintInfo(pOut);
 			}
 			else if (SelectedFig[i] == SelectedFig[abs(i - 1)])
@@ -50,7 +50,7 @@ void SelectAction::ReadActionParameters()
 				SelectedFig[i]->SetSelected(!SelectedFig[i]->IsSelected());
 				if (SelectedFig[i]->IsSelected())
 				{
-					
+
 					SelectedFig[i]->PrintInfo(pOut);
 				}
 				else
@@ -60,7 +60,7 @@ void SelectAction::ReadActionParameters()
 				}
 				SelectedFig[abs(i - 1)] = NULL;
 			}
-		
+
 		}
 		pManager->UpdateInterface();
 		if (++i == 2)
@@ -74,4 +74,9 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	ReadActionParameters();
+}
+
+int SelectAction::ActType()
+{
+	return 7;
 }

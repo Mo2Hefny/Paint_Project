@@ -16,6 +16,7 @@ protected:
 	static unsigned int IDcounter;
 	bool Selected;	//true if the figure is selected.
 	bool Hidden;
+	bool deleted;
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	GfxInfo OldFigGfxInfo;
 	/// Add more parameters if needed.
@@ -45,12 +46,15 @@ public:
 
 	///Decide the parameters that you should pass to each function	
 	virtual void move(int x, int y) = 0;
-	virtual void Save(ofstream& outfile)=0;
-		//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
-		//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Save(ofstream& outfile) = 0;
+	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
+	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual void load(ifstream& infile) = 0;
-
+	int get_ID() const;
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	bool IsDeleted() const;
+	void Delete(bool s);
+
 };
 
 #endif

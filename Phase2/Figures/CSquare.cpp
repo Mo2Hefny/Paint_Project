@@ -44,8 +44,8 @@ void CSquare::PrintInfo(Output* pOut) const
 }
 void CSquare::load(ifstream&infile)
 {
-	int cx, cy, ex, ey, id;
-	infile >> id >> cx >> cy >> ex >> ey;
+	int cx, cy, id;
+	infile >> id >> cx >> cy;
 	ID = id;
 	Center.x = cx;
 	Center.y = cy;

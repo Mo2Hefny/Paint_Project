@@ -4,7 +4,10 @@
 #include "..\GUI\Output.h"
 
 MoveAction::MoveAction(ApplicationManager* pApp) :Action(pApp)
-{	x = 0; y = 0; }
+{	
+	x = 0; y = 0;
+	MoveFig = NULL;
+}
 
 void MoveAction::ReadActionParameters()
 {
@@ -48,9 +51,43 @@ void MoveAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user
 
 	//Add the rectangle to the list of figures
 
+}
+
+int MoveAction::ActType()
+{	return 4; }
+
+void MoveAction::undo()
+{
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Returned to previous location.");
+		MoveFig->move(OldPos.x, OldPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to undo.");
+}
+
+void MoveAction::redo()
+{
+	if (MoveFig != NULL)
+	{
+		pManager->GetOutput()->PrintMessage("Redo move.");
+		MoveFig->move(NewPos.x, NewPos.y);
+	}
+	else
+		pManager->GetOutput()->PrintMessage("No object was moved to redo.");
+}
+
+void MoveAction::play()
+{
+	MoveFig = pManager->GetFigure(OldPos.x, OldPos.y);
+	MoveFig->move(NewPos.x, NewPos.y);
+	if (MoveFig != NULL)
+	pManager->GetOutput()->PrintMessage("Moved.");
 }

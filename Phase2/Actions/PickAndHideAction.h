@@ -27,7 +27,6 @@ public:
 	void PrintProperty() const;
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
 };
 
 #endif

@@ -25,7 +25,7 @@ void LoadAction::ReadActionParameters()
 }
 void LoadAction::Execute()
 {
-	string drawclr, fillclr,type;
+	string drawclr, fillclr, type;
 	int n;
 	ReadActionParameters();
 	ifstream infile(file);
@@ -54,7 +54,7 @@ void LoadAction::Execute()
 			UI.FillColor = BLACK;
 		if (fillclr == "GREEN")
 			UI.FillColor = GREEN;
-		if (fillclr== "ORANGE")
+		if (fillclr == "ORANGE")
 			UI.FillColor = ORANGE;
 		if (fillclr == "BLUE")
 			UI.FillColor = BLUE;
@@ -68,13 +68,15 @@ void LoadAction::Execute()
 			myfig = new CRectangle;
 		else if (type == "HEXA")
 			myfig = new CHexagon;
-		else if (type =="TRI")
+		else if (type == "TRI")
 			myfig = new CTriangle;
 		else	if (type == "SQUARE")
 			myfig = new CSquare;
 		else if (type == "CIRC")
 			myfig = new CCircle;
 		myfig->load(infile);
+		myfig->Delete(false); //testing
+		myfig->Hide(false);
 		pManager->AddFigure(myfig);
 		pManager->UpdateInterface();
 

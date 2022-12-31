@@ -43,6 +43,7 @@ void AddTriAction::ReadActionParameters()
 void AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
+	
 	ReadActionParameters();
 
 	//Create a triangle with the parameters read from the user
@@ -50,9 +51,16 @@ void AddTriAction::Execute()
 
 	//Add the triangle to the list of figures
 	pManager->AddFigure(T);
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 int AddTriAction::ActType()
 {
 	return 1;
+}
+void AddTriAction::play()
+{
+	CTriangle* T = new CTriangle(P1, P2, P3, TriGfxInfo);
+	pManager->AddFigure(T);
 }

@@ -17,6 +17,7 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
+	void play();
 	virtual int ActType();
 };
 

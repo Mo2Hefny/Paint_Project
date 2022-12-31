@@ -72,6 +72,7 @@ void CHexagon::load(ifstream& infile)
 			FigGfxInfo.isFilled = false;
 		else
 		{
+			FigGfxInfo.isFilled = true;
 			if (FillColor == "RED")
 				FigGfxInfo.FillClr = RED;
 

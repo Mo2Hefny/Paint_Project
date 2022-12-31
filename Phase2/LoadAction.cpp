@@ -19,9 +19,14 @@ void LoadAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	pManager->clear_figs();
+	pManager->clear_undo();
+	pManager->clear_gui();
+	pOut->ClearDrawArea();
+	pManager->UpdateInterface();
 	pOut->PrintMessage("Please enter the file name");
 	file = pIn->GetSrting(pOut) + ".txt";
-	pOut->ClearDrawArea();
+	
 	pOut->ClearStatusBar();
 }
 void LoadAction::Execute()

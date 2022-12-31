@@ -141,6 +141,8 @@
     <ClCompile Include="Actions\PickAndHideAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SwitchDraw.cpp" />
+    <ClCompile Include="Actions\SwitchPlay.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -210,6 +212,8 @@
     <ClInclude Include="Actions\PickAndHideAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SwitchDraw.h" />
+    <ClInclude Include="Actions\SwitchPlay.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />

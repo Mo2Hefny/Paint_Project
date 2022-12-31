@@ -10,6 +10,7 @@ private:
 	CFigure* Fig;
 	color NewOutline;
 	color OldOutline;
+	Point P;
 public:
 	DrawClrAction(ApplicationManager* pApp, color c);
 
@@ -21,6 +22,7 @@ public:
 	int ActType();
 	virtual void undo();
 	virtual void redo();
+	virtual void play();
 };
 
 #endif

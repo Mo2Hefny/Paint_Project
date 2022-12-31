@@ -8,6 +8,7 @@ private:
 	int current;
 	int ptrs_act[5];
 	CFigure* arr[5];
+	Action** ptr;
 public:
 	RedoAction(ApplicationManager* pApp);
 	void Execute();
@@ -16,8 +17,7 @@ public:
 	void dec_act();
 	void add_fig(CFigure*);
 	void clear();
-	virtual void undo() {};
-
+	void add_action(Action* ptr_act);
 
 
 };

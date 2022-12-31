@@ -11,6 +11,7 @@ private:
 	color NewFill;
 	color OldFill;
 	bool filled;
+	Point P;
 public:
 	FillAction(ApplicationManager* pApp, color);
 

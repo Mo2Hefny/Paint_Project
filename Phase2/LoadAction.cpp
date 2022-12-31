@@ -9,7 +9,6 @@
 #include"Figures/CSquare.h"
 #include"Figures/CTriangle.h"
 #include"Figures/CCircle.h"
-#include"Actions/ClearAll.h"
 #include<fstream>
 LoadAction::LoadAction(ApplicationManager* pApp) :Action(pApp)
 {
@@ -19,19 +18,14 @@ void LoadAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pManager->clear_figs();
-	pManager->clear_undo();
-	pManager->clear_gui();
-	pOut->ClearDrawArea();
-	pManager->UpdateInterface();
 	pOut->PrintMessage("Please enter the file name");
 	file = pIn->GetSrting(pOut) + ".txt";
-	
+	pOut->ClearDrawArea();
 	pOut->ClearStatusBar();
 }
 void LoadAction::Execute()
 {
-	string drawclr, fillclr,type;
+	string drawclr, fillclr, type;
 	int n;
 	ReadActionParameters();
 	ifstream infile(file);
@@ -52,7 +46,6 @@ void LoadAction::Execute()
 		UI.isFilled = false;
 	else
 	{
-		UI.isFilled = true;
 		if (fillclr == "RED")
 			UI.FillColor = RED;
 		if (fillclr == "YELLOW")
@@ -61,28 +54,28 @@ void LoadAction::Execute()
 			UI.FillColor = BLACK;
 		if (fillclr == "GREEN")
 			UI.FillColor = GREEN;
-		if (fillclr== "ORANGE")
+		if (fillclr == "ORANGE")
 			UI.FillColor = ORANGE;
 		if (fillclr == "BLUE")
 			UI.FillColor = BLUE;
 	}
 	infile >> n;
 	CFigure* myfig = NULL;
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i <= n; i++)
 	{
-		myfig = NULL;
 		infile >> type;
 		if (type == "RECT")
 			myfig = new CRectangle;
 		else if (type == "HEXA")
 			myfig = new CHexagon;
-		else if (type =="TRI")
+		else if (type == "TRI")
 			myfig = new CTriangle;
 		else	if (type == "SQUARE")
 			myfig = new CSquare;
 		else if (type == "CIRC")
 			myfig = new CCircle;
 		myfig->load(infile);
+		myfig->Delete(false); //testing
 		myfig->Hide(false);
 		pManager->AddFigure(myfig);
 		pManager->UpdateInterface();

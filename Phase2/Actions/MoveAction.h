@@ -22,6 +22,7 @@ public:
 	int ActType();
 	virtual void undo();
 	virtual void redo();
+	virtual void play();
 };
 
 #endif

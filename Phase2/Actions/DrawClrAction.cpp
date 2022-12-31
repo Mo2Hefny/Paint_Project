@@ -7,6 +7,7 @@ DrawClrAction::DrawClrAction(ApplicationManager* pApp, color c) :Action(pApp)
 {
 	OldOutline = UI.DrawColor;
 	UI.DrawColor = c;
+	P.x = 0;
 }
 
 void DrawClrAction::ReadActionParameters()
@@ -14,7 +15,9 @@ void DrawClrAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	Fig = pManager->GetSelectedFig();
+	if (Fig != NULL)
+		P = Fig->GetCenter();
 	if (!ClrSelected())
 	{
 		pOut->PrintMessage("Changed Outline Color");
@@ -28,7 +31,6 @@ void DrawClrAction::ReadActionParameters()
 
 bool DrawClrAction::ClrSelected()
 {
-	Fig = pManager->GetSelectedFig();
 	if (Fig == NULL)
 		return false;
 	NewOutline = UI.DrawColor;
@@ -77,5 +79,17 @@ void DrawClrAction::redo()
 	{
 		pManager->GetOutput()->PrintMessage("Redo Outline Color Change");
 		UI.DrawColor = NewOutline;
+	}
+}
+
+void DrawClrAction::play()
+{
+	UI.DrawColor = NewOutline;
+	pManager->GetOutput()->PrintMessage("Changed Outline Color");
+	if (P.x)
+	{
+		Fig = pManager->GetFigure(P.x, P.y);
+		Fig->ChngDrawClr(UI.DrawColor);
+		pManager->GetOutput()->PrintMessage("Changed Selected Figure Outline Color");
 	}
 }

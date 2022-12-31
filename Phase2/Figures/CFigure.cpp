@@ -5,11 +5,12 @@
 unsigned int CFigure::IDcounter = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
 	Hidden = false;
 	ID = ++IDcounter;
+	deleted = false;
 }
 CFigure::CFigure()
 {
@@ -17,7 +18,21 @@ CFigure::CFigure()
 }
 
 int CFigure::get_ID() const
-{	return ID; }
+{
+	return ID;
+}
+
+bool CFigure::IsDeleted() const
+{
+	return deleted;
+}
+
+void CFigure::Delete(bool s)
+{
+	deleted = s;
+}
+
+
 
 GfxInfo CFigure::getGfxInfo() const
 {
@@ -28,9 +43,11 @@ GfxInfo CFigure::getGfxInfo() const
 }
 
 color CFigure::getFillClr() const
-{	return FigGfxInfo.FillClr; }
+{
+	return FigGfxInfo.FillClr;
+}
 
-color CFigure::getDrawClr() 
+color CFigure::getDrawClr()
 {
 	if (IsSelected())
 		return OldFigGfxInfo.DrawClr;
@@ -38,8 +55,8 @@ color CFigure::getDrawClr()
 }
 
 void CFigure::SetSelected(bool s)
-{	
-	Selected = s; 
+{
+	Selected = s;
 	if (s)
 	{
 		OldFigGfxInfo.DrawClr = FigGfxInfo.DrawClr;
@@ -52,31 +69,41 @@ void CFigure::SetSelected(bool s)
 }
 
 void CFigure::Hide(bool mode)
-{	Hidden = mode; }
+{
+	Hidden = mode;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
 bool CFigure::IsFilled() const
-{	return FigGfxInfo.isFilled; }
+{
+	return FigGfxInfo.isFilled;
+}
 
 bool CFigure::IsHidden() const
-{	return Hidden; }
+{
+	return Hidden;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
-{	
+{
 	OldFigGfxInfo.DrawClr = FigGfxInfo.DrawClr;
-	FigGfxInfo.DrawClr = Dclr; 
+	FigGfxInfo.DrawClr = Dclr;
 }
 
 void CFigure::ChngFillClr(color Fclr)
-{	
+{
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
 }
 
 void CFigure::SetIsFilled(bool Fill)
-{	FigGfxInfo.isFilled = Fill; }
+{
+	FigGfxInfo.isFilled = Fill;
+}
 
 string CFigure::getFillClrStr() const
 {

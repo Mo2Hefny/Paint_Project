@@ -7,7 +7,7 @@
 class SelectAction : public Action
 {
 private:
-	Point P; 
+	Point P;
 	CFigure* SelectedFig[2];
 public:
 	SelectAction(ApplicationManager* pApp);
@@ -17,7 +17,7 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-	virtual void undo() {};
+	virtual int ActType(); //returns 7 to be ignored like undo
 };
 
 #endif

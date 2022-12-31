@@ -18,10 +18,10 @@ class UndoAction;
 class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
-	enum{ MaxRecordedCount=20};
+	enum { MaxRecordedCount = 20 };
 
 private:
-	int FigCount ,RecordedCount;		//Actual number of figures
+	int FigCount, RecordedCount;		//Actual number of figures
 	bool IsRecording;
 	Action* RecordingList[MaxRecordedCount];
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
@@ -48,30 +48,39 @@ public:
 	CFigure* GetSelectedFig() const;
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetFigCount() const;
+	int Get_Real_FigCount() const;
 	CFigure* GetFigInList(int) const;
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream& outfile);
-	void setColors(color);
 	string getCrntFillClr() const;
 	string getCrntDrawClr() const;
 	void load()const;
 	void deleteFig(int); //deletes the figure of an index;
 	int get_index(CFigure* ptr); // gets an index of a figure;
-	int get_max_ID_index();		//returns index of max id
+	int get_max_ID_index(bool);		//returns index of max id
+	int get_min_ID_index(bool);
 	void clear_figs();
 	void clear_undo();
 	void clear_gui();
 	//test:
 	void add_act(Action* pointer);
-	int get_Real_FigCount();
-	int get_RecordedCount();
-	bool get_IsRecording();
+	int get_RecordedCount() const;
+	bool get_IsRecording() const;
 	void set_IsRecording(bool b);
 	void AddToRecordingList(Action* p);
 	void PlayAll();
+	//test for redo;
+	void send_action_redo(int val, Action* ptr);
+	void send_action_undo(int val, Action* ptr);
+	void send_fig_undo(CFigure* ptr);
+	void send_fig_redo(CFigure* ptr);
+
+	void Fig_Unhide(int index);
+	void Fig_Undel(int index);
+
 };
 
 #endif

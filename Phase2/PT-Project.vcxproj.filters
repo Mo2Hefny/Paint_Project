@@ -94,6 +94,8 @@
     <ClCompile Include="StartRecordingAction.cpp" />
     <ClCompile Include="StopRecordingAction.cpp" />
     <ClCompile Include="PlayRecordAction.cpp" />
+    <ClCompile Include="Actions\SwitchDraw.cpp" />
+    <ClCompile Include="Actions\SwitchPlay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="StartRecordingAction.h" />
     <ClInclude Include="StopRecordingAction.h" />
     <ClInclude Include="PlayRecordAction.h" />
+    <ClInclude Include="Actions\SwitchDraw.h" />
+    <ClInclude Include="Actions\SwitchPlay.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

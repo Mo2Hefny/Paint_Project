@@ -83,3 +83,11 @@ void MoveAction::redo()
 	else
 		pManager->GetOutput()->PrintMessage("No object was moved to redo.");
 }
+
+void MoveAction::play()
+{
+	MoveFig = pManager->GetFigure(OldPos.x, OldPos.y);
+	MoveFig->move(NewPos.x, NewPos.y);
+	if (MoveFig != NULL)
+	pManager->GetOutput()->PrintMessage("Moved.");
+}

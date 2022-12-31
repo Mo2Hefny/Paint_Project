@@ -9,6 +9,7 @@
 #include"Figures/CSquare.h"
 #include"Figures/CTriangle.h"
 #include"Figures/CCircle.h"
+#include"Actions/ClearAll.h"
 #include<fstream>
 LoadAction::LoadAction(ApplicationManager* pApp) :Action(pApp)
 {
@@ -46,7 +47,7 @@ void LoadAction::Execute()
 		UI.isFilled = false;
 	else
 	{
-		
+		UI.isFilled = true;
 		if (fillclr == "RED")
 			UI.FillColor = RED;
 		if (fillclr == "YELLOW")
@@ -62,8 +63,9 @@ void LoadAction::Execute()
 	}
 	infile >> n;
 	CFigure* myfig = NULL;
-	for (int i = 0; i <= n; i++)
+	for (int i = 0; i < n; i++)
 	{
+		myfig = NULL;
 		infile >> type;
 		if (type == "RECT")
 			myfig = new CRectangle;
@@ -76,6 +78,7 @@ void LoadAction::Execute()
 		else if (type == "CIRC")
 			myfig = new CCircle;
 		myfig->load(infile);
+		myfig->Hide(false);
 		pManager->AddFigure(myfig);
 		pManager->UpdateInterface();
 

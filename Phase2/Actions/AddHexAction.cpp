@@ -33,6 +33,7 @@ void AddHexAction::ReadActionParameters()
 void AddHexAction::Execute()
 {
 	//This action needs to read some parameters first
+	
 	ReadActionParameters();
 
 	//Create a hexagon with the parameters read from the user
@@ -40,6 +41,8 @@ void AddHexAction::Execute()
 
 	//Add the hexagon to the list of figures
 	pManager->AddFigure(H);
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 int AddHexAction::ActType()

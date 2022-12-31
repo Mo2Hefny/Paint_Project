@@ -33,6 +33,7 @@ void AddSqrAction::ReadActionParameters()
 void AddSqrAction::Execute()
 {
 	//This action needs to read some parameters first
+
 	ReadActionParameters();
 
 	//Create a square with the parameters read from the user
@@ -40,6 +41,8 @@ void AddSqrAction::Execute()
 
 	//Add the square to the list of figures
 	pManager->AddFigure(S);
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 int AddSqrAction::ActType()

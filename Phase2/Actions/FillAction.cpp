@@ -72,7 +72,8 @@ void FillAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user
 
 	//Add the rectangle to the list of figures

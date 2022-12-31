@@ -38,6 +38,7 @@ void AddCircAction::ReadActionParameters()
 void AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
+	
 	ReadActionParameters();
 
 	//Create a circle with the parameters read from the user
@@ -45,9 +46,12 @@ void AddCircAction::Execute()
 
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 int AddCircAction::ActType()
 {
 	return 1;
 }
+

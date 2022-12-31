@@ -14,7 +14,8 @@ void DeleteAction::Execute()
 	Output* p_out = pManager->GetOutput();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
-
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 void DeleteAction::ReadActionParameters()

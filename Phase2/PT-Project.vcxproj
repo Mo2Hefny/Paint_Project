@@ -191,6 +191,8 @@
     <ClCompile Include="LoadAction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SaveAction.cpp" />
+    <ClCompile Include="StartRecordingAction.cpp" />
+    <ClCompile Include="StopRecordingAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -244,6 +246,8 @@
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="LoadAction.h" />
     <ClInclude Include="SaveAction.h" />
+    <ClInclude Include="StartRecordingAction.h" />
+    <ClInclude Include="StopRecordingAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

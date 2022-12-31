@@ -74,4 +74,6 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	ReadActionParameters();
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }

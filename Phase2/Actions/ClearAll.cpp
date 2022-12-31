@@ -12,4 +12,6 @@ void ClearAll::Execute()
 	pManager->clear_gui();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }

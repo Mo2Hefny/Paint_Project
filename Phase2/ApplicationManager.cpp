@@ -5,20 +5,25 @@
 #include"LoadAction.h"
 #include<iostream>
 #include"Actions/Action.h"
-Undo undo_tool;
+#include"Actions/UndoAction.h"
+#include"StartRecordingAction.h"
+#include"StopRecordingAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-
+	IsRecording = false;
+	RecordedCount = 0;
 	FigCount = 0;
 	undo_tool = new UndoAction(this);
 	redo_tool = new RedoAction(this);
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+	for (int i = 0; i < MaxRecordedCount; i++)
+		RecordingList[i] = NULL;
 	SelectedFig = NULL;
 
 }
@@ -131,13 +136,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Action: Clear drawing area , Click anywhere");
 			break;
 		case DRAW_StartRec:
-			pOut->PrintMessage("Action: Start recording , Click anywhere");
+			pAct = new StartRecordingAction(this);
 			break;
 		case DRAW_StopRec:
-			pOut->PrintMessage("Action: Stop recording , Click anywhere");
+			pAct = new StopRecordingAction(this);
 			break;
 		case DRAW_PlayRec:
-			pOut->PrintMessage("Action: Play last record , Click anywhere");
+			pOut->PrintMessage("Action: Play Record , Click anywhere");
 			break;
 		case DRAW_SAVE:
 			pAct = new SaveAction(this);
@@ -206,7 +211,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 
 
-		if (pAct->ActType() != 4 && pAct->ActType() != 2)
+		if (pAct->ActType() != 4 && pAct->ActType() != 2&& get_IsRecording()==false)
 			delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
@@ -263,7 +268,7 @@ CFigure* ApplicationManager::GetFigInList(int i) const
 void ApplicationManager::UpdateInterface() const
 {	
 	for(int i=0; i<FigCount; i++)
-		if (!FigList[i]->IsHidden())
+		if(!FigList[i]->IsHidden())
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -295,7 +300,7 @@ void ApplicationManager::SaveAll(ofstream& outfile)
 	}
 	for (int i = 0; i < FigCount; i++)
 	{
-		
+		if(!FigList[i]->IsHidden())
 			FigList[i]->Save(outfile);
 	}
 }
@@ -403,4 +408,25 @@ void ApplicationManager::add_act(Action* pointer)
 	if (pointer != NULL)
 		undo_tool->add_action(pointer);
 	pointer = NULL;
+}
+int ApplicationManager:: get_Real_FigCount()
+{
+	return FigCount;
+}
+int ApplicationManager::get_RecordedCount()
+{
+	return RecordedCount;
+}
+bool ApplicationManager::get_IsRecording()
+{
+	return IsRecording;
+}
+void ApplicationManager::set_IsRecording(bool b)
+{
+	IsRecording = b;
+}
+void ApplicationManager::AddToRecordingList(Action* p)
+{
+	if(RecordedCount<MaxRecordedCount)
+	RecordingList[RecordedCount++] = p;
 }

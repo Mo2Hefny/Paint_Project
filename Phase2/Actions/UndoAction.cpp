@@ -89,6 +89,8 @@ void UndoAction::Execute()
 	Output* p_out = pManager->GetOutput();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 void UndoAction::add_act(int act_type)

@@ -14,7 +14,8 @@ RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 
 void RedoAction::Execute()
 {
-
+	if (pManager->get_IsRecording() == true)
+		pManager->AddToRecordingList(this);
 }
 
 void RedoAction::add_act(int act_type)

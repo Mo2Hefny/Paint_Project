@@ -18,9 +18,12 @@ class UndoAction;
 class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
+	enum{ MaxRecordedCount=20};
 
 private:
-	int FigCount;		//Actual number of figures
+	int FigCount ,RecordedCount;		//Actual number of figures
+	bool IsRecording;
+	Action* RecordingList[MaxRecordedCount];
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	CFigure* SelectedFig; //Pointer to the selected figure
@@ -63,6 +66,12 @@ public:
 	void clear_gui();
 	//test:
 	void add_act(Action* pointer);
+	int get_Real_FigCount();
+	int get_RecordedCount();
+	bool get_IsRecording();
+	void set_IsRecording(bool b);
+	void AddToRecordingList(Action* p);
+	
 };
 
 #endif

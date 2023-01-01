@@ -22,12 +22,14 @@ UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 
 void UndoAction::Execute()
 {
+	ReadActionParameters();
 	bool flag = false;
 	if (current > 0)
 	{
 		switch (ptrs_act[current - 1])
 		{
 		case(1):			//adding a figure
+			pManager->Transfer_index((pManager->get_max_ID_index(false)));
 			pManager->deleteFig((pManager->get_max_ID_index(false)));
 			pManager->send_action_redo(1, NULL);
 			this->dec_act();
@@ -99,6 +101,12 @@ void UndoAction::Execute()
 	Output* p_out = pManager->GetOutput();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
+}
+
+void UndoAction::ReadActionParameters()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Action: Undo action , Click anywhere");
 }
 
 void UndoAction::add_act(int act_type)

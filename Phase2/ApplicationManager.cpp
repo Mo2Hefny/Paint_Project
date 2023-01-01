@@ -111,24 +111,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAW_DEL:
 		pAct = new DeleteAction(this);
-		pOut->PrintMessage("Action: Delete object , Click anywhere");
+
 		break;
 	case DRAW_UNDO:
 		undo_tool->Execute();
-		pOut->ClearDrawArea();
-		pOut->PrintMessage("Action: Undo action , Click anywhere");
-		this->UpdateInterface();
+
 		break;
 	case DRAW_REDO:
 		redo_tool->Execute();
-		pOut->ClearDrawArea();
 
-		this->UpdateInterface();
-		pOut->PrintMessage("Action: Redo action , Click anywhere");
 		break;
 	case DRAW_CLEAR:
 		pAct = new ClearAll(this);
-		pOut->PrintMessage("Action: Clear drawing area , Click anywhere");
 		break;
 	case DRAW_StartRec:
 		pAct = new StartRecordingAction(this);
@@ -348,17 +342,6 @@ string ApplicationManager::getCrntDrawClr() const
 
 void ApplicationManager::deleteFig(int index)
 {
-	/*if (index == FigCount - 1)
-	{
-		FigList[FigCount - 1];
-		FigCount--;
-	}
-	else
-	{
-		FigList[index] = FigList[FigCount - 1];
-		FigList[FigCount - 1] = NULL;
-		FigCount--;
-	}*/
 	FigList[index]->Hide(true);
 	FigList[index]->Delete(true);
 }
@@ -374,7 +357,7 @@ int ApplicationManager::get_index(CFigure* ptr)
 }
 int ApplicationManager::get_max_ID_index(bool wanted)
 {
-	int max = 0; //was : (FigList[0]->get_ID());
+	int max = 0;
 	int index = 0;
 	for (int i = 0; i < FigCount; i++)
 	{
@@ -386,22 +369,6 @@ int ApplicationManager::get_max_ID_index(bool wanted)
 	}
 	return index;
 
-}
-
-int ApplicationManager::get_min_ID_index(bool wanted)
-{
-	int min = 2147483647; //was : (FigList[0]->get_ID());
-	int index = 0;
-
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->get_ID() < min && FigList[i]->IsHidden() == wanted && FigList[i]->IsDeleted() == wanted)
-		{
-			min = FigList[i]->get_ID();
-			index = i;
-		}
-	}
-	return index;
 }
 
 void ApplicationManager::clear_figs()
@@ -526,6 +493,11 @@ void ApplicationManager::Fig_Unhide(int index)
 void ApplicationManager::Fig_Undel(int index)
 {
 	FigList[index]->Delete(false);
+}
+
+void ApplicationManager::Transfer_index(int index)
+{
+	redo_tool->add_index(index);
 }
 
 void ApplicationManager::add_to_tools(Action* p_Act)

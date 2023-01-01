@@ -1,11 +1,11 @@
 #include "ClearAll.h"
 
 ClearAll::ClearAll(ApplicationManager* pApp) : Action(pApp)
-{
-}
+{}
 
 void ClearAll::Execute()
 {
+	ReadActionParameters();
 	Output* p_out = pManager->GetOutput();
 	pManager->clear_figs();
 	pManager->clear_undo();
@@ -19,4 +19,10 @@ void ClearAll::Execute()
 		p_out->PrintMessage("Recording stopped");
 		pManager->set_IsRecording(false);
 	}
+}
+
+void ClearAll::ReadActionParameters()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Cleared Drawing Area.");
 }

@@ -60,7 +60,6 @@ public:
 	void deleteFig(int); //deletes the figure of an index;
 	int get_index(CFigure* ptr); // gets an index of a figure;
 	int get_max_ID_index(bool);		//returns index of max id
-	int get_min_ID_index(bool);
 	void clear_figs();
 	void clear_undo();
 	void clear_gui();
@@ -81,6 +80,7 @@ public:
 	void Fig_Unhide(int index);
 	void Fig_Undel(int index);
 	void add_to_tools(Action* p_Act); //adds action to undo and redo tools
+	void Transfer_index(int index);
 
 };
 

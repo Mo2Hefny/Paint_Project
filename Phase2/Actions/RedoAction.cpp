@@ -213,3 +213,8 @@ void RedoAction::add_action(Action* ptr_act)
 		}
 	}
 }
+
+void RedoAction::play()
+{
+	Execute();
+}

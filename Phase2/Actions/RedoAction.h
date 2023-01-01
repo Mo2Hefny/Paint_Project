@@ -20,5 +20,6 @@ public:
 	void clear();
 	void add_action(Action* ptr_act);
 	void add_index(int index);
+	virtual void play();
 };
 

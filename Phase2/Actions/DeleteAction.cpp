@@ -9,30 +9,24 @@ DeleteAction::DeleteAction(ApplicationManager* pApp) : Action(pApp)
 void DeleteAction::Execute()
 {
 	Output* p_out = pManager->GetOutput();
-	deleted = pManager->GetSelectedFig();
 	ReadActionParameters();
-	if (deleted != NULL)
-	{
-		P = deleted->GetCenter();
-		deleted->Delete(true);
-		deleted->Hide(true);
-		deleted->SetSelected(false);
-		pManager->SetSelectedFig(NULL);
-		PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
-		p_out->ClearDrawArea();
-		pManager->UpdateInterface();
-	}
-	if (pManager->get_IsRecording() == true && deleted != NULL)
+	P = deleted->GetCenter();
+	deleted->Delete(true);
+	deleted->Hide(true);
+	deleted->SetSelected(false);
+	pManager->SetSelectedFig(NULL);
+	PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
+	p_out->ClearDrawArea();
+	pManager->UpdateInterface();
+	if (pManager->get_IsRecording() == true)
 		pManager->AddToRecordingList(this);
 }
 
 void DeleteAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
-	if (deleted != NULL)
-		pOut->PrintMessage("Deleted Selected Object.");
-	else
-		pOut->PrintMessage("No Selected Object To Delete.");
+	deleted = pManager->GetSelectedFig();
+	pOut->PrintMessage("Deleted Selected Object.");
 }
 
 CFigure* DeleteAction::get_deleted()

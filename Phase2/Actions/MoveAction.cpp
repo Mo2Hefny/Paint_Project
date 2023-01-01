@@ -14,34 +14,28 @@ void MoveAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	if (pManager->GetSelectedFig() != NULL)
+	pManager->GetSelectedFig();
+	pOut->PrintMessage("Moving current selected object.");
+	while (pIn->GetButtonState(NewPos.x, NewPos.y) == BUTTON_UP)
 	{
-		pOut->PrintMessage("Moving current selected object.");
-		while (pIn->GetButtonState(NewPos.x, NewPos.y) == BUTTON_UP)
-		{ }
-		OldPos = pManager->GetSelectedFig()->GetCenter();
-		while (pIn->GetButtonState(NewPos.x, NewPos.y) == BUTTON_DOWN)
-		{
-			if (NewPos.x != x || NewPos.y != y)
-			{
-				MoveFig = pManager->GetSelectedFig();
-				MoveFig->move(NewPos.x, NewPos.y);
-				pOut->PrintMessage("Moving.....");
-				pOut->ClearDrawArea();
-				pManager->UpdateInterface();
-			}
-			else
-			{
-				pManager->UpdateInterface();
-				pOut->PrintMessage("Moved.");
-			}
-			x = NewPos.x; y = NewPos.y;
-		}
-		
 	}
-	else
+	OldPos = pManager->GetSelectedFig()->GetCenter();
+	while (pIn->GetButtonState(NewPos.x, NewPos.y) == BUTTON_DOWN)
 	{
-		pOut->PrintMessage("No selected object.");
+		if (NewPos.x != x || NewPos.y != y)
+		{
+			MoveFig = pManager->GetSelectedFig();
+			MoveFig->move(NewPos.x, NewPos.y);
+			pOut->PrintMessage("Moving.....");
+			pOut->ClearDrawArea();
+			pManager->UpdateInterface();
+		}
+		else
+		{
+			pManager->UpdateInterface();
+			pOut->PrintMessage("Moved.");
+		}
+		x = NewPos.x; y = NewPos.y;
 	}
 }
 
@@ -51,7 +45,7 @@ void MoveAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	if (pManager->get_IsRecording() == true && MoveFig != NULL)
+	if (pManager->get_IsRecording() == true)
 		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user
 

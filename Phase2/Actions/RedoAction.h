@@ -21,5 +21,6 @@ public:
 	void add_action(Action* ptr_act);
 	void add_index(int index);
 	virtual void play();
+	~RedoAction();
 };
 

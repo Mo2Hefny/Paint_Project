@@ -107,10 +107,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new DrawClrAction(this, GREEN);
 		break;
 	case DRAW_MOVE:
-		pAct = new MoveAction(this);
+		if (GetSelectedFig() != NULL)
+			pAct = new MoveAction(this);
+		else
+			pOut->PrintMessage("No selected object.");
 		break;
 	case DRAW_DEL:
-		pAct = new DeleteAction(this);
+		if (GetSelectedFig() != NULL)
+			pAct = new DeleteAction(this);
+		else
+
+			pOut->PrintMessage("No selected object.");
 
 		break;
 	case DRAW_UNDO:
@@ -286,6 +293,8 @@ ApplicationManager::~ApplicationManager()
 		delete FigList[i];
 	delete pIn;
 	delete pOut;
+	delete undo_tool;
+	delete redo_tool;
 
 }
 void ApplicationManager::SaveAll(ofstream& outfile)

@@ -22,6 +22,7 @@ public:
 	int act_type(); //returns 7(meaning undo)
 	void add_action(Action* ptr);
 	virtual void play();
+	~UndoAction();
 
 };
 

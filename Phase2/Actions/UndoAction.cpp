@@ -199,3 +199,8 @@ void UndoAction::play()
 {
 	Execute();
 }
+
+UndoAction::~UndoAction()
+{
+	delete[] ptr;
+}

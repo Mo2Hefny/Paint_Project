@@ -218,3 +218,8 @@ void RedoAction::play()
 {
 	Execute();
 }
+
+RedoAction::~RedoAction()
+{
+	delete[] ptr;
+}

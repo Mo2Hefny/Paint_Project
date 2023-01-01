@@ -23,5 +23,6 @@ void ExitAction::Execute()
 	//Create a rectangle with the parameters read from the user
 
 	//Add the rectangle to the list of figures
+	
 
 }

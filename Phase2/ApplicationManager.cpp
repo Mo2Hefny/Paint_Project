@@ -213,7 +213,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i]->IsPointInFigure(x, y))
+		if (FigList[i]->IsPointInFigure(x, y) && !FigList[i]->IsHidden())
 		{
 			return FigList[i];
 		}

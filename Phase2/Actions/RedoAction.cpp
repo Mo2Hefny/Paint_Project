@@ -10,20 +10,33 @@ RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 		ptrs_act[i] = -1;
 		arr[i] = NULL;
 		ptr[i] = NULL;
+		indices[i] = -1;
 	}
 
 }
 
 void RedoAction::Execute()
 {
+	ReadActionParameters();
 	bool flag = false;
 	int index;
 	if (current > 0)
 	{
 		switch (ptrs_act[current - 1])
 		{
-		case(1):			//adding a figure
-			index = (pManager->get_min_ID_index(true));
+		case(1):			//adding a figure		//testing: to transfer indices between tools
+			for (int i = 4; i >= 0; i--)
+			{
+				if (!flag)
+				{
+					if (indices[i] > -1)
+					{
+						index = indices[i];
+						indices[i] = -1;
+						flag = true;
+					}
+				}
+			}
 			pManager->Fig_Unhide(index);
 			pManager->Fig_Undel(index);
 			pManager->send_action_undo(ptrs_act[current - 1], NULL);
@@ -97,6 +110,12 @@ void RedoAction::Execute()
 	pManager->UpdateInterface();
 }
 
+void RedoAction::ReadActionParameters()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Action: Redo action , Click anywhere");
+}
+
 
 void RedoAction::add_act(int act_type)
 {
@@ -141,7 +160,25 @@ void RedoAction::add_fig(CFigure* fig)
 		arr[4] = fig;
 	}
 }
-
+void RedoAction::add_index(int index)
+{
+	bool flag = false;
+	for (int i = 0; i < 5; i++)
+	{
+		if (!flag)
+			if (indices[i] == -1)
+			{
+				indices[i] = index;
+				flag = true;
+			}
+	}
+	if (!flag)
+	{
+		for (int i = 1; i <= 4; i++)
+			indices[i - 1] = indices[i];
+		indices[4] = index;
+	}
+}
 void RedoAction::clear()
 {
 	for (int i = 0; i < 5; i++)
@@ -155,7 +192,7 @@ void RedoAction::clear()
 
 void RedoAction::add_action(Action* ptr_act)
 {
-	if (ptr_act->ActType() == 4 || ptr_act->ActType() == 2 || ptr_act->ActType() == 4 || ptr_act->ActType() == 4)
+	if (ptr_act->ActType() == 4 || ptr_act->ActType() == 2)
 	{
 		bool flag = false;
 		for (int i = 0; i < 5; i++)
@@ -175,9 +212,4 @@ void RedoAction::add_action(Action* ptr_act)
 			ptr[4] = ptr_act;
 		}
 	}
-}
-
-void RedoAction::play()
-{
-	Execute();
 }

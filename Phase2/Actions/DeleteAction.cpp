@@ -10,15 +10,16 @@ void DeleteAction::Execute()
 {
 	Output* p_out = pManager->GetOutput();
 	deleted = pManager->GetSelectedFig();
+	ReadActionParameters();
 	if (deleted != NULL)
 	{
 		P = deleted->GetCenter();
 		deleted->Delete(true);
 		deleted->Hide(true);
 		pManager->SetSelectedFig(NULL);
+		PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
 		p_out->ClearDrawArea();
 		pManager->UpdateInterface();
-		PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
 	}
 	if (pManager->get_IsRecording() == true && deleted != NULL)
 		pManager->AddToRecordingList(this);
@@ -26,6 +27,11 @@ void DeleteAction::Execute()
 
 void DeleteAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	if (deleted != NULL)
+		pOut->PrintMessage("Deleted Selected Object.");
+	else
+		pOut->PrintMessage("No Selected Object To Delete.");
 }
 
 CFigure* DeleteAction::get_deleted()

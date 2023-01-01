@@ -509,9 +509,12 @@ void ApplicationManager::PlayAll()
 	pOut->ClearDrawArea();
 	for (int i = 0; i < RecordedCount; i++)
 	{
+		Sleep(1000);
 
 		RecordingList[i]->play();
-		Sleep(1000);
+		add_to_tools(RecordingList[i]);
+
+
 		GetOutput()->ClearDrawArea();
 		UpdateInterface();
 	}
@@ -525,4 +528,34 @@ void ApplicationManager::Fig_Unhide(int index)
 void ApplicationManager::Fig_Undel(int index)
 {
 	FigList[index]->Delete(false);
+}
+
+void ApplicationManager::add_to_tools(Action* p_Act)
+{
+
+	if (p_Act != NULL)
+	{
+		if (p_Act->ActType() == 1 || p_Act->ActType() == 2 || p_Act->ActType() == 3 || p_Act->ActType() == 4) //undo or select;
+			redo_tool->clear();
+		if (p_Act->ActType() == 3)
+		{
+
+			undo_tool->add_fig(p_Act->get_deleted());
+
+		}
+
+		if (p_Act->ActType() == 4 || p_Act->ActType() == 2) //to be done
+		{
+			//test:
+			this->add_act(p_Act);
+		}
+
+		undo_tool->add_act(p_Act->ActType());
+
+
+
+
+		//if (pAct->ActType() != 4 && pAct->ActType() != 2 && get_IsRecording() == false)
+		p_Act = NULL;
+	}
 }

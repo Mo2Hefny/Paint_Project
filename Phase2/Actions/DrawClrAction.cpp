@@ -50,6 +50,7 @@ void DrawClrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	PlaySound("Audio/DrawOutline.wav", NULL, SND_ASYNC);
 	if (pManager->get_IsRecording() == true && OldOutline != UI.DrawColor)
 		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user

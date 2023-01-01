@@ -72,6 +72,7 @@ void FillAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	PlaySound("Audio/SprayPaint.wav", NULL, SND_ASYNC);
 	if (pManager->get_IsRecording() == true)
 		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user

@@ -65,7 +65,10 @@ void PickAndHideAction::ReadActionParameters()
 		}
 	}
 	if (CountRight && P.y > UI.ToolBarHeight)
+	{
+		PlaySound("Audio/Cheer.wav", NULL, SND_ASYNC);
 		PrintResults();
+	}
 	pOut->ClearDrawArea();
 	pManager->UpdateInterface();
 }

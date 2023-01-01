@@ -79,6 +79,7 @@ public:
 
 	void Fig_Unhide(int index);
 	void Fig_Undel(int index);
+	void add_to_tools(Action* p_Act); //adds action to undo and redo tools
 
 };
 

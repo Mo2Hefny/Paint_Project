@@ -387,7 +387,7 @@ void ApplicationManager::clear_gui()
 {
 	UI.InterfaceMode = MODE_DRAW;
 	pOut->CreateDrawToolBar();
-	UI.FillColor = GREEN;
+	UI.FillColor = LIGHTGOLDENRODYELLOW;
 	UI.isFilled = false;
 	UI.DrawColor = BLUE;
 }

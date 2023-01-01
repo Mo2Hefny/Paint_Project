@@ -67,7 +67,7 @@ void LoadAction::Execute()
 	}
 	infile >> n;
 	CFigure* myfig = NULL;
-	for (int i = 0; i <= n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		infile >> type;
 		if (type == "RECT")

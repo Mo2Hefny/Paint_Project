@@ -90,7 +90,29 @@ void FillAction::undo()
 	OldFilled = Filled;
 	Filled = tempfill;
 	if (Fig)
-		FillSelected();
+	{
+		if (NewFill == OldFill && OldFilled)
+		{
+			pManager->GetOutput()->PrintMessage("UnFill Selected Figure Color");
+			Filled = false;
+			Fig->ChngFillClr(NewFill);
+			Fig->SetIsFilled(false);
+			pManager->GetOutput()->ClearDrawArea();
+		}
+		else if (OldFilled && !Filled)
+		{
+			pManager->GetOutput()->PrintMessage("UnFill Selected Figure Color");
+			Fig->ChngFillClr(NewFill);
+			Fig->SetIsFilled(false);
+			pManager->GetOutput()->ClearDrawArea();
+		}
+		else
+		{
+			pManager->GetOutput()->PrintMessage("Changed Selected Figure Fill Color");
+			Filled = true;
+			Fig->ChngFillClr(NewFill);
+		}
+	}
 	else
 		ChangeUI();
 }

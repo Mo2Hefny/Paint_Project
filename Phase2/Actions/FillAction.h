@@ -20,7 +20,6 @@ public:
 	virtual void ReadActionParameters();
 	void FillSelected();
 	void ChangeUI();
-	bool SetFilling(color, bool&);
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 	virtual int ActType();

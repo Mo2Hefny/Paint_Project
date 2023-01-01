@@ -16,6 +16,7 @@ void DeleteAction::Execute()
 		P = deleted->GetCenter();
 		deleted->Delete(true);
 		deleted->Hide(true);
+		deleted->SetSelected(false);
 		pManager->SetSelectedFig(NULL);
 		PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
 		p_out->ClearDrawArea();

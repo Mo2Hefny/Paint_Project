@@ -344,6 +344,8 @@ void ApplicationManager::deleteFig(int index)
 {
 	FigList[index]->Hide(true);
 	FigList[index]->Delete(true);
+	FigList[index]->SetSelected(false);
+	SetSelectedFig(NULL);
 }
 
 int ApplicationManager::get_index(CFigure* ptr)

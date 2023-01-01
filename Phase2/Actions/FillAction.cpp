@@ -5,12 +5,8 @@
 
 FillAction::FillAction(ApplicationManager* pApp, color c) :Action(pApp)
 {
-	filled = UI.isFilled;
 	NewFill = c;
-	OldFill = UI.FillColor;
-	Fig = pManager->GetSelectedFig();
-	if (Fig != NULL)
-		filled = Fig->IsFilled();
+	P.x = 0;
 }
 
 void FillAction::ReadActionParameters()
@@ -18,41 +14,55 @@ void FillAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	bool empty = !SetFilling(NewFill, UI.isFilled);
-	if (empty)
+	Fig = pManager->GetSelectedFig();
+	if (Fig == NULL)
 	{
-		pOut->PrintMessage("UnFill Color");
+		ChangeUI();
+		return;
 	}
-	if (!FillSelected())
-	{
-		if (!empty)
-		{
-		pOut->PrintMessage("Changed Fill Color");
-		}
-	}
-	else
-	{
-		//pOut->PrintMessage("Changed Selected Figure Fill Color");
-	}
+	P = Fig->GetCenter();
+	FillSelected();
 }
 
-bool FillAction::FillSelected()
+void FillAction::FillSelected()
 {
-	if (Fig == NULL)
-		return false;
-	if (NewFill == Fig->getFillClr() && filled)
+	OldFill = Fig->getFillClr();
+	OldFilled = Fig->IsFilled();
+	if (NewFill == OldFill && OldFilled)
 	{
-		pManager->GetOutput()->PrintMessage("UnFill Selected Color");
-		filled = false;
+		pManager->GetOutput()->PrintMessage("UnFill Selected Figure Color");
+		Filled = false;
 		Fig->ChngFillClr(NewFill);
-		Fig->SetIsFilled(filled);
+		Fig->SetIsFilled(false);
 		pManager->GetOutput()->ClearDrawArea();
 	}
 	else
 	{
+		pManager->GetOutput()->PrintMessage("Changed Selected Figure Fill Color");
+		Filled = true;
 		Fig->ChngFillClr(NewFill);
 	}
-	return true;
+	pManager->GetOutput()->ClearDrawArea();
+}
+
+void FillAction::ChangeUI()
+{
+	OldFilled = UI.isFilled;
+	OldFill = UI.FillColor;
+	if (NewFill == OldFill && OldFilled)
+	{
+		pManager->GetOutput()->PrintMessage("UnFill Color");
+		UI.isFilled = false;
+		Filled = false;
+		UI.FillColor = NewFill;
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("Changed Fill Color");
+		UI.isFilled = true;
+		Filled = true;
+		UI.FillColor = NewFill;
+	}
 }
 
 bool FillAction::SetFilling(color c, bool &b)
@@ -85,34 +95,43 @@ int FillAction::ActType()
 
 void FillAction::undo()
 {
-	color temp;
-	temp = OldFill;
+	color tempclr = OldFill;
 	OldFill = NewFill;
-	NewFill = temp;
-	SetFilling(NewFill, filled);
-	if (!FillSelected())
-	{
-		pManager->GetOutput()->PrintMessage("Undo Fill Color Change");
-	}
+	NewFill = tempclr;
+	bool tempfill = OldFilled;
+	OldFilled = Filled;
+	Filled = tempfill;
+	if (Fig)
+		FillSelected();
 	else
-	{
-		pManager->GetOutput()->PrintMessage("Undo Selected Figure Fill Color Change");
-	}
+		ChangeUI();
 }
 
 void FillAction::redo()
 {
-	color temp;
-	temp = OldFill;
+	color tempclr = OldFill;
 	OldFill = NewFill;
-	NewFill = temp;
-	SetFilling(NewFill, filled);
-	if (!FillSelected())
+	NewFill = tempclr;
+	bool tempfill = OldFilled;
+	OldFilled = Filled;
+	Filled = tempfill;
+	if (Fig)
+		FillSelected();
+	else
+		ChangeUI();
+}
+
+void FillAction::play()
+{
+	if (P.x)
 	{
-		pManager->GetOutput()->PrintMessage("Redo Fill Color Change");
+		Fig = pManager->GetFigure(P.x, P.y);
+		FillSelected();
+		pManager->GetOutput()->PrintMessage("Changed Figure Fill Color in Record");
 	}
 	else
 	{
-		pManager->GetOutput()->PrintMessage("Redo Selected Figure Fill Color Change");
+		ChangeUI();
+		pManager->GetOutput()->PrintMessage("Changed Fill Color in Record");
 	}
 }

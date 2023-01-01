@@ -10,20 +10,23 @@ private:
 	CFigure* Fig;
 	color NewFill;
 	color OldFill;
-	bool filled;
+	bool Filled;
+	bool OldFilled;
 	Point P;
 public:
 	FillAction(ApplicationManager* pApp, color);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-	bool FillSelected();
+	void FillSelected();
+	void ChangeUI();
 	bool SetFilling(color, bool&);
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 	virtual int ActType();
 	virtual void undo();
 	virtual void redo();
+	virtual void play();
 };
 
 #endif

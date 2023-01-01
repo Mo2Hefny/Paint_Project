@@ -51,7 +51,7 @@ void MoveAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	if (pManager->get_IsRecording() == true)
+	if (pManager->get_IsRecording() == true && MoveFig != NULL)
 		pManager->AddToRecordingList(this);
 	//Create a rectangle with the parameters read from the user
 

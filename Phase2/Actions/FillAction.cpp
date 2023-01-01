@@ -65,18 +65,6 @@ void FillAction::ChangeUI()
 	}
 }
 
-bool FillAction::SetFilling(color c, bool &b)
-{
-	if (c == UI.FillColor && b)
-	{
-		b = false;
-		return false;
-	}
-	else
-		b = true;
-	UI.FillColor = c;
-	return true;
-}
 //Execute the action
 void FillAction::Execute()
 {

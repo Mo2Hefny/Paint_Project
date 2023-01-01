@@ -291,7 +291,7 @@ ApplicationManager::~ApplicationManager()
 void ApplicationManager::SaveAll(ofstream& outfile)
 {
 	outfile << getCrntDrawClr() << " " << getCrntFillClr() << endl;
-	outfile << FigCount << endl;
+	outfile << GetFigCount() << endl;
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected() == true)

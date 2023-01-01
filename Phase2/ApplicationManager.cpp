@@ -110,15 +110,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		if (GetSelectedFig() != NULL)
 			pAct = new MoveAction(this);
 		else
+<<<<<<< HEAD
 			pOut->PrintMessage("No selected object.");
+=======
+			pOut->PrintMessage("No Selected Object.");
+>>>>>>> b71fb6343ba0dfe930998232293d2eb92f12a656
 		break;
 	case DRAW_DEL:
 		if (GetSelectedFig() != NULL)
 			pAct = new DeleteAction(this);
 		else
+<<<<<<< HEAD
 
 			pOut->PrintMessage("No selected object.");
 
+=======
+			pOut->PrintMessage("No Selected Object.");
+>>>>>>> b71fb6343ba0dfe930998232293d2eb92f12a656
 		break;
 	case DRAW_UNDO:
 		undo_tool->Execute();
@@ -248,7 +256,6 @@ int ApplicationManager::GetFigCount() const
 		if (!FigList[i]->IsDeleted())
 			counter++;
 	return counter;
-	//return FigCount;
 }
 
 int ApplicationManager::Get_Real_FigCount() const

@@ -1,15 +1,16 @@
 #include "LoadAction.h"
-#include<string>
-#include"ApplicationManager.h"
-#include"GUI/UI_Info.h"
-#include"GUI/Output.h"
-#include"GUI/Input.h"
-#include"Figures/CRectangle.h"
-#include"Figures/CHexagon.h"
-#include"Figures/CSquare.h"
-#include"Figures/CTriangle.h"
-#include"Figures/CCircle.h"
-#include<fstream>
+#include <string>
+#include "../ApplicationManager.h"
+#include "../GUI/UI_Info.h"
+#include "../GUI/Output.h"
+#include "../GUI/Input.h"
+#include "../Figures/CRectangle.h"
+#include "../Figures/CHexagon.h"
+#include "../Figures/CSquare.h"
+#include "../Figures/CTriangle.h"
+#include "../Figures/CCircle.h"
+#include <fstream>
+
 LoadAction::LoadAction(ApplicationManager* pApp) :Action(pApp)
 {
 

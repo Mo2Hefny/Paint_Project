@@ -54,18 +54,23 @@ void PickAndHideAction::ReadActionParameters()
 			if (Score(Fig))
 			{
 				pOut->PrintMessage("RIGHT!");
+				PlaySound("Audio/Right.wav", NULL, SND_ASYNC);
 				CountRight++;
 			}
 			else
 			{
 				pOut->PrintMessage("WRONG....");
+				PlaySound("Audio/No.wav", NULL, SND_ASYNC);
 				CountWrong++;
 			}
 			Fig->Hide(true);
 		}
 	}
 	if (CountRight && P.y > UI.ToolBarHeight)
+	{
+		PlaySound("Audio/GameOver.wav", NULL, SND_ASYNC);
 		PrintResults();
+	}
 	pOut->ClearDrawArea();
 	pManager->UpdateInterface();
 }

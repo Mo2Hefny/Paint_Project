@@ -14,6 +14,7 @@ void SwitchPlay::ReadActionParameters()
 		pManager->SetSelectedFig(NULL);
 	}
 	pOut->CreatePlayToolBar();
+	PlaySound("Audio/SwitchMode.wav", NULL, SND_ASYNC);
 }
 
 void SwitchPlay::Execute()

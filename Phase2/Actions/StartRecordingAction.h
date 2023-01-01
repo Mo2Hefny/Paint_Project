@@ -1,6 +1,7 @@
 #pragma once
-#include"ApplicationManager.h"
-#include"Actions/Actions.h"
+#include "Action.h"
+#include "../ApplicationManager.h"
+
 class StartRecordingAction:public Action
 {
 public:

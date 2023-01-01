@@ -3,6 +3,7 @@
 
 #include "..\DefS.h"
 #include"../Figures/CFigure.h"
+#include <Windows.h>
 
 class ApplicationManager; //forward class declaration
 

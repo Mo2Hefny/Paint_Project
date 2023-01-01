@@ -8,6 +8,7 @@ DeleteAction::DeleteAction(ApplicationManager* pApp) : Action(pApp)
 
 void DeleteAction::Execute()
 {
+	Output* p_out = pManager->GetOutput();
 	deleted = pManager->GetSelectedFig();
 	if (deleted != NULL)
 	{
@@ -15,10 +16,10 @@ void DeleteAction::Execute()
 		deleted->Delete(true);
 		deleted->Hide(true);
 		pManager->SetSelectedFig(NULL);
+		p_out->ClearDrawArea();
+		pManager->UpdateInterface();
+		PlaySound("Audio/Delete.wav", NULL, SND_ASYNC);
 	}
-	Output* p_out = pManager->GetOutput();
-	p_out->ClearDrawArea();
-	pManager->UpdateInterface();
 	if (pManager->get_IsRecording() == true && deleted != NULL)
 		pManager->AddToRecordingList(this);
 }

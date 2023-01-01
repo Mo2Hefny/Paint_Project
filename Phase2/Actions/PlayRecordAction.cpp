@@ -11,7 +11,14 @@ void PlayRecordAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("Playing the record");
-	pManager->PlayAll();
-	pOut->PrintMessage("The record ended");
+	if (pManager->get_RecordedCount() != 0)
+	{
+		pOut->PrintMessage("Playing the record");
+		pManager->PlayAll();
+		pOut->PrintMessage("The record ended");
+	}
+	else
+	{
+		pOut->PrintMessage("Please record first");
+	}
 }

@@ -70,6 +70,7 @@ public:
 	bool get_IsRecording() const;
 	void set_IsRecording(bool b);
 	void AddToRecordingList(Action* p);
+	void clear_recording();
 	void PlayAll();
 	//test for redo;
 	void send_action_redo(int val, Action* ptr);
@@ -79,6 +80,7 @@ public:
 
 	void Fig_Unhide(int index);
 	void Fig_Undel(int index);
+	void add_to_tools(Action* p_Act); //adds action to undo and redo tools
 
 };
 

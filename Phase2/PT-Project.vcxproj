@@ -136,6 +136,7 @@
     <ClCompile Include="Actions\ClearAll.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\DrawClrAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\FillAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PickAndHideAction.cpp" />
@@ -190,12 +191,12 @@
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
-    <ClCompile Include="LoadAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlayRecordAction.cpp" />
-    <ClCompile Include="SaveAction.cpp" />
-    <ClCompile Include="StartRecordingAction.cpp" />
-    <ClCompile Include="StopRecordingAction.cpp" />
+    <ClCompile Include="Actions\PlayRecordAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\StopRecordingAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Actions\ColorAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\DrawClrAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\FillAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PickAndHideAction.h" />
@@ -249,11 +251,11 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="LoadAction.h" />
-    <ClInclude Include="PlayRecordAction.h" />
-    <ClInclude Include="SaveAction.h" />
-    <ClInclude Include="StartRecordingAction.h" />
-    <ClInclude Include="StopRecordingAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\PlayRecordAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\StartRecordingAction.h" />
+    <ClInclude Include="Actions\StopRecordingAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

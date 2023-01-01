@@ -1,16 +1,8 @@
 #include "ApplicationManager.h"
-#include "Actions/Actions.h"
-#include"SaveAction.h"
 #include "GUI/Output.h"
-#include"LoadAction.h"
 #include<iostream>
-#include"Actions/Action.h"
-#include"Actions/UndoAction.h"
-#include"StartRecordingAction.h"
-#include"StopRecordingAction.h"
-#include"PlayRecordAction.h"
-#include"Actions/SwitchPlay.h"
-#include"Actions/SwitchDraw.h"
+#include"Actions/Actions.h"
+
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
@@ -177,8 +169,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new SwitchPlay(this);
 		break;
 	case EXIT:
-		///create ExitAction here
-
+		pAct = new ExitAction(this);
 		break;
 	case STATUS:	//a click on the status bar ==> no action
 		pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
@@ -501,6 +492,13 @@ void ApplicationManager::AddToRecordingList(Action* p)
 	}
 }
 
+void ApplicationManager::clear_recording()
+{
+	for (int i = 0; i < RecordedCount; i++)
+		RecordingList[i] = NULL;
+	RecordedCount = 0;
+}
+
 void ApplicationManager::PlayAll()
 {
 	clear_figs();
@@ -509,9 +507,12 @@ void ApplicationManager::PlayAll()
 	pOut->ClearDrawArea();
 	for (int i = 0; i < RecordedCount; i++)
 	{
+		Sleep(1000);
 
 		RecordingList[i]->play();
-		Sleep(1000);
+		add_to_tools(RecordingList[i]);
+
+
 		GetOutput()->ClearDrawArea();
 		UpdateInterface();
 	}
@@ -525,4 +526,34 @@ void ApplicationManager::Fig_Unhide(int index)
 void ApplicationManager::Fig_Undel(int index)
 {
 	FigList[index]->Delete(false);
+}
+
+void ApplicationManager::add_to_tools(Action* p_Act)
+{
+
+	if (p_Act != NULL)
+	{
+		if (p_Act->ActType() == 1 || p_Act->ActType() == 2 || p_Act->ActType() == 3 || p_Act->ActType() == 4) //undo or select;
+			redo_tool->clear();
+		if (p_Act->ActType() == 3)
+		{
+
+			undo_tool->add_fig(p_Act->get_deleted());
+
+		}
+
+		if (p_Act->ActType() == 4 || p_Act->ActType() == 2) //to be done
+		{
+			//test:
+			this->add_act(p_Act);
+		}
+
+		undo_tool->add_act(p_Act->ActType());
+
+
+
+
+		//if (pAct->ActType() != 4 && pAct->ActType() != 2 && get_IsRecording() == false)
+		p_Act = NULL;
+	}
 }

@@ -18,7 +18,7 @@ public:
 	void add_fig(CFigure*);
 	void clear();
 	void add_action(Action* ptr_act);
-
+	virtual void play();
 
 };
 

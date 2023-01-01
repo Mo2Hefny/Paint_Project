@@ -1,8 +1,9 @@
 #pragma once
-#include "Actions/Action.h"
+#include "Action.h"
 #include<fstream>
 #include<iostream>
-#include "ApplicationManager.h"
+#include "../ApplicationManager.h"
+
 class SaveAction : public Action
 {
 private:

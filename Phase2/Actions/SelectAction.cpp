@@ -18,11 +18,9 @@ void SelectAction::ReadActionParameters()
 	pOut->PrintMessage("Select a figure");
 
 	SelectedFig[1] = pManager->GetSelectedFig();
-	//Read 1st corner and store in point P
-	for (int i = 0; i < 2;)
+	int i = 0;
+	while (pIn->GetPointClicked(P.x, P.y) == LEFT_CLICK)
 	{
-		GfxInfo SelectedGfxInfo;
-		pIn->GetPointClicked(P.x, P.y);
 		if (P.y < UI.ToolBarHeight)
 		{
 			pOut->PrintMessage("Clicked outside");

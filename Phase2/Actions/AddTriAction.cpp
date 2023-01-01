@@ -17,18 +17,24 @@ void AddTriAction::ReadActionParameters()
 
 	pOut->PrintMessage("New Triangle: Click at vertix 1");
 
-	//Read vertix 1 and store in point P1
-	pIn->GetPointClicked(P1.x, P1.y);
+	do {
+		//Read vertix 1 and store in point P1
+		pIn->GetPointClicked(P1.x, P1.y);
+	} while (P1.y < UI.ToolBarHeight);
 
 	pOut->PrintMessage("New Triangle: Click at vertix 2");
 
-	//Read vertix 2 and store in point P2
-	pIn->GetPointClicked(P2.x, P2.y);
+	do {
+		//Read vertix 2 and store in point P2
+		pIn->GetPointClicked(P2.x, P2.y);
+	} while (P2.y < UI.ToolBarHeight);
 
 	pOut->PrintMessage("New Triangle: Click at vertix 3");
 
-	//Read vertix 3 and store in point P3
-	pIn->GetPointClicked(P3.x, P3.y);
+	do {
+		//Read vertix 3 and store in point P3
+		pIn->GetPointClicked(P3.x, P3.y);
+	} while (P3.y < UI.ToolBarHeight);
 
 	TriGfxInfo.isFilled = UI.isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface

@@ -15,15 +15,19 @@ void AddCircAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("New Circle: Click at center");
-
-	//Read center and store in point P1
-	pIn->GetPointClicked(P1.x, P1.y);
-
+		pOut->PrintMessage("New Circle: Click at center");
+	do {
+		//Read center and store in point P1
+		pIn->GetPointClicked(P1.x, P1.y);
+	} while (P1.y < UI.ToolBarHeight);
+	
 	pOut->PrintMessage("New Circle: Click at edge");
-
-	//Read edge and store in point P2
-	pIn->GetPointClicked(P2.x, P2.y);
+	double R;
+	do {
+		//Read edge and store in point P2
+		pIn->GetPointClicked(P2.x, P2.y);
+		R = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+	} while (R > P1.y - UI.ToolBarHeight);
 
 	CircGfxInfo.isFilled = UI.isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface

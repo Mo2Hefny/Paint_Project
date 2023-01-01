@@ -1,9 +1,9 @@
 #pragma once
-#include "Actions/Action.h"
-#include<fstream>
-#include<iostream>
-#include "ApplicationManager.h"
-#include<string>
+#include "Action.h"
+#include <fstream>
+#include <iostream>
+#include "../ApplicationManager.h"
+#include <string>
 class LoadAction : public Action
 {
 private:

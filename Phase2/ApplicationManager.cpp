@@ -1,16 +1,8 @@
 #include "ApplicationManager.h"
-#include "Actions/Actions.h"
-#include"SaveAction.h"
 #include "GUI/Output.h"
-#include"LoadAction.h"
 #include<iostream>
-#include"Actions/Action.h"
-#include"Actions/UndoAction.h"
-#include"StartRecordingAction.h"
-#include"StopRecordingAction.h"
-#include"PlayRecordAction.h"
-#include"Actions/SwitchPlay.h"
-#include"Actions/SwitchDraw.h"
+#include"Actions/Actions.h"
+
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
@@ -177,8 +169,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new SwitchPlay(this);
 		break;
 	case EXIT:
-		///create ExitAction here
-		PlaySound("Audio/Close.wav", NULL, SND_SYNC);
+		pAct = new ExitAction(this);
 		break;
 	case STATUS:	//a click on the status bar ==> no action
 		pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
@@ -499,6 +490,13 @@ void ApplicationManager::AddToRecordingList(Action* p)
 		pOut->PrintMessage("You exceeded the allowable number of actions to record, Recording Stopped ");
 		set_IsRecording(false);
 	}
+}
+
+void ApplicationManager::clear_recording()
+{
+	for (int i = 0; i < RecordedCount; i++)
+		RecordingList[i] = NULL;
+	RecordedCount = 0;
 }
 
 void ApplicationManager::PlayAll()

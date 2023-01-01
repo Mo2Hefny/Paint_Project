@@ -70,6 +70,7 @@ public:
 	bool get_IsRecording() const;
 	void set_IsRecording(bool b);
 	void AddToRecordingList(Action* p);
+	void clear_recording();
 	void PlayAll();
 	//test for redo;
 	void send_action_redo(int val, Action* ptr);

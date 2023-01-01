@@ -1,5 +1,5 @@
 #pragma once
-#include"ApplicationManager.h"
+#include"../ApplicationManager.h"
 
 class PlayRecordAction:public Action
 {

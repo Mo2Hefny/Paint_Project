@@ -84,18 +84,19 @@
     <ClCompile Include="Actions\DrawClrAction.cpp" />
     <ClCompile Include="Actions\FillAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
-    <ClCompile Include="SaveAction.cpp" />
-    <ClCompile Include="LoadAction.cpp" />
+    <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PickAndHideAction.cpp" />
     <ClCompile Include="Actions\ClearAll.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
-    <ClCompile Include="StartRecordingAction.cpp" />
-    <ClCompile Include="StopRecordingAction.cpp" />
-    <ClCompile Include="PlayRecordAction.cpp" />
+    <ClCompile Include="Actions\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\StopRecordingAction.cpp" />
+    <ClCompile Include="Actions\PlayRecordAction.cpp" />
     <ClCompile Include="Actions\SwitchDraw.cpp" />
     <ClCompile Include="Actions\SwitchPlay.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Actions.h" />
@@ -165,19 +166,20 @@
     <ClInclude Include="Actions\DrawClrAction.h" />
     <ClInclude Include="Actions\FillAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
-    <ClInclude Include="SaveAction.h" />
-    <ClInclude Include="LoadAction.h" />
+    <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PickAndHideAction.h" />
     <ClInclude Include="Figures\Figures.h" />
     <ClInclude Include="Actions\ClearAll.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
-    <ClInclude Include="StartRecordingAction.h" />
-    <ClInclude Include="StopRecordingAction.h" />
-    <ClInclude Include="PlayRecordAction.h" />
+    <ClInclude Include="Actions\StartRecordingAction.h" />
+    <ClInclude Include="Actions\StopRecordingAction.h" />
+    <ClInclude Include="Actions\PlayRecordAction.h" />
     <ClInclude Include="Actions\SwitchDraw.h" />
     <ClInclude Include="Actions\SwitchPlay.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

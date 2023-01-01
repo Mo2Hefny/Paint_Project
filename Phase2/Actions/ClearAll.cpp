@@ -10,19 +10,13 @@ void ClearAll::Execute()
 	pManager->clear_figs();
 	pManager->clear_undo();
 	pManager->clear_gui();
+	pManager->clear_recording();
 	p_out->ClearDrawArea();
 	pManager->UpdateInterface();
 	PlaySound("Audio/ClearAll.wav", NULL, SND_ASYNC);
 	if (pManager->get_IsRecording() == true)
-		pManager->AddToRecordingList(this);
-}
-void ClearAll::play()
-{
-
-	Output* p_out = pManager->GetOutput();
-	pManager->clear_figs();
-	pManager->clear_undo();
-	pManager->clear_gui();
-	p_out->ClearDrawArea();
-	
+	{
+		p_out->PrintMessage("Recording stopped");
+		pManager->set_IsRecording(false);
+	}
 }

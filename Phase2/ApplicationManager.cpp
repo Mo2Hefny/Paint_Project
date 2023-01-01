@@ -107,11 +107,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new DrawClrAction(this, GREEN);
 		break;
 	case DRAW_MOVE:
-		pAct = new MoveAction(this);
+		if (GetSelectedFig() != NULL)
+			pAct = new MoveAction(this);
+		else
+			pOut->PrintMessage("No Selected Object.");
 		break;
 	case DRAW_DEL:
-		pAct = new DeleteAction(this);
-
+		if (GetSelectedFig() != NULL)
+			pAct = new DeleteAction(this);
+		else
+			pOut->PrintMessage("No Selected Object.");
 		break;
 	case DRAW_UNDO:
 		undo_tool->Execute();
@@ -241,7 +246,6 @@ int ApplicationManager::GetFigCount() const
 		if (!FigList[i]->IsDeleted())
 			counter++;
 	return counter;
-	//return FigCount;
 }
 
 int ApplicationManager::Get_Real_FigCount() const

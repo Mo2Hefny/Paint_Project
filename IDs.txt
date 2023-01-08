@@ -1,4 +1,0 @@
-Name				ID		Sec	BN	Email
-زياد محمد علي عبدالفتاح	9220337	1	25	zeyad.abdelfatah03@eng-st.cu.edu.eg
-مؤمن محمد سعيد محمد حفني	9220886	2	15	moamen.mohamed04@eng-st.cu.edu.eg
-سيف محمد احمد عبد الباقى	9220386	1	29	seif.abdelbaky03@eng-st.cu.edu.eg
